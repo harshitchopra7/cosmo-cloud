@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Section3Cards from "./Section3Cards";
 
 const data = [
@@ -6,25 +6,46 @@ const data = [
     id: 1,
     title: "API designer",
     description: "Lorem Ipsum Dolor Sit Amet",
+    illustration: "",
   },
   {
     id: 2,
     title: "Templatised flows",
     description: "Lorem Ipsum Dolor Sit Amet",
+    illustration: "",
   },
   {
     id: 3,
     title: "One-click deploy",
     description: "Lorem Ipsum Dolor Sit Amet",
+    illustration: "",
   },
   {
     id: 4,
     title: "Workflow builder",
     description: "Lorem Ipsum Dolor Sit Amet",
+    illustration: "",
   },
 ];
 
 function Section3() {
+  const [selectedId, setSelectedId] = useState(1);
+
+  const onClick = (id) => {
+    setSelectedId(id);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (selectedId === data.length) {
+        setSelectedId(1);
+        return;
+      }
+      setSelectedId((prev) => prev + 1);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [selectedId]);
+
   return (
     <div className="mt-[70px] mb-[70px] pl-[7%] pr-[7%]">
       <p className="font-medium text-3xl">Consectetur adipiscing elit</p>
@@ -35,6 +56,8 @@ function Section3() {
               id={val.id}
               title={val.title}
               description={val.description}
+              selectedId={selectedId}
+              onClick={onClick}
             />
           ))}
         </div>
@@ -43,7 +66,9 @@ function Section3() {
           style={{
             flex: "0.7",
           }}
-        ></div>
+        >
+          {data[selectedId - 1].illustration}
+        </div>
       </div>
     </div>
   );

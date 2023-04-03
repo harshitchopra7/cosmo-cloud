@@ -34,6 +34,26 @@ const contactData = [
 function ContactUsComponent() {
   const [formData, setFormData] = useState({});
 
+  const onSubmit = () => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      }),
+    };
+    fetch(`${process.env.REACT_APP_BASE_URL}/contact-us`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("data", data);
+      });
+  };
+
+  console.log("formData", formData);
+
   return (
     <div className="flex justify-between">
       <div className="flex-[0.4]">
@@ -57,7 +77,9 @@ function ContactUsComponent() {
             <Input
               placeholder="What should we call you?"
               value={formData.name}
-              onChange={(e) => setFormData({ name: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
             />
           </div>
           <div>
@@ -65,7 +87,9 @@ function ContactUsComponent() {
             <Input
               placeholder="john.doe@gmail.com"
               value={formData.email}
-              onChange={(e) => setFormData({ email: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
             />
           </div>
         </div>
@@ -75,7 +99,9 @@ function ContactUsComponent() {
           <Input
             placeholder="What are you looking for?"
             value={formData.subject}
-            onChange={(e) => setFormData({ subject: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, subject: e.target.value })
+            }
             width="100%"
           />
         </div>
@@ -86,11 +112,13 @@ function ContactUsComponent() {
             className="text-[#95949E] w-full h-[120px] p-4 bg-[#211E33] !outline-none rounded-lg"
             placeholder="Write your message here..."
             value={formData.message}
-            onChange={(e) => setFormData({ message: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, message: e.target.value })
+            }
           />
         </div>
 
-        <Button text="Send" />
+        <Button text="Send" onClick={onSubmit} />
       </div>
     </div>
   );

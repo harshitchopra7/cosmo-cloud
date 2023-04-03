@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../../assets/logo.png";
 import WaitlistInput from "../WaitlistInput/WaitlistInput";
 
 function Section4() {
+  const [waitlistCount, setWaitlistCount] = useState(null);
+
+  const getWaitlistCount = async () => {
+    fetch(`${process.env.REACT_APP_BASE_URL}/waitlist`)
+      .then((res) => res.json())
+      .then((data) => setWaitlistCount(data.count));
+  };
+
+  useEffect(() => {
+    getWaitlistCount();
+  }, []);
+
   return (
     <div className="flex items-center justify-center flex-col">
       <div className="flex items-center justify-center flex-col">
@@ -16,11 +28,13 @@ function Section4() {
           Sign up to be one of the first to use future of no-code platform
         </p>
 
-        <div className="mt-5 mb-5 flex items-center justify-center">
+        <div className="mt-5 mb-5 items-center justify-center">
           <WaitlistInput />
         </div>
 
-        <p className="text-center text-[#BFB8B8]">Current waitlist: 5,298</p>
+        <p className="text-center text-[#BFB8B8]">
+          Current waitlist: {waitlistCount}
+        </p>
       </div>
     </div>
   );

@@ -49,7 +49,7 @@ function Navbar() {
         ))}
       </div>
       <div style={{ flex: "0.11" }}>
-        <Button text="Join the waitlist" />
+        <Button text="Join the waitlist" onClick={() => navigate("/")} />
       </div>
     </div>
   );

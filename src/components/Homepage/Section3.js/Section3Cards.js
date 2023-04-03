@@ -1,8 +1,13 @@
 import React from "react";
 
-function Section3Cards({ id, title, description }) {
+function Section3Cards({ id, title, description, selectedId, onClick }) {
   return (
-    <div className="mt-8 bg-[#1D1B2D] rounded-lg p-4">
+    <div
+      className={`mt-8 rounded-lg p-4 cursor-pointer ${
+        selectedId === id && `bg-[#1D1B2D]`
+      }`}
+      onClick={() => onClick(id)}
+    >
       <div className="flex">
         <p className="bg-white rounded-[50%] flex items-center justify-center w-[25px] h-[25px] text-[#161426]">
           {id}
