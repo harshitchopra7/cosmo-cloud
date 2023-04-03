@@ -38,10 +38,10 @@ const leadersData = [
 function Section2() {
   return (
     <div className="mt-[70px] mb-[70px] bg-[#1D1B2D] w-full pl-[11%] pr-[11%] pt-[50px] pb-[50px]">
-      <p className="text-3xl font-medium mb-[50px]">
+      <p className="text-3xl font-medium mb-[50px] tablet:text-xl largeMobile:text-center">
         Industry leaders backing us
       </p>
-      <div className="flex flex-wrap items-center">
+      <div className="flex flex-wrap items-center largeMobile:flex-col">
         {leadersData.map((val) => (
           <Section2Cards
             image={val.image}

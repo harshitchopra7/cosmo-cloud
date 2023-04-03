@@ -1,32 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Section3Cards from "./Section3Cards";
 
-const data = [
-  {
-    id: 1,
-    title: "API designer",
-    description: "Lorem Ipsum Dolor Sit Amet",
-    illustration: "",
-  },
-  {
-    id: 2,
-    title: "Templatised flows",
-    description: "Lorem Ipsum Dolor Sit Amet",
-    illustration: "",
-  },
-  {
-    id: 3,
-    title: "One-click deploy",
-    description: "Lorem Ipsum Dolor Sit Amet",
-    illustration: "",
-  },
-  {
-    id: 4,
-    title: "Workflow builder",
-    description: "Lorem Ipsum Dolor Sit Amet",
-    illustration: "",
-  },
-];
+// internald deps
+import Section3Cards from "./Section3Cards";
+import Section3MobileCards from "./Section3MobileCards";
+
+// data
+import { data } from "./data";
 
 function Section3() {
   const [selectedId, setSelectedId] = useState(1);
@@ -49,7 +28,7 @@ function Section3() {
   return (
     <div className="mt-[70px] mb-[70px] pl-[7%] pr-[7%]">
       <p className="font-medium text-3xl">Consectetur adipiscing elit</p>
-      <div className="flex">
+      <div className="flex largeMobile:hidden">
         <div style={{ flex: "0.3" }} className="mr-8">
           {data.map((val) => (
             <Section3Cards
@@ -68,6 +47,19 @@ function Section3() {
           }}
         >
           {data[selectedId - 1].illustration}
+        </div>
+      </div>
+
+      <div className="hidden largeMobile:block flex flex-col">
+        <div className="mr-8">
+          {data.map((val) => (
+            <Section3MobileCards
+              id={val.id}
+              title={val.title}
+              description={val.description}
+              illustration={val.illustration}
+            />
+          ))}
         </div>
       </div>
     </div>

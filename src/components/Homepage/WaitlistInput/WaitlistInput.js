@@ -58,18 +58,18 @@ function WaitlistInput() {
   return (
     <>
       <div
-        className="flex items-center justify-center bg-[#211E33] rounded-lg"
+        className="flex items-center justify-center bg-[#211E33] rounded-lg tablet:flex-col tablet:bg-transparent"
         style={{ width: "fit-content" }}
       >
         <input
           placeholder="Enter your email..."
-          className="h-[45px] w-[300px] text-[#95949E] pl-4 pr-4 bg-[#211E33] !outline-none rounded-lg"
+          className="h-[45px] w-[300px] text-[#95949E] pl-4 pr-4 bg-[#211E33] !outline-none rounded-lg tablet:mb-2"
           value={email}
           onFocus={onFocus}
           onChange={(e) => setEmail(e.target.value)}
           disabled={isDisabled}
         />
-        <Button text={buttonText} onClick={onClick} />
+        <Button text={buttonText} onClick={onClick} width="300px" />
       </div>
 
       {hintMessage && (

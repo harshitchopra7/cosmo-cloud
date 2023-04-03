@@ -6,10 +6,10 @@ import open_in_new from "../../../assets/open_in_new.png";
 
 function Section5() {
   return (
-    <div className="flex items-center justify-center flex-col mb-[70px]">
+    <div className="flex items-center justify-center flex-col mb-[70px] ml-[5%]">
       <p className="text-[#95949E] font-semibold">Powered by</p>
       <img className="mt-5" src={mongo_db_logo} alt="Mongo DB Logo" />
-      <p className="text-[#BFB8B8] font-semibold mt-5 w-[50%] text-center">
+      <p className="text-[#BFB8B8] font-semibold mt-5 w-[50%] text-center table:text-sm">
         Cosmocloud is powered by MongoDB Atlas, which gives you flexibility,
         security, and scalability out of the box.
       </p>

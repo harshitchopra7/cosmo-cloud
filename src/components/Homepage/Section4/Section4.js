@@ -23,16 +23,16 @@ function Section4() {
       </div>
 
       <div className="bg-[#1D1B2D] pl-8 pr-8 pt-6 pb-6 rounded-2xl mt-8 mb-8">
-        <p className="text-2xl font-medium">Join the waitlist</p>
-        <p className="text-[#BFB8B8] text-lg">
+        <p className="text-2xl font-medium tablet:text-lg">Join the waitlist</p>
+        <p className="text-[#BFB8B8] text-lg tablet:text-base">
           Sign up to be one of the first to use future of no-code platform
         </p>
 
-        <div className="mt-5 mb-5 items-center justify-center">
+        <div className="mt-5 mb-5 flex flex-col items-center justify-center">
           <WaitlistInput />
         </div>
 
-        <p className="text-center text-[#BFB8B8]">
+        <p className="text-center text-[#BFB8B8] tablet:text-xs">
           Current waitlist: {waitlistCount}
         </p>
       </div>

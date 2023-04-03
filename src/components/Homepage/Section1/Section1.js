@@ -53,7 +53,7 @@ const cardsData = [
 function Section1() {
   return (
     <div>
-      <p className="text-center text-3xl">
+      <p className="text-center text-3xl text-xl">
         Make your developers <span className="text-[#E08880]">10x</span> more
         productive
       </p>

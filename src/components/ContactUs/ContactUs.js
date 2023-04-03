@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 
 // internal deps
 import Input from "../../common/Input";
@@ -17,12 +17,12 @@ const contactData = [
     description: "Our team is here to help.",
     contactDetails: "support@cosmocloud.io",
   },
-  {
-    image: phone,
-    title: "Call us",
-    description: "Mon-Fri from 8am to 5pm. ",
-    contactDetails: "+91 9876543210",
-  },
+  // {
+  //   image: phone,
+  //   title: "Call us",
+  //   description: "Mon-Fri from 8am to 5pm. ",
+  //   contactDetails: "+91 9876543210",
+  // },
   {
     image: location,
     title: "Visit us",
@@ -31,8 +31,17 @@ const contactData = [
   },
 ];
 
+const messageSentStatusValues = {
+  UN_SENT: "UN_SENT",
+  SUCCESS: "SUCCESS",
+  INVALID_EMAIL: "INVALID_EMAIL",
+};
+
 function ContactUsComponent() {
   const [formData, setFormData] = useState({});
+  const [messageSentStatus, setMessageSentStatus] = useState(
+    messageSentStatusValues.UN_SENT
+  );
 
   const onSubmit = () => {
     const requestOptions = {
@@ -48,11 +57,24 @@ function ContactUsComponent() {
     fetch(`${process.env.REACT_APP_BASE_URL}/contact-us`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log("data", data);
+        if (data.status_code === 400) {
+          setMessageSentStatus(messageSentStatusValues.INVALID_EMAIL);
+          return;
+        }
+        setMessageSentStatus(messageSentStatusValues.SUCCESS);
       });
   };
 
-  console.log("formData", formData);
+  const messageSentText = useMemo(() => {
+    switch (messageSentStatus) {
+      case messageSentStatusValues.SUCCESS:
+        return "Message succesfully sent!";
+      case messageSentStatusValues.INVALID_EMAIL:
+        return "Invalid email, please enter correct email address";
+      default:
+        break;
+    }
+  }, [messageSentStatus]);
 
   return (
     <div className="flex justify-between">
@@ -93,7 +115,6 @@ function ContactUsComponent() {
             />
           </div>
         </div>
-
         <div className="mt-5">
           <p className="mb-3 font-medium">Subject line</p>
           <Input
@@ -105,7 +126,6 @@ function ContactUsComponent() {
             width="100%"
           />
         </div>
-
         <div className="mt-5 mb-5">
           <p className="mb-3 font-medium">Message</p>
           <textarea
@@ -117,8 +137,19 @@ function ContactUsComponent() {
             }
           />
         </div>
-
         <Button text="Send" onClick={onSubmit} />
+
+        {messageSentText && (
+          <p
+            className={`text-left ml-4 text-xs font-medium mt-2 ${
+              messageSentStatus === messageSentStatusValues.SUCCESS
+                ? "text-[#17B169]"
+                : "text-[#EA4882]"
+            }`}
+          >
+            {messageSentText}
+          </p>
+        )}
       </div>
     </div>
   );
