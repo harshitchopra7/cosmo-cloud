@@ -11,6 +11,7 @@ const plans = [
     pricingTitle: "free for",
     pricingDescription: "First 7 days",
     buttonText: "Try free",
+    link: "",
   },
   {
     title: "Personal",
@@ -19,8 +20,10 @@ const plans = [
     detailedDescription2: "Up to 200 million API requests/month",
     detailedDescription3: "Up to 10 GB data bandwidth",
     pricingTitle: "starts at",
-    pricingDescription: "₹0.69 0.59/hour",
+    pricingDescription: "0.59/hour",
     buttonText: "Get started",
+    link: "",
+    strikePrice: "₹0.69",
   },
   {
     title: "Starter",
@@ -31,6 +34,7 @@ const plans = [
     pricingTitle: "starts at",
     pricingDescription: "₹0.69/hour",
     buttonText: "Get started",
+    link: "",
   },
   {
     title: "Standard",
@@ -41,6 +45,7 @@ const plans = [
     pricingTitle: "starts at",
     pricingDescription: "₹0.69/hour",
     buttonText: "Get started",
+    link: "",
   },
   {
     title: "Enterprise",
@@ -51,6 +56,8 @@ const plans = [
     pricingTitle: "",
     pricingDescription: "",
     buttonText: "Contact Us",
+    buttonType: "secondary",
+    link: "/contact-us",
   },
 ];
 
@@ -74,8 +81,11 @@ function Section1() {
             detailedDescription2={val.detailedDescription2}
             detailedDescription3={val.detailedDescription3}
             pricingTitle={val.pricingTitle}
+            strikePrice={val.strikePrice}
             pricingDescription={val.pricingDescription}
             buttonText={val.buttonText}
+            buttonType={val.buttonType}
+            link={val.link}
           />
         ))}
       </div>

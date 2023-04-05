@@ -45,8 +45,8 @@ const teamMembers = [
 function Section2() {
   return (
     <div className="mt-[70px]">
-      <p className="font-medium text-4xl">Team</p>
-      <p className="mt-4 text-[#BFB8B8] text-lg">
+      <p className="font-medium text-4xl mobile:text-2xl">Team</p>
+      <p className="mt-4 text-[#BFB8B8] text-lg mobile:text-base">
         Our team has led and delivered large-scale software and design projects
         in multiple startups and high-growth environments like{" "}
         <span className="text-white">Innovaccer</span>,{" "}

@@ -77,11 +77,11 @@ function ContactUsComponent() {
   }, [messageSentStatus]);
 
   return (
-    <div className="flex justify-between">
-      <div className="flex-[0.4]">
-        <p className="text-5xl font-medium mb-8">Contact us</p>
+    <div className="flex justify-between tablet:flex-col-reverse">
+      <div className="flex-[0.4] tablet:flex-[1]">
+        <p className="text-5xl font-medium mb-8 tablet:hidden">Contact us</p>
 
-        <div>
+        <div className="tablet:mt-10 tablet:pl-[2%] tablet:pr-[2%]">
           {contactData.map((val) => (
             <ContactUsCards
               image={val.image}
@@ -92,9 +92,9 @@ function ContactUsComponent() {
           ))}
         </div>
       </div>
-      <div className="bg-[#1D1B2D] flex-[0.6] p-10 rounded-lg">
-        <div className="flex items-center justify-between">
-          <div className="mr-4">
+      <div className="bg-[#1D1B2D] flex-[0.6] p-10 rounded-lg tablet:flex-[1] tablet:p-4">
+        <div className="flex items-center justify-between tablet:flex-col">
+          <div className="mr-4 tablet:mr-0 tablet:mb-3 tablet:w-[100%]">
             <p className="mb-3 font-medium">Your name</p>
             <Input
               placeholder="What should we call you?"
@@ -104,7 +104,7 @@ function ContactUsComponent() {
               }
             />
           </div>
-          <div>
+          <div className="tablet:w-[100%]">
             <p className="mb-3 font-medium">Your email</p>
             <Input
               placeholder="john.doe@gmail.com"
@@ -151,6 +151,9 @@ function ContactUsComponent() {
           </p>
         )}
       </div>
+      <p className="tablet:block hidden font-medium mb-8 tablet:text-2xl">
+        Contact us
+      </p>
     </div>
   );
 }

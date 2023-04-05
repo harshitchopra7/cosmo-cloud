@@ -3,6 +3,7 @@ import Divider from "../components/Homepage/Divider/Divider";
 import Section1 from "../components/Pricing/Section1";
 import Section2 from "../components/Pricing/Section2";
 import Section3 from "../components/Pricing/Section3";
+import Section4 from "../components/Pricing/Section4";
 
 function Pricing() {
   return (
@@ -14,6 +15,8 @@ function Pricing() {
       <Section3 />
 
       <Divider />
+
+      <Section4 />
     </div>
   );
 }

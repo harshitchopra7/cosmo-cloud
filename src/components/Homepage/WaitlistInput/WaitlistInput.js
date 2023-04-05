@@ -69,7 +69,7 @@ function WaitlistInput() {
           onChange={(e) => setEmail(e.target.value)}
           disabled={isDisabled}
         />
-        <Button text={buttonText} onClick={onClick} width="300px" />
+        <Button text={buttonText} onClick={onClick} width="100px" />
       </div>
 
       {hintMessage && (

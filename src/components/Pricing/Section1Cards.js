@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 // assets
 import icon1 from "../../assets/pricing/icon1.png";
@@ -12,9 +13,14 @@ function Section1Cards({
   detailedDescription2,
   detailedDescription3,
   pricingTitle,
+  strikePrice,
   pricingDescription,
   buttonText,
+  buttonType = "primary",
+  link,
 }) {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-[#1D1B2D] w-[30%] mr-4 p-5 rounded-lg mt-4 h-[380px] flex flex-col justify-between">
       <div>
@@ -40,10 +46,25 @@ function Section1Cards({
       <div>
         <div className="mb-5 mt-5">
           <p className="text-sm text-[#BFB8B8]">{pricingTitle}</p>
-          <p className="text-xl font-medium">{pricingDescription}</p>
+          <p className="text-xl font-medium">
+            {strikePrice && (
+              <span>
+                <s className="mr-2">{strikePrice}</s>
+              </span>
+            )}
+
+            {pricingDescription}
+          </p>
         </div>
 
-        <button className="bg-[#312D52] font-medium w-full rounded-md h-[45px]">
+        <button
+          className={`${
+            buttonType === "primary" ? "bg-[#312D52]" : "bg-transparent"
+          } font-medium w-full rounded-md h-[45px] ${
+            buttonType !== "primary" && "border-[#312D52] border-2"
+          }`}
+          onClick={() => navigate(link)}
+        >
           {buttonText}
         </button>
       </div>
