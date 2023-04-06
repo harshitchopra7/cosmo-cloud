@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from "@mui/material/Slider";
+import Box from "@mui/material/Box";
 
 const SliderComponent = ({
   defaultValue,
@@ -10,6 +11,7 @@ const SliderComponent = ({
   disabled = false,
   color,
   step,
+  marks,
 }) => {
   return (
     <div>
@@ -25,6 +27,7 @@ const SliderComponent = ({
         max={max}
         style={{ color: color }}
         step={step}
+        marks={marks}
       />
       <div className="flex items-center justify-between text-sm">
         <p>{min}</p>

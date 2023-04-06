@@ -12,15 +12,6 @@ import InfoDetails from "./InfoDetails";
 
 const totalHoursInMonth = 730;
 
-const marks = [
-  {
-    value: 300,
-  },
-  {
-    value: 600,
-  },
-];
-
 const plans = [
   {
     name: "Personal",
@@ -163,11 +154,26 @@ function Section4() {
   );
 
   const handlePlanClick = (val) => {
+    setRpsSelected(0);
+    setProjectsSelected(0);
+    setDataSelected(0);
+
     setSelectedPlan(val);
     setselectedPlanName(val.name.toLowerCase());
   };
 
-  const calculateRpsCost = () => {};
+  const calculateRpsCost = useCallback(() => {
+    const findIndex = pricing[selectedPlanName].pricing.rps.limits.findIndex(
+      (val) => val.value === rpsSelected
+    );
+
+    if (findIndex === -1 || findIndex === 0) {
+      // return 0 since the first value will always be included in the pack
+      return 0;
+    }
+
+    return pricing[selectedPlanName].pricing.rps.limits[findIndex]?.price.inr;
+  }, [rpsSelected, selectedPlanName]);
 
   const calculateProjectCost = useCallback(() => {
     const needToCalculaterpsSelected = 0;
@@ -181,7 +187,7 @@ function Section4() {
           pricing[selectedPlanName].pricing.projects.limits[0]?.multiplier
             ?.inr || 0);
 
-    return totalProjectCost;
+    return Math.round(totalProjectCost);
   }, [selectedPlanName, projectsSelected]);
 
   const calculateDataCost = useCallback(() => {
@@ -197,9 +203,20 @@ function Section4() {
     return (
       selectedPlanBasePrice * totalHoursInMonth +
       calculateProjectCost() +
-      calculateDataCost()
+      calculateDataCost() +
+      calculateRpsCost()
     );
-  }, [calculateDataCost, calculateProjectCost, selectedPlanName]);
+  }, [
+    calculateDataCost,
+    calculateProjectCost,
+    selectedPlanName,
+    calculateRpsCost,
+  ]);
+
+  console.log("calculateTotalCost", calculateTotalCost());
+  console.log("calculateDataCost", calculateDataCost());
+  console.log("calculateProjectCost", calculateProjectCost());
+  console.log("calculateRpsCost", calculateRpsCost());
 
   const calculateCustomisationCost = () => {
     const totalCost = calculateTotalCost();
@@ -208,6 +225,13 @@ function Section4() {
       pricing[selectedPlanName].pricing.base.inr * totalHoursInMonth;
 
     return totalCost - dataCost - basePrice;
+  };
+
+  const getMarks = () => {
+    const arr = [];
+    const limits = pricing[selectedPlanName]?.pricing?.rps.limits;
+    limits.map((val) => arr.push({ value: val.value }));
+    return arr;
   };
 
   return (
@@ -306,10 +330,13 @@ function Section4() {
                       value={rpsSelected}
                       setterValue={setRpsSelected}
                       min={
-                        pricing[selectedPlanName].pricing.rps.limits[0].value
+                        pricing[selectedPlanName]?.pricing?.rps.limits[0]?.value
                       }
                       max={
-                        pricing[selectedPlanName].pricing.rps.limits[1].value
+                        pricing[selectedPlanName]?.pricing?.rps.limits[
+                          pricing[selectedPlanName]?.pricing?.rps.limits
+                            .length - 1
+                        ]?.value
                       }
                       disabled={
                         pricing[selectedPlanName].pricing.rps.enabled ===
@@ -320,6 +347,11 @@ function Section4() {
                           ? "#8F8F8F"
                           : "#8980D4"
                       }
+                      marks={
+                        pricing[selectedPlanName]?.pricing?.rps.enabled !==
+                          false && getMarks()
+                      }
+                      step={null}
                     />
                   }
                 </div>
@@ -452,7 +484,7 @@ function Section4() {
 
               <RenderConfigurationDetails
                 title="Customisation"
-                description={0}
+                description={calculateCustomisationCost()}
                 type="priceBreakdown"
               />
 
