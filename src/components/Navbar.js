@@ -8,18 +8,16 @@ import Button from "../common/Button";
 
 // assets
 import logoMain from "../assets/logoMain.png";
-import HeaderIcon from "../assets/navbar/HeaderIcon";
-import DownArrow from "../assets/navbar/DownArrow";
-import menu from "../assets/menu.png";
 
-// mui deps
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import { MdOutlineClose, MdOutlineMenu } from "react-icons/md";
 
 const items = ["Home", "Pricing", "About", "Contact us"];
 
 function Navbar() {
   const navigate = useNavigate();
+
+  const [showNavbarinMobileScreen, setShowNavbarinMobileScreen] =
+    useState(false);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const openTabs = Boolean(anchorEl);
@@ -52,11 +50,41 @@ function Navbar() {
     setAnchorEl(null);
   };
 
+  function disableScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    const scrollLeft =
+      window.pageXOffset || document.documentElement.scrollLeft;
+
+    window.onscroll = function () {
+      window.scrollTo(scrollLeft, scrollTop);
+    };
+  }
+
+  function enableScroll() {
+    window.onscroll = function () {};
+  }
+
+  const closeMenu = () => {
+    setShowNavbarinMobileScreen(false);
+    enableScroll();
+  };
+
+  const onMobileJoinWaitlistClick = () => {
+    navigate("/");
+    closeMenu();
+  };
+
   return (
     <>
       <div className="mobile:hidden flex items-center justify-between pt-4 pb-4 pl-[2%] pr-[2%]">
-        <div style={{ flex: "0.11" }} className="font-semibold cursor-pointer">
-          <img onClick={() => navigate("/")} src={logoMain} alt="" />
+        <div className="font-semibold cursor-pointer">
+          <img
+            className="h-[30px]"
+            onClick={() => navigate("/")}
+            src={logoMain}
+            alt=""
+          />
         </div>
         <div className="flex justify-center" style={{ flex: "0.88" }}>
           {items.map((val) => (
@@ -75,7 +103,56 @@ function Navbar() {
 
       <div className="hidden mobile:block">
         <>
-          <div className="flex items-center justify-between p-2 pl-4 pr-4">
+          <div className="flex items-center justify-between p-4">
+            <div className="font-semibold cursor-pointer">
+              <img src={logoMain} alt="" />
+            </div>
+            <MdOutlineMenu
+              size={25}
+              onClick={() => {
+                setShowNavbarinMobileScreen(true);
+                disableScroll();
+              }}
+            />
+          </div>
+
+          {showNavbarinMobileScreen && (
+            <div className="fixed overflow-hidden top-0 left-0 right-0 h-[100vh] bg-[#161426] p-4">
+              <div className="flex justify-between">
+                <img
+                  className="h-[28px]"
+                  onClick={() => {
+                    navigate("/");
+                    closeMenu();
+                  }}
+                  src={logoMain}
+                  alt=""
+                />
+                <MdOutlineClose size={25} onClick={closeMenu} />
+              </div>
+
+              <div className="mt-12 mb-12 ml-4">
+                {items.map((val) => (
+                  <p
+                    className="mt-8"
+                    onClick={() => {
+                      handleNavbarRedirection(val);
+                      closeMenu();
+                    }}
+                  >
+                    {val}
+                  </p>
+                ))}
+              </div>
+
+              <Button
+                text="Join the waitlist"
+                onClick={onMobileJoinWaitlistClick}
+              />
+            </div>
+          )}
+
+          {/* <div className="flex items-center justify-between p-2 pl-4 pr-4">
             <div className="font-semibold cursor-pointer">
               <img src={logoMain} alt="" />
             </div>
@@ -130,7 +207,7 @@ function Navbar() {
                 </Menu>
               </div>
             </div>
-          </div>
+          </div> */}
         </>
       </div>
     </>

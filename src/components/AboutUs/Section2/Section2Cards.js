@@ -1,5 +1,6 @@
 import React from "react";
-import linkedin from "../../../assets/footer/linkedin.png";
+
+import { FaLinkedinIn } from "react-icons/fa";
 
 function Section2Cards({ image, name, role, pastExp }) {
   return (
@@ -17,8 +18,13 @@ function Section2Cards({ image, name, role, pastExp }) {
         <p className="mt-1 text-[#BFB8B8]">Past: {pastExp}</p>
       </div>
 
-      <a href={ValidityState.linkedin} className="mt-4 cursor-pointer">
-        <img src={linkedin} target="_blank" alt="linkedin" />
+      <a
+        href={ValidityState.linkedin}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-4 cursor-pointer"
+      >
+        <FaLinkedinIn className="text-[#5869D6]" />
       </a>
     </div>
   );

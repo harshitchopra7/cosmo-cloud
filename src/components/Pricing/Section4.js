@@ -1,19 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Divider from "../Homepage/Divider/Divider";
 
 import radio_button_unchecked from "../../assets/pricing/radio_button_unchecked.png";
 import radio_button_checked from "../../assets/pricing/radio_button_checked.png";
 
-import Slider from "@mui/material/Slider";
+import { dataPrice, pricing } from "../../pricing";
+
+import SliderComponent from "./SliderComponent";
+import RenderConfigurationDetails from "./RenderConfigurationDetails";
+import InfoDetails from "./InfoDetails";
+
+const totalHoursInMonth = 730;
+
+const marks = [
+  {
+    value: 300,
+  },
+  {
+    value: 600,
+  },
+];
 
 const plans = [
   {
     name: "Personal",
     price: "$40/hour",
+    rps: "disabled",
+    numberOfProjects: "disabled",
+    dataBandwidth: "1",
   },
   {
     name: "Starter",
     price: "$60/hour",
+    rps: "300",
+    numberOfProjects: "disabled",
+    dataBandwidth: "1",
   },
   {
     name: "Standard",
@@ -129,65 +150,100 @@ const pricingDetails = [
   },
 ];
 
-const renderConfigurationDetails = (title, description) => {
-  return (
-    <div className="flex items-center justify-between text-sm font-medium mb-2">
-      <p className="text-[#BFB8B8]">{title}</p>
-      <p>{description}</p>
-    </div>
-  );
-};
-
-const SliderComponent = ({ defaultValue, min, max, disabled = false }) => {
-  return (
-    <div>
-      {" "}
-      <Slider
-        defaultValue={defaultValue}
-        valueLabelDisplay={disabled ? "auto" : "on"}
-        aria-label="Small"
-        color="primary"
-        disabled={disabled}
-        min={min}
-        max={max}
-        style={{ color: "#8980D4" }}
-      />
-      <div className="flex items-center justify-between text-sm">
-        <p>{min}</p>
-        <p>{max}</p>
-      </div>
-    </div>
-  );
-};
-
 function Section4() {
-  const [selectedPlan, setSelectedPlan] = useState(plans[0].name.toLowerCase());
+  const [selectedPlan, setSelectedPlan] = useState(plans[0]);
+  const [selectedPlanName, setselectedPlanName] = useState(
+    plans[0].name.toLowerCase()
+  );
+
+  const [rpsSelected, setRpsSelected] = useState(0);
+  const [projectsSelected, setProjectsSelected] = useState(0);
+  const [dataSelected, setDataSelected] = useState(
+    pricing[selectedPlanName].pricing.data.limits[0].value
+  );
+
+  const handlePlanClick = (val) => {
+    setSelectedPlan(val);
+    setselectedPlanName(val.name.toLowerCase());
+  };
+
+  const calculateRpsCost = () => {};
+
+  const calculateProjectCost = useCallback(() => {
+    const needToCalculaterpsSelected = 0;
+    const perProjectTotalCost =
+      pricing[selectedPlanName].pricing.base.inr + needToCalculaterpsSelected;
+
+    const totalProjectCost =
+      perProjectTotalCost *
+      (1 +
+        (projectsSelected - 1) *
+          pricing[selectedPlanName].pricing.projects.limits[0]?.multiplier
+            ?.inr || 0);
+
+    return totalProjectCost;
+  }, [selectedPlanName, projectsSelected]);
+
+  const calculateDataCost = useCallback(() => {
+    const includedDataInSelectedPlan =
+      pricing[selectedPlanName].pricing.data.limits[0].value;
+    const finalAmount =
+      (dataSelected - includedDataInSelectedPlan) * dataPrice.data.inr;
+    return finalAmount < 0 ? 0 : finalAmount;
+  }, [dataSelected, selectedPlanName]);
+
+  const calculateTotalCost = useCallback(() => {
+    const selectedPlanBasePrice = pricing[selectedPlanName].pricing.base.inr;
+    return (
+      selectedPlanBasePrice * totalHoursInMonth +
+      calculateProjectCost() +
+      calculateDataCost()
+    );
+  }, [calculateDataCost, calculateProjectCost, selectedPlanName]);
+
+  const calculateCustomisationCost = () => {
+    const totalCost = calculateTotalCost();
+    const dataCost = calculateDataCost();
+    const basePrice =
+      pricing[selectedPlanName].pricing.base.inr * totalHoursInMonth;
+
+    return totalCost - dataCost - basePrice;
+  };
 
   return (
     <div className="items-center pr-[11%] pl-[11%]">
-      <p className="text-3xl text-center">Cost Calculator</p>
+      <p className="text-[28px] text-center largeMobile:text-[22px]">
+        Cost Calculator
+      </p>
+      <p className="text-[20px] text-center text-[#BFB8B8] largeMobile:text-[16px]">
+        Calculate your custom cost tailored to your needs
+      </p>
 
-      <div className="flex justify-between mt-10">
+      <div className="flex justify-evenly mt-10  largeMobile:flex-col">
         {/* left  */}
-        <div className="w-[65%]">
+        <div className="w-[58%] largeMobile:w-[100%]">
           <div>
-            <p className="font-medium mt-6 mb-4 text-xl">Select a plan</p>
-            <div className="flex">
+            <p className="font-medium mt-6 mb-4 text-[20px] largeMobile:text-[18px]">
+              Select a plan
+            </p>
+            <div className="flex justify-between largeMobile:flex-col">
               {plans.map((val) => (
                 <div
-                  className="bg-[#1D1B2D] rounded-lg p-4 flex justify-between w-[150px] mr-4"
-                  onClick={() => setSelectedPlan(val.name.toLowerCase())}
+                  className="bg-[#1D1B2D] rounded-lg p-2 pl-4 pr-4 flex justify-between w-[32%] cursor-pointer largeMobile:w-[100%] largeMobile:mb-[12px]"
+                  onClick={() => handlePlanClick(val)}
                 >
                   <div>
-                    <p className="text-lg font-medium">{val.name}</p>
-                    <p className="font-medium text-[#BFB8B8] text-sm">
+                    <p className="text-lg font-medium largeMobile:text-[16px]">
+                      {val.name}
+                    </p>
+                    <p className="font-medium text-[#BFB8B8] text-sm largeMobile:text-[14px]">
                       {val.price}
                     </p>
                   </div>
                   <div>
                     <img
                       src={
-                        selectedPlan === val.name.toLowerCase()
+                        selectedPlanName === val.name.toLowerCase()
                           ? radio_button_checked
                           : radio_button_unchecked
                       }
@@ -200,40 +256,42 @@ function Section4() {
           </div>
 
           <div>
-            <p className="font-medium mt-6 mb-4 text-xl">Out of box</p>
+            <p className="font-medium mt-6 mb-4 text-xl largeMobile:text-[18px]">
+              Out of box
+            </p>
 
-            <div className="flex items-center flex-wrap bg-[#1D1B2D] p-4 pl-5 pr-5">
-              <div className="w-[33%] mb-5">
-                <p className="text-sm text-[#BFB8B8] mb-1">API requests</p>
-                <p>{planDetails[selectedPlan].apiReq}</p>
+            <div className="flex items-center flex-wrap bg-[#1D1B2D] p-2 pl-4 pr-4 rounded-lg largeMobile:flex-col">
+              <div className="w-[33%] mb-5 largeMobile:w-[100%]">
+                <InfoDetails text="API requests" />
+                <p>{planDetails[selectedPlanName].apiReq}</p>
               </div>
-              <div className="w-[33%] mb-5">
-                <p className="text-sm text-[#BFB8B8] mb-1">
-                  Requests per second
-                </p>
-                <p>{planDetails[selectedPlan].requestsPerSecond}</p>
+              <div className="w-[33%] mb-5 largeMobile:w-[100%]">
+                <InfoDetails text="Requests per second" />
+                <p>{planDetails[selectedPlanName].requestsPerSecond}</p>
               </div>
-              <div className="w-[33%] mb-5">
-                <p className="text-sm text-[#BFB8B8] mb-1">Data bandwidth</p>
-                <p>{planDetails[selectedPlan].dataBandwidth}</p>
+              <div className="w-[33%] mb-5 largeMobile:w-[100%]">
+                <InfoDetails text="Data bandwidth" />
+                <p>{planDetails[selectedPlanName].dataBandwidth}</p>
               </div>
-              <div className="w-[33%] mb-5">
-                <p className="text-sm text-[#BFB8B8] mb-1">Number of models</p>
-                <p>{planDetails[selectedPlan].numberOfModels}</p>
+              <div className="w-[33%] mb-5 largeMobile:w-[100%]">
+                <InfoDetails text="Number of models" />
+                <p>{planDetails[selectedPlanName].numberOfModels}</p>
               </div>
-              <div className="w-[33%] mb-5">
-                <p className="text-sm text-[#BFB8B8] mb-1">Number of APIs</p>
-                <p>{planDetails[selectedPlan].numberOfAPis}</p>
+              <div className="w-[33%] mb-5 largeMobile:w-[100%]">
+                <InfoDetails text="Number of APIs" />
+                <p>{planDetails[selectedPlanName].numberOfAPis}</p>
               </div>
             </div>
           </div>
 
           <div>
-            <p className="font-medium mt-6 mb-4 text-xl">Configure</p>
+            <p className="font-medium mt-6 mb-4 text-xl largeMobile:text-[18px]">
+              Configure
+            </p>
 
-            <div>
-              <div className="mt-8">
-                <div className="mt-3 mb-3">
+            <div className="bg-[#1D1B2D] rounded-lg p-4">
+              <div>
+                <div className="mt-1 mb-1 largeMobile:text-[16px]">
                   <p>Requests per second (RPS)</p>
                   <p className="text-[#BFB8B8]">
                     Current plan doesn’t support RPS control.
@@ -242,36 +300,104 @@ function Section4() {
                 <div>
                   {
                     <SliderComponent
-                      defaultValue={10}
-                      min={10}
-                      max={100}
-                      disabled={true}
+                      defaultValue={
+                        pricing[selectedPlanName].pricing.rps.limits[0].value
+                      }
+                      value={rpsSelected}
+                      setterValue={setRpsSelected}
+                      min={
+                        pricing[selectedPlanName].pricing.rps.limits[0].value
+                      }
+                      max={
+                        pricing[selectedPlanName].pricing.rps.limits[1].value
+                      }
+                      disabled={
+                        pricing[selectedPlanName].pricing.rps.enabled ===
+                          false && true
+                      }
+                      color={
+                        pricing[selectedPlanName].pricing.rps.enabled === false
+                          ? "#8F8F8F"
+                          : "#8980D4"
+                      }
                     />
                   }
                 </div>
               </div>
 
-              <div className="mt-8">
-                <div className="mt-3 mb-3">
-                  <p>Number of projects</p>
+              <div className="mt-4 largeMobile:text-[16px]">
+                <div className="mt-1 mb-1">
+                  <p className="">Number of projects</p>
                   <p className="text-[#BFB8B8]">
-                    10 GB is included in the base price.
+                    1 project is included in the base price.
                   </p>
                 </div>
                 <div>
-                  {<SliderComponent defaultValue={10} min={1} max={100} />}
+                  {
+                    <SliderComponent
+                      defaultValue={
+                        pricing[selectedPlanName].pricing.projects.limits[0]
+                          .value
+                      }
+                      value={projectsSelected}
+                      setterValue={setProjectsSelected}
+                      min={
+                        pricing[selectedPlanName].pricing.projects.limits[0]
+                          .value
+                      }
+                      max={
+                        pricing[selectedPlanName].pricing.projects.limits[1]
+                          .value
+                      }
+                      disabled={
+                        pricing[selectedPlanName].pricing.projects.enabled ===
+                          false && true
+                      }
+                      color={
+                        pricing[selectedPlanName].pricing.projects.enabled ===
+                        false
+                          ? "#8F8F8F"
+                          : "#8980D4"
+                      }
+                      step={1}
+                    />
+                  }
                 </div>
               </div>
 
-              <div className="mt-8">
-                <div className="mt-3 mb-3">
+              <div className="mt-4 largeMobile:text-[16px]">
+                <div className="mt-1 mb-1">
                   <p>Data bandwidth</p>
                   <p className="text-[#BFB8B8]">
                     10 GB is included in the base price.
                   </p>
                 </div>
                 <div>
-                  {<SliderComponent defaultValue={20} min={10} max={100} />}
+                  {
+                    <SliderComponent
+                      defaultValue={
+                        pricing[selectedPlanName].pricing.data.limits[0].value
+                      }
+                      value={dataSelected}
+                      setterValue={setDataSelected}
+                      min={
+                        pricing[selectedPlanName].pricing.data.limits[0].value
+                      }
+                      max={
+                        pricing[selectedPlanName].pricing.data.limits[1].value
+                      }
+                      disabled={
+                        pricing[selectedPlanName].pricing.data.enabled ===
+                          false && true
+                      }
+                      color={
+                        pricing[selectedPlanName].pricing.data.enabled === false
+                          ? "#8F8F8F"
+                          : "#8980D4"
+                      }
+                      step={10}
+                    />
+                  }
                 </div>
               </div>
             </div>
@@ -279,44 +405,62 @@ function Section4() {
         </div>
 
         {/* right  */}
-        <div className="w-[30%]">
-          <p className="font-medium mt-6 mb-4 text-xl">Estimate</p>
-          <div className="bg-[#1D1B2D] p-4">
-            <div className="text-center mt-6 mb-6">
-              <p className="text-3xl font-medium">₹6.5/hour</p>
+        <div className="w-[34%] largeMobile:w-[100%]">
+          <p className="font-medium mt-6 mb-4 text-xl largeMobile:text-[18px]">
+            Estimate
+          </p>
+          <div className="bg-[#1D1B2D] p-4 rounded-lg">
+            <div className="text-center mt-8 mb-8">
+              <p className="text-3xl font-medium">
+                ₹{(calculateTotalCost() / 730).toFixed(2)}/hour
+              </p>
               <p className="text-[#BFB8B8]">charged monthly</p>
             </div>
             <div>
-              <p className="text-sm mb-4 font-medium">Your Configuration</p>
+              <p className="text-sm mb-6 font-medium">Your Configuration</p>
 
-              {renderConfigurationDetails(
-                "Requests per second",
-                planDetails[selectedPlan].requestsPerSecond
-              )}
-              {renderConfigurationDetails(
-                "Data bandwidth",
-                planDetails[selectedPlan].dataBandwidth
-              )}
-              {renderConfigurationDetails(
-                "Number of models",
-                planDetails[selectedPlan].numberOfModels
-              )}
-              {renderConfigurationDetails(
-                "Number of APIs",
-                planDetails[selectedPlan].numberOfAPis
-              )}
+              <RenderConfigurationDetails
+                title="Requests per second"
+                description={planDetails[selectedPlanName].requestsPerSecond}
+              />
+
+              <RenderConfigurationDetails
+                title="Data bandwidth"
+                description={planDetails[selectedPlanName].dataBandwidth}
+              />
+
+              <RenderConfigurationDetails
+                title="Number of models"
+                description={planDetails[selectedPlanName].numberOfModels}
+              />
+
+              <RenderConfigurationDetails
+                title="Number of APIs"
+                description={planDetails[selectedPlanName].numberOfAPis}
+              />
             </div>
             <div>
-              <p className="text-sm mb-4 font-medium mt-8">Price breakdown</p>
+              <p className="text-sm mb-6 font-medium mt-10">Price breakdown</p>
 
-              {renderConfigurationDetails("Personal Plan", "₹500/month")}
+              <RenderConfigurationDetails
+                title={selectedPlan.name}
+                description={
+                  pricing[selectedPlanName].pricing.base.inr * totalHoursInMonth
+                }
+                type="priceBreakdown"
+              />
 
-              {renderConfigurationDetails("Customisation", "₹1,200/month")}
+              <RenderConfigurationDetails
+                title="Customisation"
+                description={0}
+                type="priceBreakdown"
+              />
 
-              {renderConfigurationDetails(
-                "Data bandwidth increase",
-                "₹200/month"
-              )}
+              <RenderConfigurationDetails
+                title="Data bandwidth increase"
+                description={calculateDataCost()}
+                type="priceBreakdown"
+              />
             </div>
             <div className="mt-[-45px] mb-[-45px]">
               <Divider />
@@ -326,13 +470,13 @@ function Section4() {
               <p>
                 Total <span className="text-[#BFB8B8]">(monthly)</span>
               </p>
-              <p>₹1,900/month</p>
+              <p>₹{calculateTotalCost()}/month</p>
             </div>
             <p className="text-right text-[#BFB8B8] text-xs">
               *Any applicable taxes are not included
             </p>
 
-            <button className="bg-[#312D52] font-medium w-full rounded-md h-[45px] font-medium mt-[35px] mb-[10px]">
+            <button className="bg-[#312D52] font-medium w-full rounded-md h-[45px] font-medium mt-[110px] mb-[10px] largeMobile:mt-[50px]">
               Sign up now
             </button>
           </div>

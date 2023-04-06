@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import Section3Cards from "./Section3Cards";
 import Section3MobileCards from "./Section3MobileCards";
 
-// data
 import { data } from "./data";
 
 function Section3() {
@@ -50,8 +49,8 @@ function Section3() {
         </div>
       </div>
 
-      <div className="hidden largeMobile:block flex flex-col">
-        <div className="mr-8">
+      <div className="hidden largeMobile:block flex flex-col items-center justify-center">
+        <div>
           {data.map((val) => (
             <Section3MobileCards
               id={val.id}

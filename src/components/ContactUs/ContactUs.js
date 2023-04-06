@@ -15,7 +15,7 @@ const contactData = [
     image: email,
     title: "Mail us",
     description: "Our team is here to help.",
-    contactDetails: "support@cosmocloud.io",
+    contactDetails: "contact@cosmocloud.io",
   },
   // {
   //   image: phone,
@@ -27,7 +27,7 @@ const contactData = [
     image: location,
     title: "Visit us",
     description: "Come say hello at our office HQ.",
-    contactDetails: "100 Qutab Minar, Delhi 100006",
+    contactDetails: "Noida, U.P, India - 201301",
   },
 ];
 
@@ -117,13 +117,13 @@ function ContactUsComponent() {
         </div>
         <div className="mt-5">
           <p className="mb-3 font-medium">Subject line</p>
-          <Input
+          <input
+            className={`h-[45px] w-[100%] text-[#95949E] pl-4 pr-4 bg-[#211E33] !outline-none rounded-lg mobile:w-[100%]`}
             placeholder="What are you looking for?"
             value={formData.subject}
             onChange={(e) =>
               setFormData({ ...formData, subject: e.target.value })
             }
-            width="100%"
           />
         </div>
         <div className="mt-5 mb-5">

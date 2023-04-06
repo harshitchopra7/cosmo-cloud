@@ -1,5 +1,7 @@
 import "./App.css";
 
+import { useState } from "react";
+
 // routing
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -12,13 +14,17 @@ import HomePage from "./container/HomePage";
 import Pricing from "./container/Pricing";
 
 function App() {
+  const [hideOverFlowY, setHideOverFlowY] = useState(false);
+
   return (
     <BrowserRouter>
       <div
-        className="text-[#ffffff] flex flex-col justify-between"
+        className={`text-[#ffffff] flex flex-col justify-between ${
+          hideOverFlowY && "overflow-y-hidden"
+        }`}
         style={{ minHeight: "100vh" }}
       >
-        <Navbar />
+        <Navbar setHideOverFlowY={setHideOverFlowY} />
         <Routes>
           <Route path="/" exact element={<HomePage />} />
           <Route path="/about-us" element={<AboutUs />} />

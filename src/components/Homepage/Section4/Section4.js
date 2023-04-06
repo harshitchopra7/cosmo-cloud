@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../../assets/logo.png";
+import Logo from "../../../assets/Logo";
 import WaitlistInput from "../WaitlistInput/WaitlistInput";
 
 function Section4() {
@@ -18,7 +19,7 @@ function Section4() {
   return (
     <div className="flex items-center justify-center flex-col">
       <div className="flex items-center justify-center flex-col">
-        <img src={logo} />
+        <Logo />
         <p className="mt-2 text-2xl">Cosmocloud</p>
       </div>
 

@@ -18,7 +18,8 @@ function Section3MobileCards({ id, title, description, illustration }) {
           flex: "0.7",
         }}
       >
-        {illustration}
+        <img src={illustration} alt="" />
+        {/* {illustration} */}
       </div>
     </div>
   );
