@@ -213,11 +213,6 @@ function Section4() {
     calculateRpsCost,
   ]);
 
-  console.log("calculateTotalCost", calculateTotalCost());
-  console.log("calculateDataCost", calculateDataCost());
-  console.log("calculateProjectCost", calculateProjectCost());
-  console.log("calculateRpsCost", calculateRpsCost());
-
   const calculateCustomisationCost = () => {
     const totalCost = calculateTotalCost();
     const dataCost = calculateDataCost();
