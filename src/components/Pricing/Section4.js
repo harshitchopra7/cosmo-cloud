@@ -172,7 +172,9 @@ function Section4() {
       return 0;
     }
 
-    return pricing[selectedPlanName].pricing.rps.limits[findIndex]?.price.inr;
+    return (
+      pricing[selectedPlanName].pricing.rps.limits[findIndex]?.price.inr * 730
+    );
   }, [rpsSelected, selectedPlanName]);
 
   const calculateProjectCost = useCallback(() => {
