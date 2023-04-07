@@ -150,7 +150,7 @@ function Section2() {
     <div className="pl-[11%] pr-[11%] bg-[#1D1B2D] largeMobile:bg-transparent">
       {/* desktop version  */}
       <div className="pt-[60px] pb-[60px] largeMobile:hidden">
-        <p className="text-2xl text-center">Compare features across plans</p>
+        <p className="text-[28px] text-center">Compare features across plans</p>
 
         <div className="flex flex-wrap justify-between mt-10">
           {pricingDetails.map((val) => (

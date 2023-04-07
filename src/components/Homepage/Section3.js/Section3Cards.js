@@ -13,8 +13,8 @@ function Section3Cards({ id, title, description, selectedId, onClick }) {
           {id}
         </p>
         <div className="ml-3">
-          <p className="text-xl font-medium">{title}</p>
-          <p className="text-lg text-[#BFB8B8]">{description}</p>
+          <p className="text-[20px] font-medium">{title}</p>
+          <p className="text-[18px] text-[#BFB8B8]">{description}</p>
         </div>
       </div>
     </div>

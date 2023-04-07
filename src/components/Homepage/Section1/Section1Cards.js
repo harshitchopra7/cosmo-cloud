@@ -6,8 +6,10 @@ function Section1Cards({ icon, title, description }) {
       {/* <img src={icon} alt="" /> */}
       <div>{icon}</div>
       <div className="mt-6">
-        <p className="font-semibold text-xl tablet:text-lg">{title}</p>
-        <p className="text-lg text-[#BFB8B8] mt-2 tablet:text-base">
+        <p className="font-semibold text-[22px] font-medium tablet:text-lg">
+          {title}
+        </p>
+        <p className="text-[18px] text-[#BFB8B8] mt-2 tablet:text-base">
           {description}
         </p>
       </div>

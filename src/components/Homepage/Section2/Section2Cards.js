@@ -5,8 +5,12 @@ function Section2Cards({ image, name, designation }) {
     <div className="w-[25%] mb-[40px] largeMobile:w-[90%] largeMobile:flex">
       <img src={image} />
       <div className="mt-4 largeMobile:ml-4">
-        <p className="text-xl font-semibold">{name}</p>
-        <p className="text-[#BFB8B8]">{designation}</p>
+        <p className="text-[22px] font-semibold font-semibold largeMobile:text-[18px]">
+          {name}
+        </p>
+        <p className="text-[#BFB8B8] text-[16px] font-medium largeMobile:text-[15px]">
+          {designation}
+        </p>
       </div>
     </div>
   );

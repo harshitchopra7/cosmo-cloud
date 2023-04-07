@@ -11,11 +11,13 @@ function Section2Cards({ image, name, role, pastExp }) {
         src={image}
         alt="person"
       />
-      <p className="mt-4 font-semibold text-lg">{name}</p>
+      <p className="mt-4 font-semibold text-[20px] largeMobile:text-[18px]">
+        {name}
+      </p>
 
       <div className="mt-4">
-        <p className="font-medium">{role}</p>
-        <p className="mt-1 text-[#BFB8B8]">Past: {pastExp}</p>
+        <p className="font-medium text-[16px]">{role}</p>
+        <p className="mt-1 text-[#BFB8B8] text-[16px]">Past: {pastExp}</p>
       </div>
 
       <a

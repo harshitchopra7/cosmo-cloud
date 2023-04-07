@@ -7,9 +7,9 @@ function ContactUsCards({ image, title, description, contactDetails }) {
         <img className="tablet:h-[45px]" src={image} alt="" />
       </div>
       <div className="ml-4 tablet:flex-[0.8] tablet:justify-center">
-        <p className="text-lg font-medium">{title}</p>
-        <p className="text-[#BFB8B8] mt-2 mb-2">{description}</p>
-        <p className="font-medium">{contactDetails}</p>
+        <p className="text-[20px] font-medium">{title}</p>
+        <p className="text-[#BFB8B8] mt-2 mb-2 text-[16px]">{description}</p>
+        <p className="font-medium text-[18px]">{contactDetails}</p>
       </div>
     </div>
   );

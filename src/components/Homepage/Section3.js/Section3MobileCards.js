@@ -8,8 +8,8 @@ function Section3MobileCards({ id, title, description, illustration }) {
           {id}
         </p>
         <div className="ml-3">
-          <p className="text-xl font-medium">{title}</p>
-          <p className="text-lg text-[#BFB8B8]">{description}</p>
+          <p className="text-[16px] font-medium">{title}</p>
+          <p className="text-[16px] text-[#BFB8B8]">{description}</p>
         </div>
       </div>
       <div

@@ -82,17 +82,16 @@ const plans = [
 ];
 
 function Section1() {
-  const getIcon = () => {
-    return <Webhook />;
-  };
-
   return (
     <div className="pl-[11%] pr-[11%]">
       <div className="text-center">
-        <p className="text-4xl font-medium largeMobile:text-[28px]">Pricing</p>
-        <p className="text-[#BFB8B8] mt-2 largeMobile:text-[16px]">
+        <p className="text-[48px] font-medium largeMobile:text-[28px]">
+          Pricing
+        </p>
+        <p className="text-[#BFB8B8] mt-2 text-[20px] largeMobile:text-[16px]">
           Flexible usage-based pricing that scale with your needs – from early
-          exploration to enterprise scale. <span> Calculate your price</span>
+          exploration to enterprise scale.{" "}
+          <span className="text-[#fff]"> Calculate your price</span>
         </p>
       </div>
 

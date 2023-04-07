@@ -26,7 +26,9 @@ function Section3() {
 
   return (
     <div className="mt-[70px] mb-[70px] pl-[7%] pr-[7%]">
-      <p className="font-medium text-3xl">Consectetur adipiscing elit</p>
+      <p className="font-medium text-[32px] font-medium largeMobile:text-[20px]">
+        Consectetur adipiscing elit
+      </p>
       <div className="flex largeMobile:hidden">
         <div style={{ flex: "0.3" }} className="mr-8">
           {data.map((val) => (

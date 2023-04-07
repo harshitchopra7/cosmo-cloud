@@ -17,15 +17,19 @@ function Section4() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center flex-col">
+    <div className="flex items-center justify-center flex-col largeMobile:pl-[4%] largeMobile:pr-[4%]">
       <div className="flex items-center justify-center flex-col">
         <Logo />
-        <p className="mt-2 text-2xl">Cosmocloud</p>
+        <p className="mt-2 text-[26px] font-semibold largeMobile:text-[18px]">
+          Cosmocloud
+        </p>
       </div>
 
       <div className="bg-[#1D1B2D] pl-8 pr-8 pt-6 pb-6 rounded-2xl mt-8 mb-8">
-        <p className="text-2xl font-medium tablet:text-lg">Join the waitlist</p>
-        <p className="text-[#BFB8B8] text-lg tablet:text-base">
+        <p className="text-[26px] font-medium font-medium largeMobile:text-[18px]">
+          Join the waitlist
+        </p>
+        <p className="text-[#BFB8B8] text-[20px] largeMobile:text-[14px]">
           Sign up to be one of the first to use future of no-code platform
         </p>
 
@@ -33,7 +37,7 @@ function Section4() {
           <WaitlistInput />
         </div>
 
-        <p className="text-center text-[#BFB8B8] tablet:text-xs">
+        <p className="text-center text-[#BFB8B8] text-[18px] largeMobile:text-[12px]">
           Current waitlist: {waitlistCount}
         </p>
       </div>

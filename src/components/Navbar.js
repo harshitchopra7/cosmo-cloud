@@ -19,11 +19,7 @@ function Navbar() {
   const [showNavbarinMobileScreen, setShowNavbarinMobileScreen] =
     useState(false);
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const openTabs = Boolean(anchorEl);
-
   const handleNavbarRedirection = (page) => {
-    setAnchorEl(null);
     switch (page) {
       case "Home":
         navigate("/");
@@ -40,14 +36,6 @@ function Navbar() {
       default:
         return;
     }
-  };
-
-  const handleClickTabs = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleCloseTabs = (event) => {
-    setAnchorEl(null);
   };
 
   function disableScroll() {
@@ -89,7 +77,7 @@ function Navbar() {
         <div className="flex justify-center" style={{ flex: "0.88" }}>
           {items.map((val) => (
             <p
-              className="mr-8 hover:bg-[#3A3564] p-2 pl-4 pr-4 rounded-full cursor-pointer font-semibold text-sm"
+              className="mr-8 hover:bg-[#3A3564] p-2 pl-4 pr-4 rounded-full cursor-pointer font-semibold text-[16px]"
               onClick={() => handleNavbarRedirection(val)}
             >
               {val}

@@ -172,54 +172,39 @@ function Section4() {
       return 0;
     }
 
-    return (
-      pricing[selectedPlanName].pricing.rps.limits[findIndex]?.price.inr * 730
-    );
+    return pricing[selectedPlanName].pricing.rps.limits[findIndex]?.price.inr;
   }, [rpsSelected, selectedPlanName]);
 
   const calculateProjectCost = useCallback(() => {
-    const needToCalculaterpsSelected = 0;
     const perProjectTotalCost =
-      pricing[selectedPlanName].pricing.base.inr + needToCalculaterpsSelected;
+      pricing[selectedPlanName].pricing.base.inr + calculateRpsCost();
 
     const totalProjectCost =
       perProjectTotalCost *
       (1 +
         (projectsSelected - 1) *
           pricing[selectedPlanName].pricing.projects.limits[0]?.multiplier
-            ?.inr || 0);
+            ?.inr || 1);
 
     return Math.round(totalProjectCost);
-  }, [selectedPlanName, projectsSelected]);
+  }, [selectedPlanName, projectsSelected, calculateRpsCost]);
 
   const calculateDataCost = useCallback(() => {
     const includedDataInSelectedPlan =
       pricing[selectedPlanName].pricing.data.limits[0].value;
     const finalAmount =
       (dataSelected - includedDataInSelectedPlan) * dataPrice.data.inr;
-    return finalAmount < 0 ? 0 : finalAmount;
+    return finalAmount < 0 ? 0 : finalAmount * 730;
   }, [dataSelected, selectedPlanName]);
 
   const calculateTotalCost = useCallback(() => {
-    const selectedPlanBasePrice = pricing[selectedPlanName].pricing.base.inr;
-    return (
-      selectedPlanBasePrice * totalHoursInMonth +
-      calculateProjectCost() +
-      calculateDataCost() +
-      calculateRpsCost()
-    );
-  }, [
-    calculateDataCost,
-    calculateProjectCost,
-    selectedPlanName,
-    calculateRpsCost,
-  ]);
+    return calculateProjectCost() * 730 + calculateDataCost();
+  }, [calculateDataCost, calculateProjectCost]);
 
   const calculateCustomisationCost = () => {
     const totalCost = calculateTotalCost();
     const dataCost = calculateDataCost();
-    const basePrice =
-      pricing[selectedPlanName].pricing.base.inr * totalHoursInMonth;
+    const basePrice = pricing[selectedPlanName].pricing.base.inr;
 
     return totalCost - dataCost - basePrice;
   };
@@ -229,6 +214,37 @@ function Section4() {
     const limits = pricing[selectedPlanName]?.pricing?.rps.limits;
     limits.map((val) => arr.push({ value: val.value }));
     return arr;
+  };
+
+  const getCost = () => {
+    const basePrice = pricing[selectedPlanName].pricing.base.inr;
+
+    const findIndex = pricing[selectedPlanName].pricing.rps.limits.findIndex(
+      (val) => val.value === rpsSelected
+    );
+
+    var rpsPrice;
+
+    if (findIndex === -1 || findIndex === 0) {
+      // return 0 since the first value will always be included in the pack
+      rpsPrice = 0;
+    } else {
+      rpsPrice =
+        pricing[selectedPlanName].pricing.rps.limits[findIndex]?.price.inr;
+    }
+
+    const x = basePrice + rpsPrice;
+    const y = x * (1 + (projectsSelected - 1) * 0.8);
+
+    const totalCost = y * 730 + calculateDataCost();
+
+    const perHourCost = totalCost / 730; // upto 3 decimals
+
+    const monthlyBasePrice = basePrice * 730;
+
+    const customisedCost = totalCost - calculateDataCost() - monthlyBasePrice;
+
+    return totalCost;
   };
 
   return (
@@ -254,10 +270,10 @@ function Section4() {
                   onClick={() => handlePlanClick(val)}
                 >
                   <div>
-                    <p className="text-lg font-medium largeMobile:text-[16px]">
+                    <p className="text-[20px] font-medium largeMobile:text-[16px]">
                       {val.name}
                     </p>
-                    <p className="font-medium text-[#BFB8B8] text-sm largeMobile:text-[14px]">
+                    <p className="font-medium text-[#BFB8B8] text-[16px] largeMobile:text-[14px]">
                       {val.price}
                     </p>
                   </div>
@@ -277,44 +293,54 @@ function Section4() {
           </div>
 
           <div>
-            <p className="font-medium mt-6 mb-4 text-xl largeMobile:text-[18px]">
+            <p className="font-medium mt-6 mb-4 text-[20px] largeMobile:text-[18px]">
               Out of box
             </p>
 
             <div className="flex items-center flex-wrap bg-[#1D1B2D] p-2 pl-4 pr-4 rounded-lg largeMobile:flex-col">
               <div className="w-[33%] mb-5 largeMobile:w-[100%]">
                 <InfoDetails text="API requests" />
-                <p>{planDetails[selectedPlanName].apiReq}</p>
+                <p className="text-[16px]">
+                  {planDetails[selectedPlanName].apiReq}
+                </p>
               </div>
               <div className="w-[33%] mb-5 largeMobile:w-[100%]">
                 <InfoDetails text="Requests per second" />
-                <p>{planDetails[selectedPlanName].requestsPerSecond}</p>
+                <p className="text-[16px]">
+                  {planDetails[selectedPlanName].requestsPerSecond}
+                </p>
               </div>
               <div className="w-[33%] mb-5 largeMobile:w-[100%]">
                 <InfoDetails text="Data bandwidth" />
-                <p>{planDetails[selectedPlanName].dataBandwidth}</p>
+                <p className="text-[16px]">
+                  {planDetails[selectedPlanName].dataBandwidth}
+                </p>
               </div>
               <div className="w-[33%] mb-5 largeMobile:w-[100%]">
                 <InfoDetails text="Number of models" />
-                <p>{planDetails[selectedPlanName].numberOfModels}</p>
+                <p className="text-[16px]">
+                  {planDetails[selectedPlanName].numberOfModels}
+                </p>
               </div>
               <div className="w-[33%] mb-5 largeMobile:w-[100%]">
                 <InfoDetails text="Number of APIs" />
-                <p>{planDetails[selectedPlanName].numberOfAPis}</p>
+                <p className="text-[16px]">
+                  {planDetails[selectedPlanName].numberOfAPis}
+                </p>
               </div>
             </div>
           </div>
 
           <div>
-            <p className="font-medium mt-6 mb-4 text-xl largeMobile:text-[18px]">
+            <p className="font-medium mt-6 mb-4 text-[20px] largeMobile:text-[18px]">
               Configure
             </p>
 
             <div className="bg-[#1D1B2D] rounded-lg p-4">
               <div>
-                <div className="mt-1 mb-1 largeMobile:text-[16px]">
+                <div className="mt-1 mb-1 text-[16px]">
                   <p>Requests per second (RPS)</p>
-                  <p className="text-[#BFB8B8]">
+                  <p className="text-[#BFB8B8] text-[16px] font-medium">
                     Current plan doesn’t support RPS control.
                   </p>
                 </div>
@@ -355,9 +381,9 @@ function Section4() {
               </div>
 
               <div className="mt-4 largeMobile:text-[16px]">
-                <div className="mt-1 mb-1">
+                <div className="mt-1 mb-1 text-[16px]">
                   <p className="">Number of projects</p>
-                  <p className="text-[#BFB8B8]">
+                  <p className="text-[#BFB8B8] text-[16px] font-medium">
                     1 project is included in the base price.
                   </p>
                 </div>
@@ -395,9 +421,9 @@ function Section4() {
               </div>
 
               <div className="mt-4 largeMobile:text-[16px]">
-                <div className="mt-1 mb-1">
+                <div className="mt-1 mb-1 text-[16px]">
                   <p>Data bandwidth</p>
-                  <p className="text-[#BFB8B8]">
+                  <p className="text-[#BFB8B8] text-[16px] font-medium">
                     10 GB is included in the base price.
                   </p>
                 </div>
@@ -435,18 +461,20 @@ function Section4() {
 
         {/* right  */}
         <div className="w-[34%] largeMobile:w-[100%]">
-          <p className="font-medium mt-6 mb-4 text-xl largeMobile:text-[18px]">
+          <p className="font-medium mt-6 mb-4 text-[20px] largeMobile:text-[18px]">
             Estimate
           </p>
           <div className="bg-[#1D1B2D] p-4 rounded-lg">
             <div className="text-center mt-8 mb-8">
-              <p className="text-3xl font-medium">
+              <p className="text-[36px] font-medium">
                 ₹{(calculateTotalCost() / 730).toFixed(2)}/hour
               </p>
-              <p className="text-[#BFB8B8]">charged monthly</p>
+              <p className="text-[#BFB8B8] text-[18px] font-medium">
+                charged monthly
+              </p>
             </div>
             <div>
-              <p className="text-sm mb-6 font-medium">Your Configuration</p>
+              <p className="text-[16px] mb-6 font-medium">Your Configuration</p>
 
               <RenderConfigurationDetails
                 title="Requests per second"
@@ -469,7 +497,9 @@ function Section4() {
               />
             </div>
             <div>
-              <p className="text-sm mb-6 font-medium mt-10">Price breakdown</p>
+              <p className="text-[16px] mb-6 font-medium mt-10">
+                Price breakdown
+              </p>
 
               <RenderConfigurationDetails
                 title={selectedPlan.name}
@@ -495,17 +525,17 @@ function Section4() {
               <Divider />
             </div>
 
-            <div className="flex items-center justify-between text-sm font-medium mb-2">
+            <div className="flex items-center justify-between text-[16px] font-medium mb-2">
               <p>
                 Total <span className="text-[#BFB8B8]">(monthly)</span>
               </p>
-              <p>₹{calculateTotalCost()}/month</p>
+              <p>₹{getCost()}/month</p>
             </div>
-            <p className="text-right text-[#BFB8B8] text-xs">
+            <p className="text-right text-[#BFB8B8] text-[14px]">
               *Any applicable taxes are not included
             </p>
 
-            <button className="bg-[#312D52] font-medium w-full rounded-md h-[45px] font-medium mt-[110px] mb-[10px] largeMobile:mt-[50px]">
+            <button className="bg-[#312D52] font-medium w-full rounded-md h-[45px] font-medium mt-[80px] mb-[10px] text-[16px] largeMobile:mt-[50px]">
               Sign up now
             </button>
           </div>

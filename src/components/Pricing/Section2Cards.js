@@ -10,7 +10,7 @@ const Divider = () => {
 
 const InfoDetails = ({ text, isDetailsColumn }) => {
   return (
-    <div className="mt-2 flex items-center h-[25px]">
+    <div className="mt-2 flex items-center h-[25px] text-[16px] font-medium">
       <p> {text}</p>
       {isDetailsColumn && (
         <span className="ml-2">
@@ -34,13 +34,13 @@ function Section2Cards({ details }) {
         details.detailsColumn && "text-[#BFB8B8]"
       }`}
     >
-      <p className="text-lg font-medium">{details.title}</p>
+      <p className="text-[20px] font-medium">{details.title}</p>
       <div className="mt-3 mb-3">
-        <p className="text-sm text-[#BFB8B8] font-medium">
+        <p className="text-[14px] text-[#BFB8B8] font-medium">
           {details.description}
         </p>
 
-        <p>
+        <p className="text-[18px]">
           {" "}
           {details.strikePrice && (
             <span>
@@ -53,7 +53,7 @@ function Section2Cards({ details }) {
 
       {details.buttonText && (
         <button
-          className={`${
+          className={`text-[16px] font-medium ${
             details.buttonType !== "secondary"
               ? "bg-[#312D52]"
               : "bg-transparent"
