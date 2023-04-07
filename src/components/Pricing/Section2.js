@@ -147,9 +147,9 @@ function Section2() {
   }
 
   return (
-    <div className="pl-[11%] pr-[11%] bg-[#1D1B2D] largeMobile:bg-transparent">
+    <div className="bg-[#1D1B2D] largeMobile:bg-transparent">
       {/* desktop version  */}
-      <div className="pt-[60px] pb-[60px] largeMobile:hidden">
+      <div className="mx-[auto] w-[1184px] pt-[60px] pb-[60px] largeMobile:hidden">
         <p className="text-[28px] text-center">Compare features across plans</p>
 
         <div className="flex flex-wrap justify-between mt-10">

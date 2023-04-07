@@ -37,18 +37,20 @@ const leadersData = [
 
 function Section2() {
   return (
-    <div className="mt-[70px] mb-[70px] bg-[#1D1B2D] w-full pl-[14%] pr-[14%] pt-[50px] pb-[50px]">
-      <p className="text-[32px] font-medium mb-[50px] largeMobile:text-center largeMobile:text-[20px]">
-        Industry leaders backing us
-      </p>
-      <div className="flex flex-wrap items-center largeMobile:flex-col">
-        {leadersData.map((val) => (
-          <Section2Cards
-            image={val.image}
-            name={val.name}
-            designation={val.designation}
-          />
-        ))}
+    <div className="mt-[70px] mb-[70px] bg-[#1D1B2D] w-full pt-[50px] pb-[50px]">
+      <div className="mx-[auto] w-[1184px]">
+        <p className="text-[32px] font-medium mb-[50px] largeMobile:text-center largeMobile:text-[20px]">
+          Industry leaders backing us
+        </p>
+        <div className="flex flex-wrap items-center largeMobile:flex-col">
+          {leadersData.map((val) => (
+            <Section2Cards
+              image={val.image}
+              name={val.name}
+              designation={val.designation}
+            />
+            ))}
+        </div>
       </div>
     </div>
   );

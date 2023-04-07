@@ -6,7 +6,7 @@ import Section2 from "../components/AboutUs/Section2/Section2";
 
 function AboutUs() {
   return (
-    <div className="pl-[9%] pr-[9%] pt-[70px]">
+    <div className="pt-[70px]">
       <Section1 />
 
       <Section2 />

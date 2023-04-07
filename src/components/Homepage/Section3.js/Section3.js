@@ -25,7 +25,7 @@ function Section3() {
   }, [selectedId]);
 
   return (
-    <div className="mt-[70px] mb-[70px] pl-[7%] pr-[7%]">
+    <div className="mt-[70px] mb-[70px] mx-[auto] w-[1184px]">
       <p className="font-medium text-[32px] font-medium largeMobile:text-[20px]">
         Our core features
       </p>
