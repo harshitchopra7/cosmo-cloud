@@ -8,7 +8,7 @@ const emailRegistrationStatusValues = {
   INVALID: "INVALID",
 };
 
-function WaitlistInput() {
+function WaitlistInput({autoFocus}) {
   const [email, setEmail] = useState("");
   const [emailRegistrationStatus, setEmailRegistrationStatus] = useState(
     emailRegistrationStatusValues.UN_REGISTERED
@@ -65,7 +65,7 @@ function WaitlistInput() {
             placeholder="Enter your email..."
             className="h-[45px] w-[300px] text-[#FFFFFF] pl-4 pr-4 bg-[#211E33] !outline-none rounded-lg tablet:mb-2"
             value={email}
-            autoFocus
+            autoFocus={autoFocus}
             onChange={(e) => {
               setEmailRegistrationStatus(emailRegistrationStatusValues.UN_REGISTERED);
               setHintMessage("");

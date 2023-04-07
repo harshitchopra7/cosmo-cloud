@@ -17,7 +17,7 @@ function Banner() {
         Build your application's backend in minutes
       </div>
 
-      <WaitlistInput />
+      <WaitlistInput autoFocus />
 
       <div className="font-semibold text-[14px] leading-[24px] text-[#BFB8B8] mt-5">
         We are in a private beta and accepting new users on a rolling basis
