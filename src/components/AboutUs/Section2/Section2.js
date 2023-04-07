@@ -45,7 +45,8 @@ const teamMembers = [
 function Section2() {
   return (
     <div className="mt-[70px]">
-      <p className="font-medium text-[48px] largeMobile:text-[28px]">Team</p>
+      <div className="absolute w-full bg-[#1D1B2D] h-full left-0 -z-10" />
+      <p className="pt-[72px] font-medium text-[48px] largeMobile:text-[28px]">Team</p>
       <p className="mt-4 text-[#BFB8B8] text-[20px] largeMobile:text-[16px]">
         Our team has led and delivered large-scale software and design projects
         in multiple startups and high-growth environments like{" "}
@@ -55,7 +56,7 @@ function Section2() {
         <span className="text-white">Salesforce</span> .
       </p>
 
-      <div className="flex flex-wrap mt-12 mb-12">
+      <div className="flex flex-wrap mt-[72px]">
         {teamMembers.map((val) => (
           <Section2Cards
             image={val.image}

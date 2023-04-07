@@ -164,7 +164,7 @@ function Section4() {
   };
 
   return (
-    <div className="items-center pr-[11%] pl-[11%]">
+    <div className="items-center pr-[11%] pl-[11%]" id="calculator">
       <p className="text-[28px] text-center largeMobile:text-[22px]">
         Cost Calculator
       </p>

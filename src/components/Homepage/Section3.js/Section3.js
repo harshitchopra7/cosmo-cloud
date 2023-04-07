@@ -42,13 +42,9 @@ function Section3() {
           ))}
         </div>
         <div
-          className="w-[500px] f-full bg-[#1D1B2D] mt-7 rounded-lg"
-          style={{
-            flex: "0.7",
-          }}
+          className="w-[500px] f-full bg-[#1D1B2D] mt-7 rounded-lg flex-[0.7] flex items-center justify-center"
         >
-          <img src={data[selectedId - 1].illustration} alt="" />
-
+          <img className='w-4/5 h-auto' src={data[selectedId - 1].illustration} alt="" />
         </div>
       </div>
 

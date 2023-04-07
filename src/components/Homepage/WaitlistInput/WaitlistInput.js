@@ -16,11 +16,14 @@ function WaitlistInput() {
   const [hintMessage, setHintMessage] = useState("");
 
   const onClick = () => {
+    if(!email) return;
+
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: email }),
     };
+
     fetch(`${process.env.REACT_APP_BASE_URL}/waitlist`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
@@ -39,15 +42,11 @@ function WaitlistInput() {
       });
   };
 
-  const onFocus = () => {
-    setEmailRegistrationStatus(emailRegistrationStatusValues.UN_REGISTERED);
-    setHintMessage("");
-  };
-
   const buttonText = useMemo(() => {
     if (emailRegistrationStatus === emailRegistrationStatusValues.REGISTERED) {
       return "Email registered!";
     }
+
     return "Join the waitlist";
   }, [emailRegistrationStatus]);
 
@@ -61,19 +60,32 @@ function WaitlistInput() {
         className="flex items-center justify-center bg-[#211E33] rounded-lg tablet:flex-col tablet:bg-transparent"
         style={{ width: "fit-content" }}
       >
-        <input
-          placeholder="Enter your email..."
-          className="h-[45px] w-[300px] text-[#95949E] pl-4 pr-4 bg-[#211E33] !outline-none rounded-lg tablet:mb-2"
-          value={email}
-          onFocus={onFocus}
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={isDisabled}
+        {emailRegistrationStatus !== emailRegistrationStatusValues.REGISTERED && (
+          <input
+            placeholder="Enter your email..."
+            className="h-[45px] w-[300px] text-[#FFFFFF] pl-4 pr-4 bg-[#211E33] !outline-none rounded-lg tablet:mb-2"
+            value={email}
+            autoFocus
+            onChange={(e) => {
+              setEmailRegistrationStatus(emailRegistrationStatusValues.UN_REGISTERED);
+              setHintMessage("");
+              setEmail(e.target.value)
+            }}
+            disabled={isDisabled}
+          />
+        )}
+        
+        <Button 
+          text={buttonText} 
+          onClick={onClick} 
+          width="100px" 
+          expand={emailRegistrationStatus === emailRegistrationStatusValues.REGISTERED}
+          disabled={emailRegistrationStatus === emailRegistrationStatusValues.REGISTERED}
         />
-        <Button text={buttonText} onClick={onClick} width="100px" />
       </div>
 
       {hintMessage && (
-        <p className="text-left ml-4 text-xs text-[#EA4882] font-medium mt-1">
+        <p className="text-left text-xs text-[#EA4882] font-medium mt-1">
           {hintMessage}
         </p>
       )}

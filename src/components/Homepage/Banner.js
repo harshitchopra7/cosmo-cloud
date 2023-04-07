@@ -7,23 +7,21 @@ function Banner() {
   return (
     <div className="text-center flex items-center justify-center flex-col mt-12 largeMobile:pl-[2%] largeMobile:pr-[2%]">
       <img className="backgroundIcon mobile:hidden" src={backgroundImage} alt="" />
-      <p className="font-bold text-[32px] mt-5 tablet:text-lg tablet:font-medium">
+      <div className="font-semibold text-[32px] leading-[64px] text-white">
         Full featured, no-code
-      </p>
-      <p className="font-light text-[72px] mt-3 tablet:text-3xl tablet:font-medium">
+      </div>
+      <div className="font-light text-[72px] leading-[72px] text-white">
         Backend-as-a-Service
-      </p>
-      <p className="mt-6 text-[22px] tablet:text-base text-[#BFB8B8]">
+      </div>
+      <div className="font-normal text-[22px] leading-[48px] text-[#BFB8B8] mt-3 mb-10">
         Build your application's backend in minutes
-      </p>
-
-      <div className="mt-12 ">
-        <WaitlistInput />
       </div>
 
-      <p className="mt-5 text-[#BFB8B8] text-[14px] font-medium">
+      <WaitlistInput />
+
+      <div className="font-semibold text-[14px] leading-[24px] text-[#BFB8B8] mt-5">
         We are in a private beta and accepting new users on a rolling basis
-      </p>
+      </div>
     </div>
   );
 }

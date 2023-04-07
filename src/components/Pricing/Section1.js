@@ -5,6 +5,8 @@ import Bolt from "./assets/Bolt";
 import CloudDownload from "./assets/CloudDownload";
 import Group from "./assets/Group";
 import Webhook from "./assets/Webhook";
+import { MdArrowDownward } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 
 const plans = [
   {
@@ -82,8 +84,10 @@ const plans = [
 ];
 
 function Section1() {
+  const navigate = useNavigate();
+
   return (
-    <div className="pl-[11%] pr-[11%]">
+    <div className="pl-[11%] pr-[11%] pb-[72px]">
       <div className="text-center">
         <p className="text-[48px] font-medium largeMobile:text-[28px]">
           Pricing
@@ -91,11 +95,13 @@ function Section1() {
         <p className="text-[#BFB8B8] mt-2 text-[20px] largeMobile:text-[16px]">
           Flexible usage-based pricing that scale with your needs – from early
           exploration to enterprise scale.{" "}
-          <span className="text-[#fff]"> Calculate your price</span>
+          <span className="text-[#fff] underline cursor-pointer" onClick={() => navigate('#calculator')}>Calculate your price</span>
         </p>
       </div>
 
-      <div className="mt-8 mb-8 flex flex-wrap items-center">
+<div className="flex justify-center">
+
+      <div className="mt-8 grid grid-cols-3 items-center gap-9">
         {plans.map((val) => (
           <Section1Cards
             title={val.title}
@@ -113,8 +119,9 @@ function Section1() {
             buttonType={val.buttonType}
             link={val.link}
           />
-        ))}
+          ))}
       </div>
+          </div>
     </div>
   );
 }

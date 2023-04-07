@@ -11,7 +11,34 @@ import logoMain from "../assets/brandResources/FullLogoDark.svg";
 
 import { MdOutlineClose, MdOutlineMenu } from "react-icons/md";
 
+import styled from 'styled-components'
+
 const items = ["Home", "Pricing", "About", "Contact us"];
+
+const NavigationItem = styled.div`
+  font-size: 16px;
+  font-weight: 500;
+  color: #E0E0E0;
+  cursor: pointer;
+  padding: 8px 16px;
+  transition: 0.2s ease-in;
+
+  &:hover {
+    background: #3A3564;
+    border-radius: 21px;
+    font-weight: 600;
+    transition: 0.2s ease-in;
+  }
+
+  &::after {
+    display: block;
+    content: '${({content}) => content}';
+    font-weight: 600;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+`
 
 function Navbar() {
   const navigate = useNavigate();
@@ -74,14 +101,14 @@ function Navbar() {
             alt=""
           />
         </div>
-        <div className="flex justify-center" style={{ flex: "0.88" }}>
+        <div className="flex justify-center" style={{ gap: "8px" }}>
           {items.map((val) => (
-            <p
-              className="mr-8 hover:bg-[#3A3564] p-2 pl-4 pr-4 rounded-full cursor-pointer font-semibold text-[16px]"
+            <NavigationItem
               onClick={() => handleNavbarRedirection(val)}
+              content={val}
             >
               {val}
-            </p>
+            </NavigationItem>
           ))}
         </div>
         <div>

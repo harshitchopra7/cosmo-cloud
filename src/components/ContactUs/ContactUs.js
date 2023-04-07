@@ -20,7 +20,7 @@ const contactData = [
     image: location,
     title: "Visit us",
     description: "Come say hello at our office HQ.",
-    contactDetails: "Noida, U.P, India - 201301",
+    contactDetails: "Noida, Uttar Pradesh, India - 201301",
   },
 ];
 
@@ -70,7 +70,7 @@ function ContactUsComponent() {
   }, [messageSentStatus]);
 
   return (
-    <div className="flex justify-between tablet:flex-col-reverse">
+    <div className="flex justify-center gap-20 tablet:flex-col-reverse">
       <div className="flex-[0.4] tablet:flex-[1]">
         <p className="text-[48px] font-medium mb-8 tablet:hidden">Contact us</p>
 
@@ -85,7 +85,7 @@ function ContactUsComponent() {
           ))}
         </div>
       </div>
-      <div className="bg-[#1D1B2D] flex-[0.6] p-10 rounded-lg tablet:flex-[1] tablet:p-4 largeMobile:w-[100%]  largeMobile:pl-[6%]  largeMobile:pr-[6%]">
+      <div className="bg-[#1D1B2D] w-[680px] p-10 rounded-lg tablet:flex-[1] tablet:p-4 largeMobile:w-[100%]  largeMobile:pl-[6%]  largeMobile:pr-[6%]">
         <div className="flex items-center justify-between tablet:flex-col">
           <div className="mr-4 tablet:mr-0 tablet:mb-3 tablet:w-[100%]">
             <p className="mb-3 font-medium text-[18px]">Your name</p>
@@ -108,10 +108,10 @@ function ContactUsComponent() {
             />
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-8">
           <p className="mb-3 font-medium text-[18px]">Subject line</p>
           <input
-            className={`h-[45px] w-[100%] text-[#95949E] pl-4 pr-4 bg-[#211E33] !outline-none rounded-lg mobile:w-[100%]`}
+            className={`h-[45px] w-[100%] text-[#95949E] pl-4 pr-4 bg-[#312E45] !outline-none rounded-lg mobile:w-[100%]`}
             placeholder="What are you looking for?"
             value={formData.subject}
             onChange={(e) =>
@@ -119,10 +119,10 @@ function ContactUsComponent() {
             }
           />
         </div>
-        <div className="mt-5 mb-5">
+        <div className="mt-8 mb-10">
           <p className="mb-3 font-medium text-[18px]">Message</p>
           <textarea
-            className="text-[#95949E] w-full h-[120px] p-4 bg-[#211E33] !outline-none rounded-lg"
+            className="text-[#95949E] w-full h-[120px] p-4 bg-[#312E45] !outline-none rounded-lg"
             placeholder="Write your message here..."
             value={formData.message}
             onChange={(e) =>

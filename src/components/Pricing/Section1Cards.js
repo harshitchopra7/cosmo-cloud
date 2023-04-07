@@ -20,14 +20,14 @@ function Section1Cards({
   const navigate = useNavigate();
 
   return (
-    <div className="bg-[#1D1B2D] w-[31%] mr-2 ml-4 p-5 rounded-lg mt-4 h-[380px] flex flex-col justify-between tablet:w-[47%] largeMobile:w-[100%] largeMobile:ml-0">
+    <div className="bg-[#1D1B2D] w-[392px] min-h-[445px] px-6 py-7 rounded-xl flex flex-col justify-between tablet:w-[47%] largeMobile:w-[100%] largeMobile:ml-0">
       <div>
         <p className="text-[22px] font-semibold largeMobile:text-[20px]">
           {title}
         </p>
-        <p className="text-[#BFB8B8] text-[16px]">{description}</p>
+        <p className="text-[#BFB8B8] text-[16px] mt-2">{description}</p>
 
-        <div className="mt-5">
+        <div className="mt-7 flex flex-col gap-6">
           <div className="flex items-center">
             {icon1}
             <p className="ml-2 text-[16px]">{detailedDescription1}</p>
@@ -44,7 +44,7 @@ function Section1Cards({
       </div>
 
       <div>
-        <div className="mb-5 mt-5">
+        <div className="mb-8 mt-12">
           <p className="text-[14px] font-medium text-[#BFB8B8]">
             {pricingTitle}
           </p>

@@ -9,14 +9,14 @@ function Section3Cards({ id, title, description, selectedId, onClick }) {
     >
 
 
-      <div className="ml-3">
-        <div className="flex gap-2 items-center">
-          <p className="bg-white rounded-[50%] flex items-center justify-center w-[16px] h-[16px] text-[#161426]">
-            {id}
-          </p>
-          <p className="text-[20px] font-medium">{title}</p>
+      <div className='flex gap-3'>
+        <div className='h-[24px] min-w-[24px] text-center font-extrabold text-[#161426] bg-white rounded-full mt-[6px]'>
+          {id}
         </div>
-        <p className="text-[18px] text-[#BFB8B8]">{description}</p>
+        <div>
+          <div className='text-[20px] font-medium leading-[32px]'>{title}</div>
+          <p className="text-[18px] text-[#BFB8B8]">{description}</p>
+        </div>
       </div>
 
     </div>
