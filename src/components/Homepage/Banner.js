@@ -1,13 +1,16 @@
 import React from "react";
 import WaitlistInput from "./WaitlistInput/WaitlistInput";
+import backgroundImage from '../../assets/headerSection/headerBackground.svg'
+import './Banner.css'
 
 function Banner() {
   return (
     <div className="text-center flex items-center justify-center flex-col mt-12 largeMobile:pl-[2%] largeMobile:pr-[2%]">
+      <img className="backgroundIcon mobile:hidden" src={backgroundImage} alt="" />
       <p className="font-bold text-[32px] mt-5 tablet:text-lg tablet:font-medium">
         Full featured, no-code
       </p>
-      <p className="font-light text-[72px] mt-3 tablet:text-4xl tablet:font-medium">
+      <p className="font-light text-[72px] mt-3 tablet:text-3xl tablet:font-medium">
         Backend-as-a-Service
       </p>
       <p className="mt-6 text-[22px] tablet:text-base text-[#BFB8B8]">

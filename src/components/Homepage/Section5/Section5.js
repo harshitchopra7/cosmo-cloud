@@ -2,7 +2,6 @@ import React from "react";
 
 // assets
 import mongo_db_logo from "../../../assets/mongo_db_logo.png";
-import open_in_new from "../../../assets/open_in_new.png";
 
 function Section5() {
   return (

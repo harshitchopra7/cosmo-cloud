@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 
 // assets
-import logoMain from "../assets/logoMain.png";
+import logoMain from "../assets/brandResources/FullLogoDark.svg";
 
 import { MdOutlineClose, MdOutlineMenu } from "react-icons/md";
 
@@ -50,7 +50,7 @@ function Navbar() {
   }
 
   function enableScroll() {
-    window.onscroll = function () {};
+    window.onscroll = function () { };
   }
 
   const closeMenu = () => {
@@ -93,7 +93,7 @@ function Navbar() {
         <>
           <div className="flex items-center justify-between p-4">
             <div className="font-semibold cursor-pointer">
-              <img src={logoMain} alt="" />
+              <img className="h-[28px]" src={logoMain} alt="" />
             </div>
             <MdOutlineMenu
               size={25}

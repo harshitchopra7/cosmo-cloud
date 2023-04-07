@@ -3,20 +3,22 @@ import React from "react";
 function Section3Cards({ id, title, description, selectedId, onClick }) {
   return (
     <div
-      className={`mt-8 rounded-lg p-4 cursor-pointer ${
-        selectedId === id && `bg-[#1D1B2D]`
-      }`}
+      className={`mt-8 rounded-lg p-4 cursor-pointer ${selectedId === id && `bg-[#1D1B2D]`
+        }`}
       onClick={() => onClick(id)}
     >
-      <div className="flex">
-        <p className="bg-white rounded-[50%] flex items-center justify-center w-[25px] h-[25px] text-[#161426]">
-          {id}
-        </p>
-        <div className="ml-3">
+
+
+      <div className="ml-3">
+        <div className="flex gap-2 items-center">
+          <p className="bg-white rounded-[50%] flex items-center justify-center w-[16px] h-[16px] text-[#161426]">
+            {id}
+          </p>
           <p className="text-[20px] font-medium">{title}</p>
-          <p className="text-[18px] text-[#BFB8B8]">{description}</p>
         </div>
+        <p className="text-[18px] text-[#BFB8B8]">{description}</p>
       </div>
+
     </div>
   );
 }

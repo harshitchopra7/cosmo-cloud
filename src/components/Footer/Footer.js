@@ -1,7 +1,7 @@
 import React from "react";
 
 // assets
-import logoMain from "../../assets/logoMain.png";
+import logoMain from "../../assets/brandResources/FullLogoDark.svg";
 import { FaLinkedinIn, FaTwitter, FaInstagram } from "react-icons/fa";
 
 function Footer() {

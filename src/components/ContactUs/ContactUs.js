@@ -7,7 +7,6 @@ import Button from "../../common/Button";
 // images
 import email from "../../assets/contact/email.png";
 import location from "../../assets/contact/location.png";
-import phone from "../../assets/contact/phone.png";
 import ContactUsCards from "./ContactUsCards";
 
 const contactData = [
@@ -17,12 +16,6 @@ const contactData = [
     description: "Our team is here to help.",
     contactDetails: "contact@cosmocloud.io",
   },
-  // {
-  //   image: phone,
-  //   title: "Call us",
-  //   description: "Mon-Fri from 8am to 5pm. ",
-  //   contactDetails: "+91 9876543210",
-  // },
   {
     image: location,
     title: "Visit us",
@@ -141,11 +134,10 @@ function ContactUsComponent() {
 
         {messageSentText && (
           <p
-            className={`text-left ml-4 text-xs font-medium mt-2 ${
-              messageSentStatus === messageSentStatusValues.SUCCESS
+            className={`text-left ml-4 text-xs font-medium mt-2 ${messageSentStatus === messageSentStatusValues.SUCCESS
                 ? "text-[#17B169]"
                 : "text-[#EA4882]"
-            }`}
+              }`}
           >
             {messageSentText}
           </p>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../../../assets/Logo";
+import Logo from "../../../assets/brandResources/FullLogoDark.svg";
 import WaitlistInput from "../WaitlistInput/WaitlistInput";
 
 function Section4() {
@@ -18,10 +18,7 @@ function Section4() {
   return (
     <div className="flex items-center justify-center flex-col largeMobile:pl-[4%] largeMobile:pr-[4%]">
       <div className="flex items-center justify-center flex-col">
-        <Logo />
-        <p className="mt-2 text-[26px] font-semibold largeMobile:text-[18px]">
-          Cosmocloud
-        </p>
+        <img className="w-72 largeMobile:w-52" src={Logo} alt="" />
       </div>
 
       <div className="bg-[#1D1B2D] pl-8 pr-8 pt-6 pb-6 rounded-2xl mt-8 mb-8">

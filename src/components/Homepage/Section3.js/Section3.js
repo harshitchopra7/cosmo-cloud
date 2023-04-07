@@ -20,14 +20,14 @@ function Section3() {
         return;
       }
       setSelectedId((prev) => prev + 1);
-    }, 2000);
+    }, 4500);
     return () => clearInterval(interval);
   }, [selectedId]);
 
   return (
     <div className="mt-[70px] mb-[70px] pl-[7%] pr-[7%]">
       <p className="font-medium text-[32px] font-medium largeMobile:text-[20px]">
-        Consectetur adipiscing elit
+        Our core features
       </p>
       <div className="flex largeMobile:hidden">
         <div style={{ flex: "0.3" }} className="mr-8">
@@ -47,7 +47,8 @@ function Section3() {
             flex: "0.7",
           }}
         >
-          {data[selectedId - 1].illustration}
+          <img src={data[selectedId - 1].illustration} alt="" />
+
         </div>
       </div>
 
