@@ -14,17 +14,13 @@ import HomePage from "./container/HomePage";
 import Pricing from "./container/Pricing";
 
 function App() {
-  const [hideOverFlowY, setHideOverFlowY] = useState(false);
-
   return (
     <BrowserRouter>
       <div
-        className={`text-[#ffffff] flex flex-col justify-between ${
-          hideOverFlowY && "overflow-y-hidden"
-        }`}
+        className={`text-[#ffffff] flex flex-col justify-between`}
         style={{ minHeight: "100vh" }}
       >
-        <Navbar setHideOverFlowY={setHideOverFlowY} />
+        <Navbar />
         <Routes>
           <Route path="/" exact element={<HomePage />} />
           <Route path="/about-us" element={<AboutUs />} />

@@ -1,13 +1,6 @@
 import React from "react";
 
 // assets
-import icon1 from "../../../assets/Section1/icon1.png";
-import icon2 from "../../../assets/Section1/icon2.png";
-import icon3 from "../../../assets/Section1/icon3.png";
-import icon4 from "../../../assets/Section1/icon4.png";
-import icon5 from "../../../assets/Section1/icon5.png";
-import icon6 from "../../../assets/Section1/icon6.png";
-
 import Autograph from "./assets/Autograph";
 import Currency from "./assets/Currency";
 import DataObject from "./assets/DataObject";

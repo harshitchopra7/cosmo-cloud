@@ -1,4 +1,6 @@
 import React from "react";
+
+// internal deps
 import Divider from "../components/Homepage/Divider/Divider";
 import Section1 from "../components/Pricing/Section1";
 import Section2 from "../components/Pricing/Section2";

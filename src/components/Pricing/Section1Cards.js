@@ -1,12 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-// assets
-import icon1 from "../../assets/pricing/icon1.png";
-import icon2 from "../../assets/pricing/icon2.png";
-import icon3 from "../../assets/pricing/icon3.png";
-import Webhook from "./assets/Webhook";
-
 function Section1Cards({
   title,
   description,

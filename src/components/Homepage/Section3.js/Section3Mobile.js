@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Section3Cards from "./Section3Cards";
 
 // data
@@ -18,14 +18,6 @@ function Section3Mobile() {
             />
           ))}
         </div>
-        {/* <div
-          className="w-[500px] f-full bg-[#1D1B2D] mt-7 rounded-lg"
-          style={{
-            flex: "0.7",
-          }}
-        >
-          {data[selectedId - 1].illustration}
-        </div> */}
       </div>
     </div>
   );

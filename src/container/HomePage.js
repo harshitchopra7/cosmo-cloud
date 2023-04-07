@@ -1,4 +1,6 @@
 import React from "react";
+
+// internal deps
 import Banner from "../components/Homepage/Banner";
 import Divider from "../components/Homepage/Divider/Divider";
 import Section1 from "../components/Homepage/Section1/Section1";

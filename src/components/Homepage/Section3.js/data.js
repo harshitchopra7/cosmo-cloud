@@ -3,8 +3,6 @@ import gif2 from "../../../assets/illustrations/gif2.gif";
 import gif3 from "../../../assets/illustrations/gif3.gif";
 import gif4 from "../../../assets/illustrations/gif4.gif";
 
-const one = require("../../../assets/illustrations/gif1.gif");
-
 export const data = [
   {
     id: 1,

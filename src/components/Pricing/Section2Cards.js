@@ -67,12 +67,6 @@ function Section2Cards({ details }) {
       )}
 
       <div className="mt-3 mb-3">
-        {/* <div className="mt-2 flex items-center">
-          <p> {details.apiReq}</p>
-          {details.detailsColumn && (
-            <span className="ml-2">{<MdOutlineInfo />}</span>
-          )}
-        </div> */}
         <InfoDetails
           text={details.apiReq}
           isDetailsColumn={details.detailsColumn}

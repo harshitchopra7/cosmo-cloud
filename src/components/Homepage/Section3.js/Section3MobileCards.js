@@ -19,7 +19,6 @@ function Section3MobileCards({ id, title, description, illustration }) {
         }}
       >
         <img src={illustration} alt="" />
-        {/* {illustration} */}
       </div>
     </div>
   );

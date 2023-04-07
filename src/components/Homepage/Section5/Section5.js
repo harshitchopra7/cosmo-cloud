@@ -15,6 +15,9 @@ function Section5() {
         Cosmocloud is powered by MongoDB Atlas, which gives you flexibility,
         security, and scalability out of the box.
       </p>
+
+      {/* NOTE: Don't delete Need to comment out when used  */}
+
       {/* <div className="flex items-center mt-5">
         <p className="font-semibold">Learn more</p>
         <img

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import logo from "../../../assets/logo.png";
 import Logo from "../../../assets/Logo";
 import WaitlistInput from "../WaitlistInput/WaitlistInput";
 
