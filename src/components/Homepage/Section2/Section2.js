@@ -37,12 +37,12 @@ const leadersData = [
 
 function Section2() {
   return (
-    <div className="mt-[70px] mb-[70px] bg-[#1D1B2D] w-full pt-[50px] pb-[50px]">
-      <div className="mx-[auto] w-[1184px]">
-        <p className="text-[32px] font-medium mb-[50px] largeMobile:text-center largeMobile:text-[20px]">
+    <div className="my-[70px] bg-[#1D1B2D] w-full py-[50px] mobile:pt-7 mobile:pb-7">
+      <div className="mx-[auto] w-[1184px] mobile:w-[330px]">
+        <p className="text-[32px] font-medium mb-[50px] mobile:mb-10 mobile:text-[20px]">
           Industry leaders backing us
         </p>
-        <div className="flex flex-wrap items-center largeMobile:flex-col">
+        <div className="flex flex-wrap items-center mobile:items-start mobile:flex-col">
           {leadersData.map((val) => (
             <Section2Cards
               image={val.image}

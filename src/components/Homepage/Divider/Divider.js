@@ -3,7 +3,7 @@ import "./Divider.css";
 
 function Divider() {
   return (
-    <div className="mt-[70px] mb-[70px] flex items-center justify-center">
+    <div className="my-[70px] flex items-center justify-center mobile:my-[48px]">
       <hr className="divider" />
     </div>
   );

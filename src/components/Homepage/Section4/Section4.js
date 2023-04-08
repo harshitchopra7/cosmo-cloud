@@ -16,16 +16,16 @@ function Section4() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center flex-col largeMobile:pl-[4%] largeMobile:pr-[4%]">
+    <div className="flex items-center justify-center flex-col mobile:w-[330px] mobile:mx-[auto]">
       <div className="flex items-center justify-center flex-col">
         <img className="w-72 largeMobile:w-52" src={Logo} alt="" />
       </div>
 
-      <div className="bg-[#1D1B2D] pl-8 pr-8 pt-6 pb-6 rounded-2xl mt-8 mb-8">
-        <p className="text-[26px] font-medium font-medium largeMobile:text-[18px]">
+      <div className="bg-[#1D1B2D] px-8 py-6 rounded-2xl my-8 mobile:py-4 mobile:px-5">
+        <p className="text-[26px] font-medium largeMobile:text-[18px]">
           Join the waitlist
         </p>
-        <p className="text-[#BFB8B8] text-[20px] largeMobile:text-[14px]">
+        <p className="text-[#BFB8B8] text-[20px] mobile:mt-2 largeMobile:text-[14px]">
           Sign up to be one of the first to use future of no-code platform
         </p>
 

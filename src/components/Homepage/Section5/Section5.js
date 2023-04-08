@@ -9,8 +9,8 @@ function Section5() {
       <p className="text-[#95949E] text-[18px] font-semibold largeMobile:text-[16px]">
         Powered by
       </p>
-      <img className="mt-5" src={mongo_db_logo} alt="Mongo DB Logo" />
-      <p className="text-[#BFB8B8] font-semibold mt-5 w-[50%] text-center text-[18px] mobile:w-[90%] largeMobile:text-[16px]">
+      <img className="mt-5 mobile:mt-3 mobile:h-[30px]" src={mongo_db_logo} alt="Mongo DB Logo" />
+      <p className="text-[#BFB8B8] font-semibold mt-5 w-[50%] text-center text-[18px] mobile:w-[90%] mobile:font-normal mobile:mt-3 largeMobile:text-[16px]">
         Cosmocloud is powered by MongoDB Atlas, which gives you flexibility,
         security, and scalability out of the box.
       </p>

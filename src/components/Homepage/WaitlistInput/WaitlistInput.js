@@ -63,7 +63,7 @@ function WaitlistInput({autoFocus}) {
         {emailRegistrationStatus !== emailRegistrationStatusValues.REGISTERED && (
           <input
             placeholder="Enter your email..."
-            className="h-[45px] w-[300px] text-[#FFFFFF] pl-4 pr-4 bg-[#211E33] !outline-none rounded-lg tablet:mb-2"
+            className="h-[45px] w-[300px] text-[#FFFFFF] pl-4 pr-4 bg-[#211E33] !outline-none rounded-lg tablet:mb-3"
             value={email}
             autoFocus={autoFocus}
             onChange={(e) => {

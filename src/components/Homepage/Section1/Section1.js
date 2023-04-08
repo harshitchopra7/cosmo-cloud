@@ -53,12 +53,12 @@ const cardsData = [
 function Section1() {
   return (
     <div>
-      <p className="text-center text-[32px] largeMobile:text-[16px] largeMobile:font-bold">
+      <p className="text-center text-[32px] mobile:text-[16px] mobile:font-semibold mobile:w-[330px] mobile:mx-[auto]">
         Make your developers <span className="text-[#E08880]">10x</span> more
         productive
       </p>
       <div className="flex justify-center">
-        <div className="mt-12 grid grid-cols-3 gap-5">
+        <div className="mt-12 grid grid-cols-3 gap-5 mobile:mt-5 mobile:flex mobile:flex-col mobile:items-center mobile:gap-4">
           {cardsData.map((val) => (
             <Section1Cards
             icon={val.icon}

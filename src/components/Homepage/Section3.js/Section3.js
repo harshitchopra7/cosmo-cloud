@@ -25,8 +25,8 @@ function Section3() {
   }, [selectedId]);
 
   return (
-    <div className="mt-[70px] mb-[70px] mx-[auto] w-[1184px]">
-      <p className="font-medium text-[32px] font-medium largeMobile:text-[20px]">
+    <div className="mt-[70px] mb-[70px] mx-[auto] w-[1184px] mobile:w-[330px]">
+      <p className="font-medium text-[32px] largeMobile:text-[20px]">
         Our core features
       </p>
       <div className="flex largeMobile:hidden">
@@ -48,7 +48,7 @@ function Section3() {
         </div>
       </div>
 
-      <div className="hidden largeMobile:block flex flex-col items-center justify-center">
+      <div className="hidden largeMobile:flex flex-col items-center justify-center">
         <div>
           {data.map((val) => (
             <Section3MobileCards
