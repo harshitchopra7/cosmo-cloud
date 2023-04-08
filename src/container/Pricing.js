@@ -9,7 +9,7 @@ import Section4 from "../components/Pricing/Section4";
 
 function Pricing() {
   return (
-    <div className="mt-[70px] mb-[70px]">
+    <div className="mt-[70px] mb-[70px] mobile:mt-[56px]">
       <Section1 />
 
       <Section2 />

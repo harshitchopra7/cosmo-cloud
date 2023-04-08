@@ -70,11 +70,11 @@ function ContactUsComponent() {
   }, [messageSentStatus]);
 
   return (
-    <div className="flex justify-center gap-20 tablet:flex-col-reverse">
+    <div className="flex justify-center gap-20 tablet:flex-col-reverse mobile:gap-6">
       <div className="flex-[0.4] tablet:flex-[1]">
         <p className="text-[48px] font-medium mb-8 tablet:hidden">Contact us</p>
 
-        <div className="tablet:mt-10 tablet:pl-[2%] tablet:pr-[2%]">
+        <div className="tablet:mt-10 tablet:pl-[2%] tablet:pr-[2%] mobile:w-[330px] mobile:mx-[auto]">
           {contactData.map((val) => (
             <ContactUsCards
               image={val.image}
@@ -85,7 +85,8 @@ function ContactUsComponent() {
           ))}
         </div>
       </div>
-      <div className="bg-[#1D1B2D] w-[680px] p-10 rounded-lg tablet:flex-[1] tablet:p-4 largeMobile:w-[100%]  largeMobile:pl-[6%]  largeMobile:pr-[6%]">
+      <div className="bg-[#1D1B2D] w-[680px] p-10 rounded-lg mobile:rounded-none mobile:py-6 tablet:flex-[1] tablet:px-0 largeMobile:w-[100%]">
+        <div className="mobile:w-[330px] mobile:mx-[auto]">
         <div className="flex items-center justify-between tablet:flex-col">
           <div className="mr-4 tablet:mr-0 tablet:mb-3 tablet:w-[100%]">
             <p className="mb-3 font-medium text-[18px]">Your name</p>
@@ -119,7 +120,7 @@ function ContactUsComponent() {
             }
           />
         </div>
-        <div className="mt-8 mb-10">
+        <div className="mt-8 mb-10 mobile:mb-6">
           <p className="mb-3 font-medium text-[18px]">Message</p>
           <textarea
             className="text-[#95949E] w-full h-[120px] p-4 bg-[#312E45] !outline-none rounded-lg"
@@ -143,7 +144,8 @@ function ContactUsComponent() {
           </p>
         )}
       </div>
-      <p className="tablet:block hidden font-medium mb-8 tablet:text-[28px]  largeMobile:pl-[4%]">
+      </div>
+      <p className="tablet:block hidden font-medium mobile:w-[330px] mobile:mx-auto tablet:text-[28px]">
         Contact us
       </p>
     </div>

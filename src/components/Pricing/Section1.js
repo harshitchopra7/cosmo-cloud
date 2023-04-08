@@ -87,41 +87,40 @@ function Section1() {
   const navigate = useNavigate();
 
   return (
-    <div className="px-[auto] pb-[72px] mx-[auto] w-[1184px]">
+    <div className="px-[auto] pb-[72px] mx-[auto] w-[1184px] mobile:w-[330px]">
       <div className="text-center">
         <p className="text-[48px] font-medium largeMobile:text-[28px]">
           Pricing
         </p>
-        <p className="text-[#BFB8B8] mt-2 text-[20px] largeMobile:text-[16px]">
+        <p className="text-[#BFB8B8] mt-2 text-[20px] largeMobile:text-[16px] mobile:mt-3">
           Flexible usage-based pricing that scale with your needs – from early
           exploration to enterprise scale.{" "}
           <span className="text-[#fff] underline cursor-pointer" onClick={() => navigate('#calculator')}>Calculate your price</span>
         </p>
       </div>
 
-<div className="flex justify-center">
-
-      <div className="mt-8 grid grid-cols-3 items-center gap-9">
-        {plans.map((val) => (
-          <Section1Cards
-            title={val.title}
-            description={val.description}
-            icon1={val.icon1}
-            icon2={val.icon2}
-            icon3={val.icon3}
-            detailedDescription1={val.detailedDescription1}
-            detailedDescription2={val.detailedDescription2}
-            detailedDescription3={val.detailedDescription3}
-            pricingTitle={val.pricingTitle}
-            strikePrice={val.strikePrice}
-            pricingDescription={val.pricingDescription}
-            buttonText={val.buttonText}
-            buttonType={val.buttonType}
-            link={val.link}
-          />
-          ))}
-      </div>
+      <div className="flex justify-center">
+          <div className="mt-8 grid grid-cols-3 items-center gap-9 mobile:flex mobile:flex-col mobile:gap-6">
+            {plans.map((val) => (
+              <Section1Cards
+                title={val.title}
+                description={val.description}
+                icon1={val.icon1}
+                icon2={val.icon2}
+                icon3={val.icon3}
+                detailedDescription1={val.detailedDescription1}
+                detailedDescription2={val.detailedDescription2}
+                detailedDescription3={val.detailedDescription3}
+                pricingTitle={val.pricingTitle}
+                strikePrice={val.strikePrice}
+                pricingDescription={val.pricingDescription}
+                buttonText={val.buttonText}
+                buttonType={val.buttonType}
+                link={val.link}
+              />
+              ))}
           </div>
+        </div>
     </div>
   );
 }

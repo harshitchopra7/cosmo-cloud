@@ -146,7 +146,7 @@ function Navbar() {
                 <MdOutlineClose size={25} onClick={closeMenu} />
               </div>
 
-              <div className="mt-12 mb-12 ml-4">
+              <div className="mt-12 mb-12 ml-4 cursor-pointer">
                 {items.map((val) => (
                   <p
                     className="mt-8"

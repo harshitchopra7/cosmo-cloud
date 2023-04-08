@@ -6,6 +6,8 @@ import {
   MdOutlineClose,
   MdOutlineArrowForward,
   MdOutlineInfo,
+  MdKeyboardArrowDown,
+  MdKeyboardArrowUp,
 } from "react-icons/md";
 
 import Tooltip from "@mui/material/Tooltip";
@@ -130,6 +132,7 @@ function Section2() {
   const [selectedPlanInMobileScreen, setSelectedPlanInMobileScreen] = useState(
     pricingDetails[1]
   );
+  const [dropdownOpened, setDropdownOpened] = useState(false);
 
   function disableScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -146,6 +149,22 @@ function Section2() {
     window.onscroll = function () {};
   }
 
+  function getPlanNames() {
+    return pricingDetails.map((item, ind) => {
+      if(!ind) return (<></>);
+
+      return (
+        <div className="underline text-base cursor-pointer leading-7" onClick={() => {
+          setSelectedPlanInMobileScreen(pricingDetails[ind]);
+          setDropdownOpened(false);
+          }}
+        >
+          {item.title}
+        </div>
+      );
+    })
+  }
+
   return (
     <div className="bg-[#1D1B2D] largeMobile:bg-transparent">
       {/* desktop version  */}
@@ -160,7 +179,7 @@ function Section2() {
       </div>
 
       {/* mobile version  */}
-      <div className="hidden largeMobile:block">
+      <div className="hidden largeMobile:block w-[330px] mx-[auto]">
         <button
           className="bg-[#312D52] font-medium w-full cursor-pointer rounded-md h-[45px] flex items-center justify-center"
           onClick={() => {
@@ -187,6 +206,22 @@ function Section2() {
               }}
             />
           </div>
+
+          <div className="py-2 px-3 mt-7 bg-[#312D52] rounded-md w-[150px] flex justify-between items-center" onClick={() => setDropdownOpened(true)}>
+            <div>
+              {selectedPlanInMobileScreen.title}
+            </div>
+            <div>
+              {dropdownOpened? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
+            </div>
+          </div>
+
+          {dropdownOpened && (
+              <div className="mt-4">  
+                {getPlanNames()}
+              </div>
+            )
+          }
 
           <div className="mt-4 mb-4">
             <ShowPlanDetailsInMobileScreen
