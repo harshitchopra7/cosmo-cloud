@@ -41,7 +41,7 @@ function Footer() {
         <p className="mt-2 cursor-pointer text-sm">Terms of Service</p>
         <p className="mt-2 cursor-pointer text-sm">Privacy Policy</p>
         {/* <p className="mt-2 cursor-pointer text-sm">Careers</p> */}
-        <p className="mt-4 text-sm">© 2023 Cosmocloud Pvt. Ltd. </p>
+        <p className="mt-4 text-sm">Cosmocloud Pvt. Ltd. </p>
       </div>
     </div>
   );
