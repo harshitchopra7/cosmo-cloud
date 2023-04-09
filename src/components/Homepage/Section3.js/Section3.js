@@ -48,7 +48,7 @@ function Section3() {
         </div>
       </div>
 
-      <div className="hidden smallTablet:flex flex-col items-center justify-center smallTablet:w-[700px] smallTablet:mx-[auto] largeMobile:w-[576px]">
+      <div className="hidden smallTablet:flex flex-col items-center justify-center smallTablet:w-[700px] smallTablet:mx-[auto] largeMobile:w-[576px] mobile:w-[330px]">
         <div>
           {data.map((val) => (
             <Section3MobileCards

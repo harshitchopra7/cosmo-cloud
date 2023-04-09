@@ -53,7 +53,7 @@ const cardsData = [
 function Section1() {
   return (
     <div>
-      <p className="text-center text-[32px] mobile:text-[16px] mobile:font-semibold mobile:w-[330px] mobile:mx-[auto] tablet:w-[850px] mx-[auto] smallTablet:w-[700px]">
+      <p className="text-center text-[32px] mobile:text-[16px] mobile:font-semibold mobile:w-[330px] mobile:mx-[auto] tablet:w-[850px] mx-[auto] smallTablet:w-[700px] largeMobile:w-[576px] largeMobile:text-2xl">
         Make your developers <span className="text-[#E08880]">10x</span> more
         productive
       </p>
@@ -65,7 +65,7 @@ function Section1() {
             title={val.title}
             description={val.description}
             />
-            ))}
+          ))}
         </div>
       </div>
     </div>

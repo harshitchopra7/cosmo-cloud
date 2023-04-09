@@ -21,7 +21,7 @@ function Section4() {
         <img className="w-72 largeMobile:w-52" src={Logo} alt="" />
       </div>
 
-      <div className="bg-[#1D1B2D] px-8 py-6 rounded-2xl my-8 mobile:py-4 mobile:px-5">
+      <div className="bg-[#1D1B2D] px-8 py-6 rounded-2xl my-8 mobile:py-4 mobile:px-5 mobile:rounded-lg mobile:mt-[36px]">
         <p className="text-[26px] font-medium largeMobile:text-[18px]">
           Join the waitlist
         </p>

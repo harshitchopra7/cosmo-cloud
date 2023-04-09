@@ -8,12 +8,12 @@ function Section3MobileCards({ id, title, description, illustration }) {
           {id}
         </p>
         <div className="ml-4">
-          <p className="text-[16px] font-medium smallTablet:text-xl">{title}</p>
-          <p className="text-[16px] text-[#BFB8B8] smallTablet:text-xl">{description}</p>
+          <p className="mobile:text-[16px] font-medium smallTablet:text-xl">{title}</p>
+          <p className="mobile:text-[16px] text-[#BFB8B8] smallTablet:text-xl">{description}</p>
         </div>
       </div>
       <div
-        className="bg-[#1D1B2D] mt-6 rounded-lg smallTablet:w-[80%] smallTablet:mx-[auto]"
+        className="bg-[#1D1B2D] mt-6 rounded-lg mobile:w-[100%] smallTablet:w-[80%] smallTablet:mx-[auto]"
         style={{
           flex: "0.7",
         }}

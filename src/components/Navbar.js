@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // routing
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // internal deps
 import Button from "../common/Button";
@@ -42,6 +42,7 @@ const NavigationItem = styled.div`
 
 function Navbar() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [showNavbarinMobileScreen, setShowNavbarinMobileScreen] =
     useState(false);
@@ -111,8 +112,8 @@ function Navbar() {
             </NavigationItem>
           ))}
         </div>
-        <div>
-          <Button text="Join the waitlist" onClick={() => navigate("/")} />
+        <div className="w-[144px]">
+          {location.pathname !== '/' && <Button text="Join the waitlist" onClick={() => navigate("/")} />}
         </div>
       </div>
 
