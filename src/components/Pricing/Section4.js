@@ -164,7 +164,7 @@ function Section4() {
   };
 
   return (
-    <div className="items-center mx-[auto] w-[1184px] smallLaptop:w-[1050px] tablet:w-[850px] mobile:w-[330px] smallTablet:w-[700px]" id="calculator">
+    <div className="items-center mx-[auto] w-[1184px] smallLaptop:w-[1050px] tablet:w-[850px] mobile:w-[330px] smallTablet:w-[700px] largeMobile:w-[576px]" id="calculator">
       <p className="text-[28px] text-center largeMobile:text-[22px]">
         Cost Calculator
       </p>

@@ -38,7 +38,7 @@ const leadersData = [
 function Section2() {
   return (
     <div className="my-[70px] bg-[#1D1B2D] w-full py-[50px] mobile:pt-7 mobile:pb-7">
-      <div className="mx-[auto] w-[1184px] mobile:w-[330px] smallLaptop:w-[1050px] tablet:w-[850px] smallTablet:w-[700px]">
+      <div className="mx-[auto] w-[1184px] mobile:w-[330px] smallLaptop:w-[1050px] tablet:w-[850px] smallTablet:w-[700px] largeMobile:w-[576px]">
         <p className="text-[32px] font-medium mb-[50px] mobile:mb-10 mobile:text-[20px]">
           Industry leaders backing us
         </p>

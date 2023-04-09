@@ -87,7 +87,7 @@ function Section1() {
   const navigate = useNavigate();
 
   return (
-    <div className="px-[auto] pb-[72px] mx-[auto] w-[1184px] mobile:w-[330px] smallLaptop:w-[1050px] tablet:w-[850px] smallTablet:w-[700px]">
+    <div className="px-[auto] pb-[72px] mx-[auto] w-[1184px] mobile:w-[330px] smallLaptop:w-[1050px] tablet:w-[850px] smallTablet:w-[700px] largeMobile:w-[576px]">
       <div className="text-center">
         <p className="text-[48px] font-medium largeMobile:text-[28px]">
           Pricing

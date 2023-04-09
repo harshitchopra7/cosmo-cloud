@@ -58,7 +58,7 @@ function Section1() {
         productive
       </p>
       <div className="flex justify-center">
-        <div className="mt-12 grid grid-cols-3 gap-5 mobile:mt-5 mobile:flex mobile:flex-col mobile:items-center mobile:gap-4 tablet:w-[850px] tablet:mx-auto tablet:items-stretch smallTablet:w-[700px] smallTablet:grid-cols-2">
+        <div className="mt-12 grid grid-cols-3 gap-5 mobile:mt-5 mobile:flex mobile:flex-col mobile:items-center mobile:gap-4 tablet:w-[850px] tablet:mx-auto tablet:items-stretch smallTablet:w-[700px] smallTablet:grid-cols-2 largeMobile:w-[576px]">
           {cardsData.map((val) => (
             <Section1Cards
             icon={val.icon}

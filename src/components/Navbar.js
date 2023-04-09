@@ -92,7 +92,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="mobile:hidden flex items-center justify-between pt-4 pb-4 pl-[2%] pr-[2%]">
+      <div className="largeMobile:hidden flex items-center justify-between pt-4 pb-4 pl-[2%] pr-[2%]">
         <div className="font-semibold cursor-pointer">
           <img
             className="h-[30px]"
@@ -116,7 +116,7 @@ function Navbar() {
         </div>
       </div>
 
-      <div className="hidden mobile:block">
+      <div className="hidden largeMobile:block">
         <>
           <div className="flex items-center justify-between p-4">
             <div className="font-semibold cursor-pointer">

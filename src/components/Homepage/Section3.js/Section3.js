@@ -25,7 +25,7 @@ function Section3() {
   }, [selectedId]);
 
   return (
-    <div className="mt-[70px] mb-[70px] mx-[auto] w-[1184px] mobile:w-[330px] smallLaptop:w-[1050px] tablet:w-[850px] smallTablet:w-[700px]">
+    <div className="mt-[70px] mb-[70px] mx-[auto] w-[1184px] mobile:w-[330px] smallLaptop:w-[1050px] tablet:w-[850px] smallTablet:w-[700px] largeMobile:w-[576px]">
       <p className="font-medium text-[32px] largeMobile:text-[20px]">
         Our core features
       </p>
@@ -48,7 +48,7 @@ function Section3() {
         </div>
       </div>
 
-      <div className="hidden smallTablet:flex flex-col items-center justify-center smallTablet:w-[700px] smallTablet:mx-[auto]">
+      <div className="hidden smallTablet:flex flex-col items-center justify-center smallTablet:w-[700px] smallTablet:mx-[auto] largeMobile:w-[576px]">
         <div>
           {data.map((val) => (
             <Section3MobileCards

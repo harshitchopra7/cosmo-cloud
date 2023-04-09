@@ -17,7 +17,7 @@ const Container = styled.div`
 function Button({ text, expand, disabled, onClick, ...classes }) {
   return (
     <Container
-      className={`p-2 pl-4 pr-4 bg-gradient-to-r from-[#8E2DE2] to-[#3E4EB4] rounded-lg cursor-pointer text-center text-[16px] font-medium ${classes.width && `w-[${classes.width}] mobile:w-full`
+      className={`p-2 pl-4 pr-4 bg-gradient-to-r from-[#8E2DE2] to-[#3E4EB4] rounded-lg cursor-pointer text-center text-[16px] font-medium ${classes.width && `w-[${classes.width}] smallTablet:w-full`
         } `}
       onClick={onClick}
       expand={expand}
