@@ -1,45 +1,46 @@
 import React from "react";
 import Section2Cards from "./Section2Cards";
+import shreyPic from '../../../assets/aboutUs/shrey.jpeg'
 
 const personImage =
   "https://img.freepik.com/free-icon/important-person_318-10744.jpg";
 
 const teamMembers = [
   {
-    image: personImage,
+    image: shreyPic,
     name: "Shrey Batra",
-    role: "Engineering",
-    pastExp: "Senior Engineer at LinkedIn and Innovaccer",
+    role: "Founder, CEO",
+    pastExp: "Sr. SWE @ LinkedIn, Innovaccer",
     linkedin: "",
   },
-  {
-    image: personImage,
-    name: "Sarthak Kamra",
-    role: "Product Design",
-    pastExp: "Senior Designer at Salesforce and Innovaccer",
-    linkedin: "",
-  },
-  {
-    image: personImage,
-    name: "Mukul Jain",
-    role: "Engineering",
-    pastExp: "Senior Engineer at Atlassian and Rubrik",
-    linkedin: "",
-  },
-  {
-    image: personImage,
-    name: "Mukul Jain",
-    role: "Engineering",
-    pastExp: "Senior Engineer at Atlassian and Rubrik",
-    linkedin: "",
-  },
-  {
-    image: personImage,
-    name: "Mukul Jain",
-    role: "Engineering",
-    pastExp: "Senior Engineer at Atlassian and Rubrik",
-    linkedin: "",
-  },
+  // {
+  //   image: personImage,
+  //   name: "Sarthak Kamra",
+  //   role: "Product Design",
+  //   pastExp: "Senior Designer at Salesforce and Innovaccer",
+  //   linkedin: "",
+  // },
+  // {
+  //   image: personImage,
+  //   name: "Mukul Jain",
+  //   role: "Engineering",
+  //   pastExp: "Senior Engineer at Atlassian and Rubrik",
+  //   linkedin: "",
+  // },
+  // {
+  //   image: personImage,
+  //   name: "Mukul Jain",
+  //   role: "Engineering",
+  //   pastExp: "Senior Engineer at Atlassian and Rubrik",
+  //   linkedin: "",
+  // },
+  // {
+  //   image: personImage,
+  //   name: "Mukul Jain",
+  //   role: "Engineering",
+  //   pastExp: "Senior Engineer at Atlassian and Rubrik",
+  //   linkedin: "",
+  // },
 ];
 
 function Section2() {
@@ -57,16 +58,16 @@ function Section2() {
           <span className="text-white">Salesforce</span>.
         </p>
 
-        <div className="flex flex-wrap mt-[72px]">
+        <div className="flex flex-wrap mt-[72px] justify-center">
           {teamMembers.map((val) => (
             <Section2Cards
-            image={val.image}
-            name={val.name}
+              image={val.image}
+              name={val.name}
               role={val.role}
               pastExp={val.pastExp}
               linkedin={val.linkedin}
             />
-            ))}
+          ))}
         </div>
       </div>
     </div>

@@ -7,25 +7,25 @@ export const data = [
   {
     id: 1,
     title: "Workflow builder",
-    description: "Not just CRUD, now build your APIs with most complicated business logic",
+    description: "Not just CRUD, now build your APIs with the most complicated business logic",
     illustration: gif2,
   },
   {
     id: 2,
-    title: "Templatised flows",
-    description: "Quickly spin up templatised flows for common use cases",
+    title: "Templatised API flows",
+    description: "Quickly spin up templatised API flows for common use cases",
     illustration: gif4,
   },
   {
     id: 3,
     title: "One-click deploy",
-    description: "Deploy your changes to Production in just a single click",
+    description: "Deploy your changes instantly to Production in just a single click with no downtime",
     illustration: gif3,
   },
   {
     id: 4,
-    title: "So much more..!",
-    description: "FTS Search, Async Flows, etc.",
+    title: "And so much more...!",
+    description: "No-code FTS search, async flows, caches and CDN, background jobs, and much more...!",
     illustration: gif1,
   },
 ];

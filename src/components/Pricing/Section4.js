@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Divider from "../Homepage/Divider/Divider";
 
 import radio_button_unchecked from "../../assets/pricing/radio_button_unchecked.png";
@@ -84,50 +84,6 @@ function Section4() {
     setselectedPlanName(val.name.toLowerCase());
   };
 
-  // const calculateRpsCost = useCallback(() => {
-  //   const findIndex = pricing[selectedPlanName].pricing.rps.limits.findIndex(
-  //     (val) => val.value === rpsSelected
-  //   );
-
-  //   if (findIndex === -1 || findIndex === 0) {
-  //     // return 0 since the first value will always be included in the pack
-  //     return 0;
-  //   }
-
-  //   return pricing[selectedPlanName].pricing.rps.limits[findIndex]?.price.inr;
-  // }, [rpsSelected, selectedPlanName]);
-
-  // const calculateProjectCost = useCallback(() => {
-  //   const perProjectTotalCost =
-  //     pricing[selectedPlanName].pricing.base.inr + calculateRpsCost();
-
-  //   const totalProjectCost =
-  //     perProjectTotalCost *
-  //     (1 +
-  //       (projectsSelected - 1) *
-  //       pricing[selectedPlanName].pricing.projects.limits[0]?.multiplier
-  //         ?.inr || 1);
-
-  //   return Math.round(totalProjectCost);
-  // }, [selectedPlanName, projectsSelected, calculateRpsCost]);
-
-  // const calculateDataCost = useCallback(() => {
-
-  // }, [dataSelected, selectedPlanName]);
-
-
-
-  // const calculateTotalCost = useCallback(() => {
-  //   return calculateProjectCost() * 730 + calculateDataCost();
-  // }, [calculateDataCost, calculateProjectCost]);
-
-  // const calculateCustomisationCost = () => {
-  //   const totalCost = calculateTotalCost();
-  //   const dataCost = calculateDataCost();
-  //   const basePrice = pricing[selectedPlanName].pricing.base.inr;
-
-  //   return totalCost - dataCost - basePrice;
-  // };
 
   const getMarks = () => {
     const arr = [];

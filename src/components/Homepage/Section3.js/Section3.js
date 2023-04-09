@@ -27,7 +27,7 @@ function Section3() {
   return (
     <div className="mt-[70px] mb-[70px] mx-[auto] w-[1184px] mobile:w-[330px] smallLaptop:w-[1050px] tablet:w-[850px] smallTablet:w-[700px] largeMobile:w-[576px]">
       <p className="font-medium text-[32px] largeMobile:text-[20px]">
-        Our core features
+        Core features
       </p>
       <div className="flex smallTablet:hidden">
         <div style={{ flex: "0.3" }} className="mr-8">

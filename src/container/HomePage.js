@@ -18,7 +18,7 @@ function HomePage() {
 
       <Section1 />
 
-      <Section2 />
+      {/* <Section2 /> */}
 
       <Section3 />
 
@@ -26,9 +26,9 @@ function HomePage() {
 
       <Section4 />
 
-      <Divider />
+      {/* <Divider /> */}
 
-      <Section5 />
+      {/* <Section5 /> */}
     </div>
   );
 }

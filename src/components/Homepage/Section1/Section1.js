@@ -40,13 +40,13 @@ const cardsData = [
     icon: <Lock />,
     title: "Built in security",
     description:
-      "With no compromise on security, we also provide battle-ready User Pools for authentication.",
+      "With no compromise on security, we also integrate with battle-ready User Pools for authentication.",
   },
   {
     icon: <FindInPage />,
     title: "Full text search, Kafka, etc.",
     description:
-      "Whether FTS Search, Kafka/Queues, or Caches and CDN, everything is provided on one platform.",
+      "Be it FTS Search, Kafka/Queues, or Caches and CDN, everything is provided on one platform.",
   },
 ];
 
@@ -61,9 +61,9 @@ function Section1() {
         <div className="mt-12 grid grid-cols-3 gap-5 mobile:mt-5 mobile:flex mobile:flex-col mobile:items-center mobile:gap-4 tablet:w-[850px] tablet:mx-auto tablet:items-stretch smallTablet:w-[700px] smallTablet:grid-cols-2 largeMobile:w-[576px]">
           {cardsData.map((val) => (
             <Section1Cards
-            icon={val.icon}
-            title={val.title}
-            description={val.description}
+              icon={val.icon}
+              title={val.title}
+              description={val.description}
             />
           ))}
         </div>

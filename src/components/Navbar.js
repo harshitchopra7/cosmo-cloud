@@ -13,7 +13,7 @@ import { MdOutlineClose, MdOutlineMenu } from "react-icons/md";
 
 import styled from 'styled-components'
 
-const items = ["Home", "Pricing", "About", "Contact us"];
+const items = ["Home", "About", "Contact us"];
 
 const NavigationItem = styled.div`
   font-size: 16px;
@@ -32,7 +32,7 @@ const NavigationItem = styled.div`
 
   &::after {
     display: block;
-    content: '${({content}) => content}';
+    content: '${({ content }) => content}';
     font-weight: 600;
     height: 0;
     overflow: hidden;
@@ -121,14 +121,14 @@ function Navbar() {
         <>
           <div className="flex items-center justify-between p-4">
             <div className="font-semibold cursor-pointer">
-              <img 
-                className="h-[28px]" 
+              <img
+                className="h-[28px]"
                 onClick={() => {
                   navigate("/");
                   closeMenu();
-                }} 
-                src={logoMain} 
-                alt="" 
+                }}
+                src={logoMain}
+                alt=""
               />
             </div>
             <MdOutlineMenu

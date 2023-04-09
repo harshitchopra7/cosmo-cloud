@@ -16,7 +16,7 @@ function Section4() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center flex-col mobile:w-[330px] mobile:mx-[auto]">
+    <div className="flex items-center justify-center flex-col mobile:w-[330px] mobile:mx-[auto] mb-[70px] mobile:mb-[48px]">
       <div className="flex items-center justify-center flex-col">
         <img className="w-72 largeMobile:w-52" src={Logo} alt="" />
       </div>
@@ -26,7 +26,7 @@ function Section4() {
           Join the waitlist
         </p>
         <p className="text-[#BFB8B8] text-[20px] mobile:mt-2 largeMobile:text-[14px]">
-          Sign up to be one of the first to use future of no-code platform
+          Sign up to be one of the first to use the next-gen no-code platform
         </p>
 
         <div className="mt-5 mb-5 flex flex-col items-center justify-center">
