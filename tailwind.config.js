@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {},
     screens: {
-      tablet: { max: "1100px", min: "900px" },
+      tablet: { max: "1100px" },
       largeMobile: { max: "700px" },
       mobile: { max: "600px" },
       smallLaptop: {max: "1250px", min: "1100px"},

@@ -10,7 +10,7 @@ const Divider = () => {
 
 const InfoDetails = ({ text, isDetailsColumn }) => {
   return (
-    <div className="mt-2 flex items-center h-[25px] text-[16px] font-medium">
+    <div className="mt-2 flex items-center h-[25px] text-[16px] font-medium tablet:h-[44px]">
       <p> {text}</p>
       {isDetailsColumn && (
         <span className="ml-2">

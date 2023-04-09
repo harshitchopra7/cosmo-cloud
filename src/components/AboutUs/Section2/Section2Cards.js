@@ -4,7 +4,7 @@ import { FaLinkedinIn } from "react-icons/fa";
 
 function Section2Cards({ image, name, role, pastExp }) {
   return (
-    <div className="flex flex-col mr-6 w-[31%] mb-[72px] mobile:w-[42%] mobile:mr-[1] mobile:mb-12">
+    <div className="flex flex-col mr-6 w-[31%] mb-[72px] tablet:w-[30%] mobile:w-[42%] mobile:mr-[1] mobile:mb-12">
       <img
         className="h-[120px] w-[120px] rounded-lg"
         src={image}

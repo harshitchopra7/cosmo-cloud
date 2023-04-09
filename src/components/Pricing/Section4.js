@@ -160,11 +160,11 @@ function Section4() {
 
     const customisedCost = totalCost - calculateDataCost() - monthlyBasePrice;
 
-    return totalCost;
+    return totalCost.toFixed(2);
   };
 
   return (
-    <div className="items-center mx-[auto] w-[1184px] smallLaptop:w-[1050px] mobile:w-[330px] mobile:mx-[auto]" id="calculator">
+    <div className="items-center mx-[auto] w-[1184px] smallLaptop:w-[1050px] tablet:w-[850px] mobile:w-[330px]" id="calculator">
       <p className="text-[28px] text-center largeMobile:text-[22px]">
         Cost Calculator
       </p>

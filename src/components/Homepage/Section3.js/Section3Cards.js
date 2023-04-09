@@ -7,8 +7,6 @@ function Section3Cards({ id, title, description, selectedId, onClick }) {
         }`}
       onClick={() => onClick(id)}
     >
-
-
       <div className='flex gap-3'>
         <div className='h-[24px] min-w-[24px] text-center font-extrabold text-[#161426] bg-white rounded-full mt-[6px]'>
           {id}

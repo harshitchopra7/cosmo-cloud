@@ -5,8 +5,8 @@ import './Banner.css'
 
 function Banner() {
   return (
-    <div className="text-center flex items-center justify-center flex-col mt-12 mobile:w-[330px] mobile:mx-[auto] mobile:mb-1">
-      <img className="backgroundIcon mobile:hidden" src={backgroundImage} alt="" />
+    <div className="text-center flex items-center justify-center flex-col mt-12 mobile:w-[330px] mobile:mx-[auto] mobile:mb-1 tablet:w-[850px] mx-[auto]">
+      <img className="absolute w-[330px] h-[270px] left-[700px] top-[88px] opacity-80 mobile:hidden tablet:left-[400px]" src={backgroundImage} alt="" />
       <div className="font-semibold text-[32px] leading-[64px] text-white mobile:text-[18px] mobile:leading-[24px]">
         Full featured, no-code
       </div>

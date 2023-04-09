@@ -20,7 +20,7 @@ function Section1Cards({
   const navigate = useNavigate();
 
   return (
-    <div className="bg-[#1D1B2D] w-[392px] min-h-[445px] px-6 py-7 rounded-xl flex flex-col justify-between tablet:w-[47%] largeMobile:w-[100%] largeMobile:ml-0 smallLaptop:w-[330px]">
+    <div className="bg-[#1D1B2D] w-[392px] min-h-[445px] px-6 py-7 rounded-xl flex flex-col justify-between largeMobile:w-[100%] largeMobile:ml-0 smallLaptop:w-[330px] tablet:w-[270px]">
       <div>
         <p className="text-[22px] font-semibold largeMobile:text-[20px]">
           {title}
