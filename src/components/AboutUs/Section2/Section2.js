@@ -45,7 +45,7 @@ const teamMembers = [
 function Section2() {
   return (
     <div className="mt-[70px] pb-[70px] bg-[#1D1B2D] mobile:pb-3">
-      <div className="mx-[auto] w-[1184px] mobile:w-[330px] smallLaptop:w-[1050px] tablet:w-[850px]">
+      <div className="mx-[auto] w-[1184px] mobile:w-[330px] smallLaptop:w-[1050px] tablet:w-[850px] smallTablet:w-[700px]">
         {/* <div className="absolute w-full bg-[#1D1B2D] h-[120%] left-0 -z-10" /> */}
         <p className="pt-[72px] font-medium text-[48px] largeMobile:text-[28px]">Team</p>
         <p className="mt-4 text-[#BFB8B8] text-[20px] largeMobile:text-[16px]">

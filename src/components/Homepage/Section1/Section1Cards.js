@@ -3,7 +3,7 @@ import React from "react";
 function Section1Cards({ icon, title, description }) {
   return (
     <div 
-    className="rounded-2xl bg-[#1D1B2D] w-[333px] min-h-[280px] py-7 px-8 tablet:flex tablet:flex-col tablet:justify-center tablet:items-center tablet:text-center tablet:w-[270px] mobile:min-h-0"
+    className="rounded-2xl bg-[#1D1B2D] w-[333px] min-h-[280px] py-7 px-8 tablet:flex tablet:flex-col tablet:justify-center tablet:items-center tablet:text-center tablet:w-[270px] mobile:min-h-0 smallTablet:w-[340px]"
     >
       <div className="mobile:w-9 mobile:h-9">{icon}</div>
       <div className="mt-6 mobile:mt-3">

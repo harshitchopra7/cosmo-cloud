@@ -9,6 +9,7 @@ module.exports = {
     extend: {},
     screens: {
       tablet: { max: "1100px" },
+      smallTablet: {max: "900px"},
       largeMobile: { max: "700px" },
       mobile: { max: "600px" },
       smallLaptop: {max: "1250px", min: "1100px"},

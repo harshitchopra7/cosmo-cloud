@@ -168,7 +168,7 @@ function Section2() {
   return (
     <div className="bg-[#1D1B2D] largeMobile:bg-transparent">
       {/* desktop version  */}
-      <div className="mx-[auto] w-[1184px] pt-[60px] pb-[60px] largeMobile:hidden smallLaptop:w-[1050px] tablet:w-[850px]">
+      <div className="mx-[auto] w-[1184px] pt-[60px] pb-[60px] largeMobile:hidden smallLaptop:w-[1050px] tablet:w-[850px] smallTablet:w-[700px]">
         <p className="text-[28px] text-center">Compare features across plans</p>
 
         <div className="flex flex-wrap justify-between mt-10">

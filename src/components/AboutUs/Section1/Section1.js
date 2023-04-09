@@ -2,7 +2,7 @@ import React from "react";
 
 function Section1() {
   return (
-    <div className="mx-[auto] w-[1184px] mobile:w-[330px] smallLaptop:w-[1050px] tablet:w-[850px]">
+    <div className="mx-[auto] w-[1184px] mobile:w-[330px] smallLaptop:w-[1050px] tablet:w-[850px] smallTablet:w-[700px]">
       <p className="font-medium text-[48px] largeMobile:text-[28px]">
         Why Cosmocloud?
       </p>

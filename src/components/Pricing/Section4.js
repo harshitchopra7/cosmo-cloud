@@ -164,7 +164,7 @@ function Section4() {
   };
 
   return (
-    <div className="items-center mx-[auto] w-[1184px] smallLaptop:w-[1050px] tablet:w-[850px] mobile:w-[330px]" id="calculator">
+    <div className="items-center mx-[auto] w-[1184px] smallLaptop:w-[1050px] tablet:w-[850px] mobile:w-[330px] smallTablet:w-[700px]" id="calculator">
       <p className="text-[28px] text-center largeMobile:text-[22px]">
         Cost Calculator
       </p>
@@ -172,17 +172,17 @@ function Section4() {
         Calculate your custom cost tailored to your needs
       </p>
 
-      <div className="flex justify-evenly mt-10  largeMobile:flex-col">
+      <div className="flex justify-evenly mt-10  smallTablet:flex-col">
         {/* left  */}
-        <div className="w-[58%] largeMobile:w-[100%]">
+        <div className="w-[58%] smallTablet:w-[100%]">
           <div>
             <p className="font-medium mt-6 mb-4 text-[20px] largeMobile:text-[18px]">
               Select a plan
             </p>
-            <div className="flex justify-between largeMobile:flex-col">
+            <div className="flex justify-between smallTablet:flex-col">
               {plans.map((val) => (
                 <div
-                  className="bg-[#1D1B2D] rounded-lg p-2 pl-4 pr-4 flex justify-between w-[32%] cursor-pointer largeMobile:w-[100%] largeMobile:mb-[12px]"
+                  className="bg-[#1D1B2D] rounded-lg p-2 pl-4 pr-4 flex justify-between w-[32%] cursor-pointer smallTablet:w-[100%] smallTablet:mb-[12px]"
                   onClick={() => handlePlanClick(val)}
                 >
                   <div>
@@ -376,7 +376,7 @@ function Section4() {
         </div>
 
         {/* right  */}
-        <div className="w-[34%] largeMobile:w-[100%]">
+        <div className="w-[34%] largeMobile:w-[100%] smallTablet:w-[80%] smallTablet:mx-[auto]">
           <p className="font-medium mt-6 mb-4 text-[20px] largeMobile:text-[18px]">
             Estimate
           </p>
