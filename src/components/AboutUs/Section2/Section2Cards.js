@@ -2,7 +2,8 @@ import React from "react";
 
 import { FaLinkedinIn } from "react-icons/fa";
 
-function Section2Cards({ image, name, role, pastExp }) {
+function Section2Cards({ image, name, role, pastExp, linkedin }) {
+
   return (
     <div className="flex flex-col w-[31%] mb-[72px] tablet:w-[50%] smallTablet:w-[50%] mobile:w-[100%] mobile:mr-[1] mobile:mb-12 text-center">
       <img
@@ -19,8 +20,9 @@ function Section2Cards({ image, name, role, pastExp }) {
         <p className="mt-1 text-[#BFB8B8] text-[16px] mx-auto">Past: {pastExp}</p>
       </div>
 
+
       <a
-        href={ValidityState.linkedin}
+        href={linkedin}
         target="_blank"
         rel="noreferrer"
         className="mt-4 cursor-pointer mx-auto"

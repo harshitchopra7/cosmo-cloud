@@ -11,7 +11,7 @@ const teamMembers = [
     name: "Shrey Batra",
     role: "Founder, CEO",
     pastExp: "Sr. SWE @ LinkedIn, Innovaccer",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/shreybatra/",
   },
   // {
   //   image: personImage,
