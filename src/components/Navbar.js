@@ -121,7 +121,15 @@ function Navbar() {
         <>
           <div className="flex items-center justify-between p-4">
             <div className="font-semibold cursor-pointer">
-              <img className="h-[28px]" src={logoMain} alt="" />
+              <img 
+                className="h-[28px]" 
+                onClick={() => {
+                  navigate("/");
+                  closeMenu();
+                }} 
+                src={logoMain} 
+                alt="" 
+              />
             </div>
             <MdOutlineMenu
               size={25}
@@ -136,11 +144,11 @@ function Navbar() {
             <div className="fixed overflow-hidden top-0 left-0 right-0 h-[100vh] bg-[#161426] p-4">
               <div className="flex justify-between">
                 <img
-                  className="h-[28px]"
                   onClick={() => {
                     navigate("/");
                     closeMenu();
                   }}
+                  className="h-[28px]"
                   src={logoMain}
                   alt=""
                 />

@@ -86,7 +86,7 @@ function ContactUsComponent() {
         </div>
       </div>
       <div className="bg-[#1D1B2D] w-[680px] p-10 rounded-lg mobile:rounded-none mobile:py-6 tablet:flex-[1] tablet:px-7 largeMobile:w-[100%] tablet:w-[100%]">
-        <div className="mobile:w-[330px] tablet:mx-[auto] tablet:w-[850px] smallTablet:w-[700px] largeMobile:w-[576px]">
+        <div className="mobile:w-[300px] tablet:mx-[auto] tablet:w-[850px] smallTablet:w-[700px] largeMobile:w-[576px]">
         <div className="flex items-center justify-between tablet:flex-col">
           <div className="mr-4 tablet:mr-0 tablet:mb-3 tablet:w-[100%]">
             <p className="mb-3 font-medium text-[18px]">Your name</p>
