@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Divider from "../Homepage/Divider/Divider";
 
 import radio_button_unchecked from "../../assets/pricing/radio_button_unchecked.png";
@@ -63,67 +63,71 @@ function Section4() {
     plans[0].name.toLowerCase()
   );
 
-  const [rpsSelected, setRpsSelected] = useState(0);
-  const [projectsSelected, setProjectsSelected] = useState(0);
+  const [rpsSelected, setRpsSelected] = useState(pricing[selectedPlanName].pricing.rps.limits[0].value);
+  const [projectsSelected, setProjectsSelected] = useState(pricing[selectedPlanName].pricing.projects.limits[0].value);
   const [dataSelected, setDataSelected] = useState(
     pricing[selectedPlanName].pricing.data.limits[0].value
   );
 
+  const [totalMonthCost, setTotalMonthCost] = useState(0)
+  const [perHourCost, setPerHourCost] = useState(0)
+  const [baseMonthCost, setBaseMonthCost] = useState(0)
+  const [customisedMonthCost, setCustomisedMonthCost] = useState(0)
+  const [dataMonthCost, setDataMonthCost] = useState(0)
+
   const handlePlanClick = (val) => {
-    setRpsSelected(0);
-    setProjectsSelected(0);
-    setDataSelected(0);
+    setRpsSelected(pricing[val.name.toLowerCase()].pricing.rps.limits[0].value);
+    setProjectsSelected(pricing[val.name.toLowerCase()].pricing.projects.limits[0].value);
+    setDataSelected(pricing[val.name.toLowerCase()].pricing.data.limits[0].value);
 
     setSelectedPlan(val);
     setselectedPlanName(val.name.toLowerCase());
   };
 
-  const calculateRpsCost = useCallback(() => {
-    const findIndex = pricing[selectedPlanName].pricing.rps.limits.findIndex(
-      (val) => val.value === rpsSelected
-    );
+  // const calculateRpsCost = useCallback(() => {
+  //   const findIndex = pricing[selectedPlanName].pricing.rps.limits.findIndex(
+  //     (val) => val.value === rpsSelected
+  //   );
 
-    if (findIndex === -1 || findIndex === 0) {
-      // return 0 since the first value will always be included in the pack
-      return 0;
-    }
+  //   if (findIndex === -1 || findIndex === 0) {
+  //     // return 0 since the first value will always be included in the pack
+  //     return 0;
+  //   }
 
-    return pricing[selectedPlanName].pricing.rps.limits[findIndex]?.price.inr;
-  }, [rpsSelected, selectedPlanName]);
+  //   return pricing[selectedPlanName].pricing.rps.limits[findIndex]?.price.inr;
+  // }, [rpsSelected, selectedPlanName]);
 
-  const calculateProjectCost = useCallback(() => {
-    const perProjectTotalCost =
-      pricing[selectedPlanName].pricing.base.inr + calculateRpsCost();
+  // const calculateProjectCost = useCallback(() => {
+  //   const perProjectTotalCost =
+  //     pricing[selectedPlanName].pricing.base.inr + calculateRpsCost();
 
-    const totalProjectCost =
-      perProjectTotalCost *
-      (1 +
-        (projectsSelected - 1) *
-          pricing[selectedPlanName].pricing.projects.limits[0]?.multiplier
-            ?.inr || 1);
+  //   const totalProjectCost =
+  //     perProjectTotalCost *
+  //     (1 +
+  //       (projectsSelected - 1) *
+  //       pricing[selectedPlanName].pricing.projects.limits[0]?.multiplier
+  //         ?.inr || 1);
 
-    return Math.round(totalProjectCost);
-  }, [selectedPlanName, projectsSelected, calculateRpsCost]);
+  //   return Math.round(totalProjectCost);
+  // }, [selectedPlanName, projectsSelected, calculateRpsCost]);
 
-  const calculateDataCost = useCallback(() => {
-    const includedDataInSelectedPlan =
-      pricing[selectedPlanName].pricing.data.limits[0].value;
-    const finalAmount =
-      (dataSelected - includedDataInSelectedPlan) * dataPrice.data.inr;
-    return finalAmount < 0 ? 0 : finalAmount * 730;
-  }, [dataSelected, selectedPlanName]);
+  // const calculateDataCost = useCallback(() => {
 
-  const calculateTotalCost = useCallback(() => {
-    return calculateProjectCost() * 730 + calculateDataCost();
-  }, [calculateDataCost, calculateProjectCost]);
+  // }, [dataSelected, selectedPlanName]);
 
-  const calculateCustomisationCost = () => {
-    const totalCost = calculateTotalCost();
-    const dataCost = calculateDataCost();
-    const basePrice = pricing[selectedPlanName].pricing.base.inr;
 
-    return totalCost - dataCost - basePrice;
-  };
+
+  // const calculateTotalCost = useCallback(() => {
+  //   return calculateProjectCost() * 730 + calculateDataCost();
+  // }, [calculateDataCost, calculateProjectCost]);
+
+  // const calculateCustomisationCost = () => {
+  //   const totalCost = calculateTotalCost();
+  //   const dataCost = calculateDataCost();
+  //   const basePrice = pricing[selectedPlanName].pricing.base.inr;
+
+  //   return totalCost - dataCost - basePrice;
+  // };
 
   const getMarks = () => {
     const arr = [];
@@ -132,7 +136,9 @@ function Section4() {
     return arr;
   };
 
+
   const getCost = () => {
+
     const basePrice = pricing[selectedPlanName].pricing.base.inr;
 
     const findIndex = pricing[selectedPlanName].pricing.rps.limits.findIndex(
@@ -149,19 +155,29 @@ function Section4() {
         pricing[selectedPlanName].pricing.rps.limits[findIndex]?.price.inr;
     }
 
+    const includedDataInSelectedPlan =
+      pricing[selectedPlanName].pricing.data.limits[0].value;
+    const dataCost =
+      (dataSelected - includedDataInSelectedPlan) * dataPrice.data.inr;
+
     const x = basePrice + rpsPrice;
     const y = x * (1 + (projectsSelected - 1) * 0.8);
 
-    const totalCost = y * 730 + calculateDataCost();
+    const totalCost = (y * 730 + dataCost).toFixed(2);
+    const perHourCost = (totalCost / 730).toFixed(2); // upto 3 decimals
+    const monthlyBasePrice = (basePrice * 730).toFixed(2);
+    const customisedCost = (totalCost - dataCost - monthlyBasePrice).toFixed(2);
 
-    const perHourCost = totalCost / 730; // upto 3 decimals
+    setTotalMonthCost(totalCost)
+    setPerHourCost(perHourCost)
+    setBaseMonthCost(monthlyBasePrice)
+    setCustomisedMonthCost(customisedCost)
+    setDataMonthCost(dataCost)
 
-    const monthlyBasePrice = basePrice * 730;
 
-    const customisedCost = totalCost - calculateDataCost() - monthlyBasePrice;
-
-    return totalCost.toFixed(2);
   };
+
+  useEffect(getCost, [selectedPlanName, rpsSelected, dataSelected, projectsSelected])
 
   return (
     <div className="items-center mx-[auto] w-[1184px] smallLaptop:w-[1050px] tablet:w-[850px] mobile:w-[330px] smallTablet:w-[700px] largeMobile:w-[576px]" id="calculator">
@@ -279,7 +295,7 @@ function Section4() {
                       }
                       disabled={
                         pricing[selectedPlanName].pricing.rps.enabled ===
-                          false && true
+                        false && true
                       }
                       color={
                         pricing[selectedPlanName].pricing.rps.enabled === false
@@ -288,7 +304,7 @@ function Section4() {
                       }
                       marks={
                         pricing[selectedPlanName]?.pricing?.rps.enabled !==
-                          false && getMarks()
+                        false && getMarks()
                       }
                       step={null}
                     />
@@ -322,11 +338,11 @@ function Section4() {
                       }
                       disabled={
                         pricing[selectedPlanName].pricing.projects.enabled ===
-                          false && true
+                        false && true
                       }
                       color={
                         pricing[selectedPlanName].pricing.projects.enabled ===
-                        false
+                          false
                           ? "#8F8F8F"
                           : "#8980D4"
                       }
@@ -359,7 +375,7 @@ function Section4() {
                       }
                       disabled={
                         pricing[selectedPlanName].pricing.data.enabled ===
-                          false && true
+                        false && true
                       }
                       color={
                         pricing[selectedPlanName].pricing.data.enabled === false
@@ -383,7 +399,7 @@ function Section4() {
           <div className="bg-[#1D1B2D] p-4 rounded-lg">
             <div className="text-center mt-8 mb-8">
               <p className="text-[36px] font-medium">
-                ₹{(calculateTotalCost() / 730).toFixed(2)}/hour
+                ₹{perHourCost}/hour
               </p>
               <p className="text-[#BFB8B8] text-[18px] font-medium">
                 charged monthly
@@ -427,13 +443,13 @@ function Section4() {
 
               <RenderConfigurationDetails
                 title="Customisation"
-                description={calculateCustomisationCost()}
+                description={customisedMonthCost}
                 type="priceBreakdown"
               />
 
               <RenderConfigurationDetails
                 title="Data bandwidth increase"
-                description={calculateDataCost()}
+                description={dataMonthCost}
                 type="priceBreakdown"
               />
             </div>
@@ -445,7 +461,7 @@ function Section4() {
               <p>
                 Total <span className="text-[#BFB8B8]">(monthly)</span>
               </p>
-              <p>₹{getCost()}/month</p>
+              <p>₹{totalMonthCost}/month</p>
             </div>
             <p className="text-right text-[#BFB8B8] text-[14px]">
               *Any applicable taxes are not included
