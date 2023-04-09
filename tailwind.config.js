@@ -8,9 +8,10 @@ module.exports = {
   theme: {
     extend: {},
     screens: {
-      tablet: { max: "950px" },
+      tablet: { max: "1100px", min: "900px" },
       largeMobile: { max: "700px" },
       mobile: { max: "600px" },
+      smallLaptop: {max: "1250px", min: "1100px"},
     },
   },
   plugins: [],

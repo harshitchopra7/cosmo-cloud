@@ -87,7 +87,7 @@ function Section1() {
   const navigate = useNavigate();
 
   return (
-    <div className="px-[auto] pb-[72px] mx-[auto] w-[1184px] mobile:w-[330px]">
+    <div className="px-[auto] pb-[72px] mx-[auto] w-[1184px] mobile:w-[330px] smallLaptop:w-[1050px]">
       <div className="text-center">
         <p className="text-[48px] font-medium largeMobile:text-[28px]">
           Pricing
@@ -100,7 +100,7 @@ function Section1() {
       </div>
 
       <div className="flex justify-center">
-          <div className="mt-8 grid grid-cols-3 items-center gap-9 mobile:flex mobile:flex-col mobile:gap-6">
+          <div className="mt-8 grid grid-cols-3 gap-9 mobile:flex mobile:flex-col mobile:gap-6">
             {plans.map((val) => (
               <Section1Cards
                 title={val.title}
