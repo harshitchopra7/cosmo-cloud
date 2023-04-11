@@ -509,7 +509,7 @@ function TermsOfService() {
         immediately preceding the claim.
       </p>
       <h1 className="text-[24px] mt-10">
-        12. Subscription Period and Termination.
+        12. Subscription Period and Cancellation and Refund Policy.
       </h1>
       <h2 className="text-[16px] mt-4">1. Subscription Period.</h2>
       <p>
