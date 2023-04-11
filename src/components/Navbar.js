@@ -11,20 +11,20 @@ import logoMain from "../assets/brandResources/FullLogoDark.svg";
 
 import { MdOutlineClose, MdOutlineMenu } from "react-icons/md";
 
-import styled from 'styled-components'
+import styled from "styled-components";
 
-const items = ["Home", "About", "Contact us"];
+const items = ["Home", "Pricing", "About", "Contact us"];
 
 const NavigationItem = styled.div`
   font-size: 16px;
   font-weight: 500;
-  color: #E0E0E0;
+  color: #e0e0e0;
   cursor: pointer;
   padding: 8px 16px;
   transition: 0.2s ease-in;
 
   &:hover {
-    background: #3A3564;
+    background: #3a3564;
     border-radius: 21px;
     font-weight: 600;
     transition: 0.2s ease-in;
@@ -32,13 +32,13 @@ const NavigationItem = styled.div`
 
   &::after {
     display: block;
-    content: '${({ content }) => content}';
+    content: "${({ content }) => content}";
     font-weight: 600;
     height: 0;
     overflow: hidden;
     visibility: hidden;
   }
-`
+`;
 
 function Navbar() {
   const navigate = useNavigate();
@@ -78,7 +78,7 @@ function Navbar() {
   }
 
   function enableScroll() {
-    window.onscroll = function () { };
+    window.onscroll = function () {};
   }
 
   const closeMenu = () => {
@@ -113,7 +113,9 @@ function Navbar() {
           ))}
         </div>
         <div className="w-[144px]">
-          {location.pathname !== '/' && <Button text="Join the waitlist" onClick={() => navigate("/")} />}
+          {location.pathname !== "/" && (
+            <Button text="Join the waitlist" onClick={() => navigate("/")} />
+          )}
         </div>
       </div>
 

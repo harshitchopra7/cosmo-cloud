@@ -4,7 +4,7 @@ export const pricing = {
     key: "personal",
     pricing: {
       base: {
-        inr: 0.69,
+        inr: 0.6849,
         usd: 0.0083,
       },
       rps: {
@@ -178,7 +178,7 @@ export const pricing = {
             },
           },
           {
-            value: 100,
+            value: 10,
             multiplier: {
               inr: 0.8,
               usd: 0.8,
