@@ -21,7 +21,8 @@ const contactData = [
     image: location,
     title: "Visit us",
     description: "Come say hello at our office HQ.",
-    contactDetails: "Noida, Uttar Pradesh, India - 201301",
+    contactDetails:
+      "HD-083, Wework Berger Delhi One, Sector 16B, Noida, Uttar Pradesh, India - 201301",
   },
   {
     image: phone,
