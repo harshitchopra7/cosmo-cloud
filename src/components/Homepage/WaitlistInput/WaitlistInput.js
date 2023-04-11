@@ -8,15 +8,21 @@ const emailRegistrationStatusValues = {
   INVALID: "INVALID",
 };
 
-function WaitlistInput({autoFocus}) {
+function WaitlistInput({ autoFocus }) {
   const [email, setEmail] = useState("");
   const [emailRegistrationStatus, setEmailRegistrationStatus] = useState(
-    emailRegistrationStatusValues.UN_REGISTERED
+    emailRegistrationStatusValues.UN_REGISTERED,
   );
   const [hintMessage, setHintMessage] = useState("");
 
-  const onClick = () => {
-    if(!email) return;
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setEmailRegistrationStatus(emailRegistrationStatusValues.INVALID);
+
+    if (!email) {
+      setHintMessage("Please Enter your email address");
+      return;
+    }
 
     const requestOptions = {
       method: "POST",
@@ -33,7 +39,7 @@ function WaitlistInput({autoFocus}) {
           return;
         } else if (data?.status_code === 409) {
           setEmailRegistrationStatus(
-            emailRegistrationStatusValues.ALREADY_REGISTERED
+            emailRegistrationStatusValues.ALREADY_REGISTERED,
           );
           setHintMessage("Email already registered!");
           return;
@@ -50,45 +56,130 @@ function WaitlistInput({autoFocus}) {
     return "Join the waitlist";
   }, [emailRegistrationStatus]);
 
-  const isDisabled = () => {
-    return emailRegistrationStatus === emailRegistrationStatusValues.REGISTERED;
-  };
+  const isDisabled =
+    emailRegistrationStatus === emailRegistrationStatusValues.REGISTERED;
+
+  console.log({ emailRegistrationStatus });
 
   return (
     <>
+      <div className="flex flex-col items-center relative mobile:hidden">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-[#211E33] rounded-lg margin-bottom-[20px] flex justify-between items-center"
+          style={{ padding: 4, width: 500 }}
+        >
+          <div
+            style={{
+              transition: "width .5s ease-in-out",
+              width:
+                emailRegistrationStatusValues.REGISTERED ===
+                emailRegistrationStatus
+                  ? 0
+                  : 348,
+            }}
+          >
+            <input
+              placeholder="Enter your email..."
+              className="h-[45px] text-[#FFFFFF] !outline-none rounded-lg"
+              style={{
+                backgroundColor: "transparent",
+                height: 44,
+                width: "100%",
+                padding: "0 8px",
+              }}
+              value={email}
+              autoFocus={autoFocus}
+              onChange={(e) => {
+                setEmailRegistrationStatus(
+                  emailRegistrationStatusValues.UN_REGISTERED,
+                );
+                setHintMessage("");
+                setEmail(e.target.value);
+              }}
+              disabled={isDisabled}
+            />
+          </div>
+
+          <Button
+            text={buttonText}
+            type="submit"
+            style={{
+              height: 44,
+              flexGrow: 2,
+              flexShrink: 0,
+              minWidth: 159,
+              transition:
+                "width .5s ease-in-out, background-color 1s, background 1s",
+            }}
+            expand={
+              emailRegistrationStatus ===
+              emailRegistrationStatusValues.REGISTERED
+            }
+            disabled={
+              emailRegistrationStatus ===
+              emailRegistrationStatusValues.REGISTERED
+            }
+          />
+        </form>
+      </div>
       <div
-        className="flex items-center justify-center bg-[#211E33] rounded-lg tablet:flex-col tablet:bg-transparent"
-        style={{ width: "fit-content" }}
+        className="hidden flex flex-col items-center relative mobile:block"
+        style={{ width: "100%" }}
       >
-        {emailRegistrationStatus !== emailRegistrationStatusValues.REGISTERED && (
+        <form
+          onSubmit={handleSubmit}
+          className="rounded-lg margin-bottom-[20px] flex justify-between items-center flex-col"
+        >
           <input
             placeholder="Enter your email..."
-            className="h-[45px] w-[300px] text-[#FFFFFF] pl-4 pr-4 bg-[#211E33] !outline-none rounded-lg tablet:mb-3"
+            className="h-[45px] text-[#FFFFFF] !outline-none rounded-lg bg-[#211E33] mb-2"
+            style={{
+              height: 44,
+              width: "100%",
+              padding: "0 12px",
+            }}
             value={email}
             autoFocus={autoFocus}
             onChange={(e) => {
-              setEmailRegistrationStatus(emailRegistrationStatusValues.UN_REGISTERED);
+              setEmailRegistrationStatus(
+                emailRegistrationStatusValues.UN_REGISTERED,
+              );
               setHintMessage("");
-              setEmail(e.target.value)
+              setEmail(e.target.value);
             }}
             disabled={isDisabled}
           />
-        )}
-        
-        <Button 
-          text={buttonText} 
-          onClick={onClick} 
-          width="100px" 
-          expand={emailRegistrationStatus === emailRegistrationStatusValues.REGISTERED}
-          disabled={emailRegistrationStatus === emailRegistrationStatusValues.REGISTERED}
-        />
-      </div>
 
-      {hintMessage && (
-        <p className="text-left text-xs text-[#EA4882] font-medium mt-1">
-          {hintMessage}
-        </p>
-      )}
+          <Button
+            text={buttonText}
+            type="submit"
+            style={{
+              height: 44,
+              width: "100%",
+              transition:
+                "width .5s ease-in-out, background-color 1s, background 1s",
+            }}
+            expand={
+              emailRegistrationStatus ===
+              emailRegistrationStatusValues.REGISTERED
+            }
+            disabled={
+              emailRegistrationStatus ===
+              emailRegistrationStatusValues.REGISTERED
+            }
+          />
+        </form>
+
+        {hintMessage && (
+          <p
+            className="text-left text-xs text-[#EA4882] font-medium mt-1 absolute bottom-[-18px] duration-2000 
+        ease-out transition transform origin-top-right"
+          >
+            {hintMessage}
+          </p>
+        )}
+      </div>
     </>
   );
 }

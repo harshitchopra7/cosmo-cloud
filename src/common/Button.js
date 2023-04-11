@@ -1,27 +1,29 @@
 import React from "react";
-import styled from 'styled-components'
+import styled from "styled-components";
 
-const Container = styled.div`
-  ${({expand}) => expand && `
-    width: 400px;
-    transition: width 1s ease-in-out;
+const Container = styled.button`
+  transition: width 4s ease-in-out !important;
+  ${({ expand }) =>
+    expand &&
+    `
     background: none;
     background-color: #312D52;
   `}
-
-  ${({disabled}) => disabled && `
+  ${({ disabled }) =>
+    disabled &&
+    `
     pointer-events: none;
-  `}
+  `};
 `;
 
-function Button({ text, expand, disabled, onClick, ...classes }) {
+function Button({ text, expand, disabled, onClick, className, ...props }) {
   return (
     <Container
-      className={`p-2 pl-4 pr-4 bg-gradient-to-r from-[#8E2DE2] to-[#3E4EB4] rounded-lg cursor-pointer text-center text-[16px] font-medium ${classes.width && `w-[${classes.width}] smallTablet:w-full`
-        } `}
+      className={`p-2 pl-4 pr-4 bg-gradient-to-r from-[#8E2DE2] to-[#3E4EB4] rounded-lg cursor-pointer text-center text-[16px] font-medium ${className}`}
       onClick={onClick}
       expand={expand}
       disabled={disabled}
+      {...props}
     >
       {text}
     </Container>

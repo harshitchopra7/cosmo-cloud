@@ -20,12 +20,12 @@ function Section3() {
         return;
       }
       setSelectedId((prev) => prev + 1);
-    }, 4500);
+    }, 5000);
     return () => clearInterval(interval);
   }, [selectedId]);
 
   return (
-    <div className="mt-[70px] mb-[70px] mx-[auto] w-[1184px] mobile:w-[330px] smallLaptop:w-[1050px] tablet:w-[850px] smallTablet:w-[700px] largeMobile:w-[576px]">
+    <div className="mt-[100px] mb-[70px] mx-[auto] w-[1180px] mobile:w-[330px] smallLaptop:w-[1050px] tablet:w-[850px] smallTablet:w-[700px] largeMobile:w-[576px]">
       <p className="font-medium text-[32px] largeMobile:text-[20px]">
         Core features
       </p>
@@ -41,10 +41,12 @@ function Section3() {
             />
           ))}
         </div>
-        <div
-          className="w-[500px] f-full bg-[#1D1B2D] mt-7 rounded-lg flex-[0.7] flex items-center justify-center"
-        >
-          <img className='w-4/5 h-auto' src={data[selectedId - 1].illustration} alt="" />
+        <div className="f-full bg-[#1D1B2D] mt-7 rounded-lg flex-[0.7] flex items-center justify-center">
+          <img
+            className="w-5/5 h-auto"
+            src={data[selectedId - 1].illustration}
+            alt=""
+          />
         </div>
       </div>
 
