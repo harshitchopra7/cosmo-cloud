@@ -17,7 +17,7 @@ function App() {
   return (
     <BrowserRouter>
       <div
-        className={`text-[#ffffff] flex flex-col justify-between`}
+        className={`text-[#ffffff] flex flex-col justify-between w-full`}
         style={{ minHeight: "100vh" }}
       >
         <Navbar />

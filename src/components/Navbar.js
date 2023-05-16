@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // routing
-import { useLocation, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 // internal deps
 import Button from "../common/Button";
@@ -42,7 +42,6 @@ const NavigationItem = styled.div`
 
 function Navbar() {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [showNavbarinMobileScreen, setShowNavbarinMobileScreen] =
     useState(false);
@@ -107,16 +106,13 @@ function Navbar() {
             <NavigationItem
               onClick={() => handleNavbarRedirection(val)}
               content={val}
+              key={crypto.randomUUID()}
             >
               {val}
             </NavigationItem>
           ))}
         </div>
-        <div className="w-[144px]">
-          {location.pathname !== "/" && (
-            <Button text="Join the waitlist" onClick={() => navigate("/")} />
-          )}
-        </div>
+        <Button text="Join the waitlist" onClick={() => window.open('https://dashboard.cosmocloud.io/', '_blank')} />
       </div>
 
       <div className="hidden largeMobile:block">

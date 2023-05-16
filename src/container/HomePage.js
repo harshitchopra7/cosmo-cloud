@@ -4,15 +4,16 @@ import React from "react";
 import Banner from "../components/Homepage/Banner";
 import Divider from "../components/Homepage/Divider/Divider";
 import Section1 from "../components/Homepage/Section1/Section1";
-import Section2 from "../components/Homepage/Section2/Section2";
-import Section3 from "../components/Homepage/Section3.js/Section3";
 import Section4 from "../components/Homepage/Section4/Section4";
-import Section5 from "../components/Homepage/Section5/Section5";
+import Features from "../components/Homepage/Features";
+import Partners from "../components/Homepage/Partners";
 
 function HomePage() {
   return (
-    <div>
+    <div className="w-full">
       <Banner />
+
+      <Partners />
 
       <Divider />
 
@@ -20,7 +21,8 @@ function HomePage() {
 
       {/* <Section2 /> */}
 
-      <Section3 />
+      {/* <Section3 /> */}
+      <Features />
 
       <Divider />
 
