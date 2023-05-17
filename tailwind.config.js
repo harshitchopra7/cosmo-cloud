@@ -14,6 +14,9 @@ module.exports = {
       mobile: { max: "600px" },
       smallLaptop: { max: "1250px", min: "1100px" },
     },
+    letterSpacing: {
+      wide: '0.01em',
+    }
   },
   plugins: [],
 };

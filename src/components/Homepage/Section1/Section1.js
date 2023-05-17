@@ -64,6 +64,7 @@ function Section1() {
               icon={val.icon}
               title={val.title}
               description={val.description}
+              key={crypto.randomUUID()}
             />
           ))}
         </div>
