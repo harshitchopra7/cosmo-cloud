@@ -13,6 +13,7 @@ function HomePage() {
     <div className="w-full">
       <Banner />
 
+
       <Partners />
 
       <Divider />
@@ -24,9 +25,9 @@ function HomePage() {
       {/* <Section3 /> */}
       <Features />
 
-      <Divider />
+      {/* <Divider /> */}
 
-      <Section4 />
+      {/* <Section4 /> */}
 
       {/* <Divider /> */}
 

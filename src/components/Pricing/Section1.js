@@ -5,7 +5,6 @@ import Bolt from "./assets/Bolt";
 import CloudDownload from "./assets/CloudDownload";
 import Group from "./assets/Group";
 import Webhook from "./assets/Webhook";
-import { MdArrowDownward } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 
 const plans = [

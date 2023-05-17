@@ -112,7 +112,7 @@ function Navbar() {
             </NavigationItem>
           ))}
         </div>
-        <Button text="Join the waitlist" onClick={() => window.open('https://dashboard.cosmocloud.io/', '_blank')} />
+        <Button text="Get started" onClick={() => window.open('https://dashboard.cosmocloud.io/', '_blank')} />
       </div>
 
       <div className="hidden largeMobile:block">

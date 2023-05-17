@@ -27,8 +27,8 @@ function Footer() {
           >
             <FaLinkedinIn className="mr-3 cursor-pointer text-[#BFB8B8] h-[20px]" />
           </a>
-          <FaTwitter className="mr-3 cursor-pointer text-[#BFB8B8] h-[20px]" />
-          <FaInstagram className="mr-3 cursor-pointer text-[#BFB8B8] h-[20px]" />
+          {/* <FaTwitter className="mr-3 cursor-pointer text-[#BFB8B8] h-[20px]" />
+          <FaInstagram className="mr-3 cursor-pointer text-[#BFB8B8] h-[20px]" /> */}
         </div>
         <div className="flex items-center font-semibold text-[#BFB8B8] largeMobile:hidden">
           <p

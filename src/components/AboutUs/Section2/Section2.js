@@ -2,8 +2,6 @@ import React from "react";
 import Section2Cards from "./Section2Cards";
 import shreyPic from '../../../assets/aboutUs/shrey.jpeg'
 
-const personImage =
-  "https://img.freepik.com/free-icon/important-person_318-10744.jpg";
 
 const teamMembers = [
   {
@@ -13,34 +11,6 @@ const teamMembers = [
     pastExp: "Sr. SWE @ LinkedIn, Innovaccer",
     linkedin: "https://www.linkedin.com/in/shreybatra/",
   },
-  // {
-  //   image: personImage,
-  //   name: "Sarthak Kamra",
-  //   role: "Product Design",
-  //   pastExp: "Senior Designer at Salesforce and Innovaccer",
-  //   linkedin: "",
-  // },
-  // {
-  //   image: personImage,
-  //   name: "Mukul Jain",
-  //   role: "Engineering",
-  //   pastExp: "Senior Engineer at Atlassian and Rubrik",
-  //   linkedin: "",
-  // },
-  // {
-  //   image: personImage,
-  //   name: "Mukul Jain",
-  //   role: "Engineering",
-  //   pastExp: "Senior Engineer at Atlassian and Rubrik",
-  //   linkedin: "",
-  // },
-  // {
-  //   image: personImage,
-  //   name: "Mukul Jain",
-  //   role: "Engineering",
-  //   pastExp: "Senior Engineer at Atlassian and Rubrik",
-  //   linkedin: "",
-  // },
 ];
 
 function Section2() {

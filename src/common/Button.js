@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.button`
-  transition: width 4s ease-in-out !important;
+  /* transition: width 4s ease-in-out !important; */
   ${({ expand }) =>
     expand &&
     `
@@ -16,7 +16,7 @@ const Container = styled.button`
   `};
 `;
 
-function Button({ text, expand, disabled, onClick, className, ...props }) {
+function Button({ text, expand, disabled, onClick, className, borderBackground=false, ...props }) {
   return (
     <Container
       className={`p-2 pl-4 pr-4 bg-gradient-to-r from-[#8E2DE2] to-[#3E4EB4] rounded-lg cursor-pointer text-center text-[16px] font-medium ${className}`}

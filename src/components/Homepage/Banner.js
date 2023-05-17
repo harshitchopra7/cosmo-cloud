@@ -21,14 +21,25 @@ function Banner() {
       <div className="font-normal text-[22px] leading-[48px] text-[#BFB8B8] mt-3 mb-10 mobile:text-[15px] mobile:leading-[20px] mobile:mt-2 mobile:mb-8">
         Build your application's backend in minutes
       </div>
+      <div className="flex flex-wrap justify-center gap-[10px] items-center">
       <Button
         text="Get started"
+        className="w-[150px] largeMobile:w-[100px] largeMobile:text-[12px]"
         onClick={() =>
-          window.open("https://dashboard.cosmocloud.io/", "_blank")
+          window.open("https://dashboard.cosmocloud.io/sign-up", "_blank")
         }
       />
+      <Button
+        text="Login"
+        className="w-[150px] largeMobile:w-[100px] largeMobile:text-[12px]"
+        borderBackground
+        onClick={() =>
+          window.open("https://dashboard.cosmocloud.io/sign-up", "_blank")
+        }
+      />
+      </div>
       <div className="mt-[72px]">
-        <BannerImage className="w-[900px] h-[600px] tablet:w-[600px] tablet:h-[400px] largeMobile:w-[350px] largeMobile:h-[230px]" />
+        <BannerImage className="w-[900px] h-[600px] tablet:w-[600px] tablet:h-[400px] largeMobile:w-[300px] largeMobile:h-[200px]" />
       </div>
     </div>
   );
