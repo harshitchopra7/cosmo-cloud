@@ -1,142 +1,107 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Divider from "../Homepage/Divider/Divider";
 
 import radio_button_unchecked from "../../assets/pricing/radio_button_unchecked.png";
 import radio_button_checked from "../../assets/pricing/radio_button_checked.png";
 
-import { dataPrice, pricing } from "../../pricing";
-
 import SliderComponent from "./SliderComponent";
 import RenderConfigurationDetails from "./RenderConfigurationDetails";
 import InfoDetails from "./InfoDetails";
+import { useGetPlanData } from "../../container/Pricing/Pricing.service";
+import { BiChevronDown } from "react-icons/bi";
 
 const totalHoursInMonth = 730;
 
-const plans = [
-  {
-    name: "Personal",
-    price: "$40/hour",
-    rps: "disabled",
-    numberOfProjects: "disabled",
-    dataBandwidth: "1",
-  },
-  {
-    name: "Starter",
-    price: "$60/hour",
-    rps: "300",
-    numberOfProjects: "disabled",
-    dataBandwidth: "1",
-  },
-  {
-    name: "Standard",
-    price: "$80/hour",
-  },
-];
-
-const planDetails = {
-  personal: {
-    apiReq: "Upto 1M per month",
-    requestsPerSecond: "Upto 5",
-    numberOfAPis: "5",
-    numberOfModels: "5",
-    dataBandwidth: "1 GB per project",
-  },
-  starter: {
-    apiReq: "Upto 1B per month",
-    requestsPerSecond: "Upto 1800",
-    numberOfAPis: "Unlimited",
-    numberOfModels: "Unlimited",
-    dataBandwidth: "50 - 100 GB",
-  },
-  standard: {
-    apiReq: "Upto 1B per month",
-    requestsPerSecond: "Upto 1800",
-    numberOfAPis: "Unlimited",
-    numberOfModels: "Unlimited",
-    dataBandwidth: "50 - 100 GB",
-  },
-};
-
 function Section4() {
+  const { data } = useGetPlanData();
+
+  const plans = ["PERSONAL", "STARTER", "STANDARD"];
+
   const [selectedPlan, setSelectedPlan] = useState(plans[0]);
-  const [selectedPlanName, setselectedPlanName] = useState(
-    plans[0].name.toLowerCase()
-  );
 
-  const [rpsSelected, setRpsSelected] = useState(pricing[selectedPlanName].pricing.rps.limits[0].value);
-  const [projectsSelected, setProjectsSelected] = useState(pricing[selectedPlanName].pricing.projects.limits[0].value);
-  const [dataSelected, setDataSelected] = useState(
-    pricing[selectedPlanName].pricing.data.limits[0].value
-  );
+  const [rpsSelected, setRpsSelected] = useState(1);
+  const [projectsSelected, setProjectsSelected] = useState(1);
+  const [dataSelected, setDataSelected] = useState(1);
 
-  const [totalMonthCost, setTotalMonthCost] = useState(0)
-  const [perHourCost, setPerHourCost] = useState(0)
-  const [baseMonthCost, setBaseMonthCost] = useState(0)
-  const [customisedMonthCost, setCustomisedMonthCost] = useState(0)
-  const [dataMonthCost, setDataMonthCost] = useState(0)
+  const [totalMonthCost, setTotalMonthCost] = useState(0);
+  const [perHourCost, setPerHourCost] = useState(0);
+  const [dataMonthCost, setDataMonthCost] = useState(0);
+  const [currency, setCurrency] = useState("INR");
+  const [showDropdown, setShowDropdown] = useState(false);
 
-  const handlePlanClick = (val) => {
-    setRpsSelected(pricing[val.name.toLowerCase()].pricing.rps.limits[0].value);
-    setProjectsSelected(pricing[val.name.toLowerCase()].pricing.projects.limits[0].value);
-    setDataSelected(pricing[val.name.toLowerCase()].pricing.data.limits[0].value);
-
-    setSelectedPlan(val);
-    setselectedPlanName(val.name.toLowerCase());
+  const toggleDropdown = () => {
+    setShowDropdown((show) => !show);
   };
 
+  const limitRps = useMemo(
+    () => (data ? data[selectedPlan].pricing.map((data) => data.rps) : []),
+    [data, selectedPlan]
+  );
+  const [selectedRpsIndex, setSelectedRpsIndex] = useState(0);
 
-  const getMarks = () => {
-    const arr = [];
-    const limits = pricing[selectedPlanName]?.pricing?.rps.limits;
-    limits.map((val) => arr.push({ value: val.value }));
-    return arr;
-  };
+  const limitProjects = data ? data[selectedPlan].maxProjects : 1;
+  const limitDataBandwidth = data ? data[selectedPlan].maxDataBandwidth : 1;
+  const startDataBandwidth = data
+    ? data[selectedPlan].resources.dataBandwidth
+    : 1;
+  const price = useMemo(
+    () => (data ? data[selectedPlan].pricing.map((data) => data.price) : []),
+    [data, selectedPlan]
+  );
 
-
-  const getCost = () => {
-
-    const basePrice = pricing[selectedPlanName].pricing.base.inr;
-
-    const findIndex = pricing[selectedPlanName].pricing.rps.limits.findIndex(
-      (val) => val.value === rpsSelected
-    );
-
-    var rpsPrice;
-
-    if (findIndex === -1 || findIndex === 0) {
-      // return 0 since the first value will always be included in the pack
-      rpsPrice = 0;
-    } else {
-      rpsPrice =
-        pricing[selectedPlanName].pricing.rps.limits[findIndex]?.price.inr;
+  useEffect(() => {
+    if (data) {
+      setRpsSelected(limitRps[limitRps.length - 1]);
+      setProjectsSelected(limitProjects);
+      setDataSelected(limitDataBandwidth);
     }
+  }, [data, limitDataBandwidth, limitProjects, limitRps, selectedPlan]);
 
-    const includedDataInSelectedPlan =
-      pricing[selectedPlanName].pricing.data.limits[0].value;
-    const dataCost =
-      (dataSelected - includedDataInSelectedPlan) * dataPrice.data.inr;
+  useEffect(() => {
+    if (data) {
+      const includedDataInSelectedPlan = startDataBandwidth;
+      const dataPrice = {
+        INR: 9,
+        USD: 0.11,
+      };
+      const dataCost =
+        (dataSelected - includedDataInSelectedPlan) * dataPrice[currency];
 
-    const x = basePrice + rpsPrice;
-    const y = x * (1 + (projectsSelected - 1) * 0.8);
+      const planCost = price[selectedRpsIndex][currency.toLowerCase()] * 730;
 
-    const totalCost = (y * 730 + dataCost).toFixed(2);
-    const perHourCost = (totalCost / 730).toFixed(2); // upto 3 decimals
-    const monthlyBasePrice = (basePrice * 730).toFixed(2);
-    const customisedCost = (totalCost - dataCost - monthlyBasePrice).toFixed(2);
+      const totalCost = dataCost + planCost;
 
-    setTotalMonthCost(totalCost)
-    setPerHourCost(perHourCost)
-    setBaseMonthCost(monthlyBasePrice)
-    setCustomisedMonthCost(customisedCost)
-    setDataMonthCost(dataCost)
+      const perHourCost = (totalCost / 730).toFixed(2);
 
+      setTotalMonthCost(totalCost.toFixed(2));
+      setPerHourCost(perHourCost);
+      setDataMonthCost(dataCost);
+    }
+  }, [
+    rpsSelected,
+    dataSelected,
+    projectsSelected,
+    data,
+    selectedPlan,
+    startDataBandwidth,
+    selectedRpsIndex,
+    currency,
+    price,
+  ]);
 
+  if (!data) {
+    return null;
+  }
+
+  const handlePlanClick = (plan) => {
+    setSelectedPlan(plan);
   };
-
-  useEffect(getCost, [selectedPlanName, rpsSelected, dataSelected, projectsSelected])
 
   return (
-    <div className="items-center mx-[auto] w-[1184px] smallLaptop:w-[1050px] tablet:w-[850px] mobile:w-[330px] smallTablet:w-[700px] largeMobile:w-[576px]" id="calculator">
+    <div
+      className="items-center mx-[auto] w-[1184px] smallLaptop:w-[1050px] tablet:w-[850px] mobile:w-[330px] smallTablet:w-[700px] largeMobile:w-[576px]"
+      id="calculator"
+    >
       <p className="text-[28px] text-center largeMobile:text-[22px]">
         Cost Calculator
       </p>
@@ -148,35 +113,105 @@ function Section4() {
         {/* left  */}
         <div className="w-[58%] smallTablet:w-[100%]">
           <div>
-            <p className="font-medium mt-6 mb-4 text-[20px] largeMobile:text-[18px]">
-              Select a plan
-            </p>
-            <div className="flex justify-between smallTablet:flex-col">
-              {plans.map((val) => (
+            <div className="flex gap-[10px] items-center">
+              <p className="font-medium mt-6 mb-4 text-[20px] largeMobile:text-[18px]">
+                Select a plan
+              </p>
+              <div class="relative inline-block w-22 bg-[#1D1B2D] rounded-lg relative">
                 <div
-                  className="bg-[#1D1B2D] rounded-lg p-2 pl-4 pr-4 flex justify-between w-[32%] cursor-pointer smallTablet:w-[100%] smallTablet:mb-[12px]"
-                  onClick={() => handlePlanClick(val)}
+                  className="flex gap-[10px] p-2 items-center cursor-pointer"
+                  onClick={toggleDropdown}
                 >
+                  <img
+                    class="h-4 w-4"
+                    src={`https://flagicons.lipis.dev/flags/4x3/${currency
+                      .substring(0, 2)
+                      .toLowerCase()}.svg`}
+                    alt="India Flag"
+                  />
+                  {currency}
                   <div>
-                    <p className="text-[20px] font-medium largeMobile:text-[16px]">
-                      {val.name}
-                    </p>
-                    <p className="font-medium text-[#BFB8B8] text-[16px] largeMobile:text-[14px]">
-                      {val.price}
-                    </p>
-                  </div>
-                  <div>
-                    <img
-                      src={
-                        selectedPlanName === val.name.toLowerCase()
-                          ? radio_button_checked
-                          : radio_button_unchecked
-                      }
-                      alt=""
+                    <BiChevronDown
+                      style={{
+                        width: 20,
+                        height: 20,
+                        color: "white",
+                        fontSize: 16,
+                      }}
+                      stroke="white"
+                      fill="white"
                     />
                   </div>
                 </div>
-              ))}
+                <div
+                  className="absolute bg-[#1D1B2D] border border-[#BFB8B8] rounded-lg cursor-pointer  top-[112%] w-full"
+                  onClick={toggleDropdown}
+                  hidden={!showDropdown}
+                >
+                  <div
+                    className="flex items-center gap-[5px] w-22 justify-center p-1"
+                    onClick={() => setCurrency("INR")}
+                  >
+                    <img
+                      class="h-4 w-4"
+                      src="https://flagicons.lipis.dev/flags/4x3/in.svg"
+                      alt="India Flag"
+                    />{" "}
+                    INR
+                  </div>
+                  <div
+                    className="flex items-center gap-[5px] w-22 justify-center p-1"
+                    onClick={() => setCurrency("USD")}
+                  >
+                    <img
+                      class="h-4 w-4"
+                      src="https://flagicons.lipis.dev/flags/4x3/us.svg"
+                      alt="USA Flag"
+                    />{" "}
+                    USD
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-between smallTablet:flex-col">
+              {plans.map((plan) => {
+                const price =
+                  plan === selectedPlan
+                    ? data[plan]?.pricing[selectedRpsIndex]?.price[
+                        currency.toLowerCase()
+                      ].toFixed(2)
+                    : data[plan]?.pricing[0]?.price[
+                        currency.toLowerCase()
+                      ].toFixed(2);
+
+                return (
+                  <div
+                    className="bg-[#1D1B2D] rounded-lg p-2 pl-4 pr-4 flex justify-between w-[32%] cursor-pointer smallTablet:w-[100%] smallTablet:mb-[12px]"
+                    onClick={() => handlePlanClick(plan)}
+                  >
+                    <div>
+                      <p className="text-[20px] font-medium largeMobile:text-[16px]">
+                        {data[plan].name}
+                      </p>
+                      <p className="font-medium text-[#BFB8B8] text-[16px] largeMobile:text-[14px]">
+                        {currency === "USD" ? "$" : "₹"}
+                        {price}
+                        /hour
+                      </p>
+                    </div>
+                    <div>
+                      <img
+                        src={
+                          selectedPlan === plan
+                            ? radio_button_checked
+                            : radio_button_unchecked
+                        }
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -189,31 +224,37 @@ function Section4() {
               <div className="w-[33%] mb-5 largeMobile:w-[100%]">
                 <InfoDetails text="API requests" />
                 <p className="text-[16px]">
-                  {planDetails[selectedPlanName].apiReq}
+                  Upto {data[selectedPlan].resources.apiRequests} per month
                 </p>
               </div>
               <div className="w-[33%] mb-5 largeMobile:w-[100%]">
                 <InfoDetails text="Requests per second" />
                 <p className="text-[16px]">
-                  {planDetails[selectedPlanName].requestsPerSecond}
+                  {data[selectedPlan].resources.maxRPS}
                 </p>
               </div>
               <div className="w-[33%] mb-5 largeMobile:w-[100%]">
                 <InfoDetails text="Data bandwidth" />
                 <p className="text-[16px]">
-                  {planDetails[selectedPlanName].dataBandwidth}
+                  Upto {data[selectedPlan].maxDataBandwidth} GB(s)
                 </p>
               </div>
               <div className="w-[33%] mb-5 largeMobile:w-[100%]">
                 <InfoDetails text="Number of models" />
                 <p className="text-[16px]">
-                  {planDetails[selectedPlanName].numberOfModels}
+                  Upto {data[selectedPlan].resources.numModels}
                 </p>
               </div>
               <div className="w-[33%] mb-5 largeMobile:w-[100%]">
                 <InfoDetails text="Number of APIs" />
                 <p className="text-[16px]">
-                  {planDetails[selectedPlanName].numberOfAPis}
+                  Upto {data[selectedPlan].resources.numApis}
+                </p>
+              </div>
+              <div className="w-[33%] mb-5 largeMobile:w-[100%]">
+                <InfoDetails text="Number of Users" />
+                <p className="text-[16px]">
+                  Upto {data[selectedPlan].resources.numUsers}
                 </p>
               </div>
             </div>
@@ -233,38 +274,23 @@ function Section4() {
                   </p>
                 </div>
                 <div>
-                  {
-                    <SliderComponent
-                      defaultValue={
-                        pricing[selectedPlanName].pricing.rps.limits[0].value
-                      }
-                      value={rpsSelected}
-                      setterValue={setRpsSelected}
-                      min={
-                        pricing[selectedPlanName]?.pricing?.rps.limits[0]?.value
-                      }
-                      max={
-                        pricing[selectedPlanName]?.pricing?.rps.limits[
-                          pricing[selectedPlanName]?.pricing?.rps.limits
-                            .length - 1
-                        ]?.value
-                      }
-                      disabled={
-                        pricing[selectedPlanName].pricing.rps.enabled ===
-                        false && true
-                      }
-                      color={
-                        pricing[selectedPlanName].pricing.rps.enabled === false
-                          ? "#8F8F8F"
-                          : "#8980D4"
-                      }
-                      marks={
-                        pricing[selectedPlanName]?.pricing?.rps.enabled !==
-                        false && getMarks()
-                      }
-                      step={null}
-                    />
-                  }
+                  <SliderComponent
+                    defaultValue={limitRps[0]}
+                    value={rpsSelected}
+                    onChange={(value) => {
+                      setRpsSelected(value);
+                      const index = value / limitRps[0] - 1;
+                      setSelectedRpsIndex(index);
+                    }}
+                    min={limitRps[0]}
+                    max={limitRps[limitRps.length - 1]}
+                    disabled={limitRps.length === 1}
+                    color={limitRps.length === 1 ? "#8F8F8F" : "#8980D4"}
+                    marks={limitRps}
+                    step={
+                      limitRps.length === 1 ? null : limitRps[1] - limitRps[0]
+                    }
+                  />
                 </div>
               </div>
 
@@ -278,30 +304,13 @@ function Section4() {
                 <div>
                   {
                     <SliderComponent
-                      defaultValue={
-                        pricing[selectedPlanName].pricing.projects.limits[0]
-                          .value
-                      }
+                      defaultValue={1}
                       value={projectsSelected}
-                      setterValue={setProjectsSelected}
-                      min={
-                        pricing[selectedPlanName].pricing.projects.limits[0]
-                          .value
-                      }
-                      max={
-                        pricing[selectedPlanName].pricing.projects.limits[1]
-                          .value
-                      }
-                      disabled={
-                        pricing[selectedPlanName].pricing.projects.enabled ===
-                        false && true
-                      }
-                      color={
-                        pricing[selectedPlanName].pricing.projects.enabled ===
-                          false
-                          ? "#8F8F8F"
-                          : "#8980D4"
-                      }
+                      onChange={setProjectsSelected}
+                      min={1}
+                      max={limitProjects}
+                      disabled={limitProjects === 1}
+                      color={limitProjects === 1 ? "#8F8F8F" : "#8980D4"}
                       step={1}
                     />
                   }
@@ -318,27 +327,14 @@ function Section4() {
                 <div>
                   {
                     <SliderComponent
-                      defaultValue={
-                        pricing[selectedPlanName].pricing.data.limits[0].value
-                      }
+                      defaultValue={startDataBandwidth}
                       value={dataSelected}
-                      setterValue={setDataSelected}
-                      min={
-                        pricing[selectedPlanName].pricing.data.limits[0].value
-                      }
-                      max={
-                        pricing[selectedPlanName].pricing.data.limits[1].value
-                      }
-                      disabled={
-                        pricing[selectedPlanName].pricing.data.enabled ===
-                        false && true
-                      }
-                      color={
-                        pricing[selectedPlanName].pricing.data.enabled === false
-                          ? "#8F8F8F"
-                          : "#8980D4"
-                      }
-                      step={10}
+                      onChange={setDataSelected}
+                      min={startDataBandwidth}
+                      max={limitDataBandwidth}
+                      disabled={limitDataBandwidth === 1}
+                      color={limitDataBandwidth === 1 ? "#8F8F8F" : "#8980D4"}
+                      step={1}
                     />
                   }
                 </div>
@@ -349,13 +345,14 @@ function Section4() {
 
         {/* right  */}
         <div className="w-[34%] largeMobile:w-[100%] smallTablet:w-[80%] smallTablet:mx-[auto]">
-          <p className="font-medium mt-6 mb-4 text-[20px] largeMobile:text-[18px]">
+          <p className="font-medium mt-6 mb-4 text-[20px] largeMobile:text-[18px] p-[10px]">
             Estimate
           </p>
           <div className="bg-[#1D1B2D] p-4 rounded-lg">
             <div className="text-center mt-8 mb-8">
               <p className="text-[36px] font-medium">
-                ₹{perHourCost}/hour
+                {currency === "USD" ? "$" : "₹"}
+                {perHourCost}/hour
               </p>
               <p className="text-[#BFB8B8] text-[18px] font-medium">
                 charged monthly
@@ -366,22 +363,22 @@ function Section4() {
 
               <RenderConfigurationDetails
                 title="Requests per second"
-                description={planDetails[selectedPlanName].requestsPerSecond}
+                description={rpsSelected}
               />
 
               <RenderConfigurationDetails
                 title="Data bandwidth"
-                description={planDetails[selectedPlanName].dataBandwidth}
+                description={`${dataSelected} GB`}
               />
 
               <RenderConfigurationDetails
                 title="Number of models"
-                description={planDetails[selectedPlanName].numberOfModels}
+                description={data[selectedPlan]?.resources.numModels}
               />
 
               <RenderConfigurationDetails
                 title="Number of APIs"
-                description={planDetails[selectedPlanName].numberOfAPis}
+                description={data[selectedPlan]?.resources.numApis}
               />
             </div>
             <div>
@@ -390,22 +387,23 @@ function Section4() {
               </p>
 
               <RenderConfigurationDetails
-                title={selectedPlan.name}
+                title={`${data[selectedPlan]?.name} plan`}
                 description={
-                  pricing[selectedPlanName].pricing.base.inr * totalHoursInMonth
+                  price[selectedRpsIndex]
+                    ? (
+                        price[selectedRpsIndex][currency.toLowerCase()] *
+                        totalHoursInMonth
+                      ).toFixed(2)
+                    : 0
                 }
-                type="priceBreakdown"
-              />
-
-              <RenderConfigurationDetails
-                title="Customisation"
-                description={customisedMonthCost}
+                currencyType={currency === "USD" ? "$" : "₹"}
                 type="priceBreakdown"
               />
 
               <RenderConfigurationDetails
                 title="Data bandwidth increase"
-                description={dataMonthCost}
+                description={dataMonthCost.toFixed(2)}
+                currencyType={currency === "USD" ? "$" : "₹"}
                 type="priceBreakdown"
               />
             </div>
@@ -417,7 +415,10 @@ function Section4() {
               <p>
                 Total <span className="text-[#BFB8B8]">(monthly)</span>
               </p>
-              <p>₹{totalMonthCost}/month</p>
+              <p>
+                {currency === "USD" ? "$" : "₹"}
+                {totalMonthCost}/month
+              </p>
             </div>
             <p className="text-right text-[#BFB8B8] text-[14px]">
               *Any applicable taxes are not included

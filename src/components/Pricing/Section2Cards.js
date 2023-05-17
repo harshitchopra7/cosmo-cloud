@@ -1,40 +1,23 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { MdOutlineInfo } from "react-icons/md";
-import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
 
 const Divider = () => {
   return <hr style={{ border: "1px solid #272531", marginTop: "10px" }} />;
 };
 
-const InfoDetails = ({ text, isDetailsColumn }) => {
+const InfoDetails = ({ text }) => {
   return (
     <div className="mt-2 flex items-center h-[25px] text-[16px] font-medium tablet:h-[44px] smallTablet:h-[60px]">
       <p> {text}</p>
-      {isDetailsColumn && (
-        <span className="ml-2">
-          <Tooltip title="Know more" placement="top">
-            <IconButton style={{ color: "#BFB8B8" }}>
-              <MdOutlineInfo size={20} />
-            </IconButton>
-          </Tooltip>
-        </span>
-      )}
     </div>
   );
 };
 
 function Section2Cards({ details }) {
   const navigate = useNavigate();
-
   return (
-    <div
-      className={`w-[16%] flex flex-col justify-end ${
-        details.detailsColumn && "text-[#BFB8B8]"
-      }`}
-    >
-      <p className="text-[20px] font-medium">{details.title}</p>
+    <div className={`w-[16%] flex flex-col justify-end`}>
+      <p className="text-[20px] font-medium">{details.name || "Enterprise"}</p>
       <div className="mt-3 mb-3">
         <p className="text-[14px] text-[#BFB8B8] font-medium">
           {details.description}
@@ -68,54 +51,38 @@ function Section2Cards({ details }) {
 
       <div className="mt-3 mb-3">
         <InfoDetails
-          text={details.apiReq}
-          isDetailsColumn={details.detailsColumn}
+          text={
+            details.apiRequests
+              ? `Upto ${details.apiRequests} per month`
+              : "Unlimited"
+          }
         />
         <Divider />
         <InfoDetails
-          text={details.requestsPerSecond}
-          isDetailsColumn={details.detailsColumn}
+          text={details.maxRPS ? `Upto ${details.maxRPS}` : "No Limit"}
         />
         <Divider />
-        <InfoDetails
-          text={details.usersPerOrg}
-          isDetailsColumn={details.detailsColumn}
-        />
+        <InfoDetails text={details.numUsers} />
+        <Divider />
+        <InfoDetails text={details.numApis} />
+        <Divider />
+        <InfoDetails text={details.numModels} />
         <Divider />
         <InfoDetails
-          text={details.numberOfAPis}
-          isDetailsColumn={details.detailsColumn}
+          text={
+            details.maxDataBandwidth
+              ? `${details.maxDataBandwidth} GB`
+              : "No Limit"
+          }
         />
         <Divider />
-        <InfoDetails
-          text={details.numberOfModels}
-          isDetailsColumn={details.detailsColumn}
-        />
+        <InfoDetails text={details.loadBalancing} />
         <Divider />
-        <InfoDetails
-          text={details.dataBandwidth}
-          isDetailsColumn={details.detailsColumn}
-        />
+        <InfoDetails text={details.resources} />
         <Divider />
-        <InfoDetails
-          text={details.loadBalancing}
-          isDetailsColumn={details.detailsColumn}
-        />
+        <InfoDetails text={details.slaSupport} />
         <Divider />
-        <InfoDetails
-          text={details.resources}
-          isDetailsColumn={details.detailsColumn}
-        />
-        <Divider />
-        <InfoDetails
-          text={details.slaSupport}
-          isDetailsColumn={details.detailsColumn}
-        />
-        <Divider />
-        <InfoDetails
-          text={details.uptimeGuarantee}
-          isDetailsColumn={details.detailsColumn}
-        />
+        <InfoDetails text={details.uptimeGuarantee} />
         <Divider />
       </div>
     </div>

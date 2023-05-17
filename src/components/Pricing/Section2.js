@@ -12,91 +12,66 @@ import {
 
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
+import { useGetPlanData } from "../../container/Pricing/Pricing.service";
+import Section2Details from "./Section2Details";
 
 const pricingDetails = [
   {
-    title: "",
-    description: "",
-    price: "",
-    buttonText: "",
-    apiReq: "API requests",
-    requestsPerSecond: "Requests per second",
-    usersPerOrg: "Users per org",
-    numberOfAPis: "Number of APIs",
-    numberOfModels: "Number of models",
-    dataBandwidth: "Data bandwidth",
-    loadBalancing: "Load balancing",
-    resources: "Resources",
-    slaSupport: "SLA support",
-    uptimeGuarantee: "Uptime guarantee",
-    detailsColumn: true,
-  },
-  {
-    title: "Free",
     description: "free for",
     price: "First 7 days",
     buttonText: "Try Free",
-    apiReq: "Upto 1M per month",
-    requestsPerSecond: "Upto 5",
-    usersPerOrg: "1",
-    numberOfAPis: "5",
-    numberOfModels: "5",
-    dataBandwidth: "1 GB per project",
     loadBalancing: <MdOutlineClose />,
     resources: "Shared",
     slaSupport: <MdOutlineClose />,
     uptimeGuarantee: <MdOutlineClose />,
+    type: "FREE",
   },
   {
-    title: "Professional",
     description: "starts at",
-    strikePrice: "₹0.69",
-    price: "0.59/hour",
-    buttonText: "Try free",
-    apiReq: "Upto 1M per month",
-    requestsPerSecond: "Upto 900",
-    usersPerOrg: "3",
-    numberOfAPis: "50",
-    numberOfModels: "50",
-    dataBandwidth: "10 GB",
+    price: "0.68/hour",
+    buttonText: "Upgrade",
     loadBalancing: <MdOutlineCheck />,
     resources: "Dedicated",
     slaSupport: <MdOutlineCheck />,
     uptimeGuarantee: <MdOutlineCheck />,
+    type: "PERSONAL",
   },
   {
-    title: "Standard",
     description: "starts at",
-    price: "₹0.69/hour",
-    buttonText: "Try free",
-    apiReq: "Upto 1B per month",
-    requestsPerSecond: "Upto 1800",
-    usersPerOrg: "100",
-    numberOfAPis: "Unlimited",
-    numberOfModels: "Unlimited",
-    dataBandwidth: "50 - 100 GB",
+    price: "₹11.00/hour",
+    buttonText: "Upgrade",
     loadBalancing: <MdOutlineCheck />,
     resources: "Dedicated",
     slaSupport: <MdOutlineCheck />,
     uptimeGuarantee: <MdOutlineCheck />,
+    type: "STARTER",
   },
   {
-    title: "Enterprise",
-    description: "Customised pricing",
-    price: "Let’s talk?",
-    buttonText: "Contact us",
-    buttonType: "secondary",
-    apiReq: "Unlimited",
-    requestsPerSecond: "No limit",
-    usersPerOrg: "No limit",
-    numberOfAPis: "Unlimited",
-    numberOfModels: "Unlimited",
-    dataBandwidth: "100 GB",
+    description: "starts at",
+    price: "₹35.00/hour",
+    buttonText: "Upgrade",
     loadBalancing: <MdOutlineCheck />,
     resources: "Dedicated",
     slaSupport: <MdOutlineCheck />,
     uptimeGuarantee: <MdOutlineCheck />,
     link: "/contact-us",
+    type: "STANDARD",
+  },
+  {
+    name: "Enterprise",
+    description: "Customised pricing",
+    price: "Let’s talk?",
+    buttonText: "Contact us",
+    buttonType: "secondary",
+    numUsers: "No limit",
+    numApis: "Unlimited",
+    numModels: "Unlimited",
+    loadBalancing: <MdOutlineCheck />,
+    resources: "Dedicated",
+    slaSupport: <MdOutlineCheck />,
+    uptimeGuarantee: <MdOutlineCheck />,
+    link: "/contact-us",
+    type: "CUSTOM",
   },
 ];
 
@@ -128,11 +103,49 @@ const ShowPlanDetailsInMobileScreen = ({ description, value }) => {
 };
 
 function Section2() {
+  const { data, isLoading, error } = useGetPlanData();
+
+  const featureDetails = {
+    title: "",
+    description: "",
+    price: "",
+    buttonText: "",
+    apiReq: "API requests",
+    requestsPerSecond: "Requests per second",
+    usersPerOrg: "Users per org",
+    numberOfAPis: "Number of APIs",
+    numberOfModels: "Number of models",
+    dataBandwidth: "Data bandwidth",
+    loadBalancing: "Load balancing",
+    resources: "Resources",
+    slaSupport: "SLA support",
+    uptimeGuarantee: "Uptime guarantee",
+    detailsColumn: true,
+  };
+
   const [showPlansInMobile, setShowPlansInMobile] = useState(false);
   const [selectedPlanInMobileScreen, setSelectedPlanInMobileScreen] = useState(
     pricingDetails[1]
   );
   const [dropdownOpened, setDropdownOpened] = useState(false);
+
+  if (!data || isLoading || error) {
+    return null;
+  }
+
+  const planData = Object.values(data ?? {});
+  const updatedPricingDetails = pricingDetails.map((detail, index) => {
+    const { resources, pricing, maxDataBandwidth, maxProjects, name } =
+      planData[index] || {};
+    const updatedPlanData = {
+      ...resources,
+      pricing,
+      maxDataBandwidth,
+      maxProjects,
+      name,
+    };
+    return { ...detail, ...updatedPlanData };
+  });
 
   function disableScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -151,18 +164,20 @@ function Section2() {
 
   function getPlanNames() {
     return pricingDetails.map((item, ind) => {
-      if(!ind) return (<></>);
+      if (!ind) return <></>;
 
       return (
-        <div className="underline text-base cursor-pointer leading-7" onClick={() => {
-          setSelectedPlanInMobileScreen(pricingDetails[ind]);
-          setDropdownOpened(false);
+        <div
+          className="underline text-base cursor-pointer leading-7"
+          onClick={() => {
+            setSelectedPlanInMobileScreen(pricingDetails[ind]);
+            setDropdownOpened(false);
           }}
         >
           {item.title}
         </div>
       );
-    })
+    });
   }
 
   return (
@@ -172,9 +187,10 @@ function Section2() {
         <p className="text-[28px] text-center">Compare features across plans</p>
 
         <div className="flex flex-wrap justify-between mt-10">
-          {pricingDetails.map((val) => (
-            <Section2Cards details={val} />
-          ))}
+          <Section2Details details={featureDetails} showDetails={true} />
+          {updatedPricingDetails.map((value, index) => {
+            return <Section2Cards details={value} data={data} key={crypto.randomUUID()}/>;
+          })}
         </div>
       </div>
 
@@ -207,21 +223,17 @@ function Section2() {
             />
           </div>
 
-          <div className="py-2 px-3 mt-7 bg-[#312D52] rounded-md w-[150px] flex justify-between items-center" onClick={() => setDropdownOpened(true)}>
+          <div
+            className="py-2 px-3 mt-7 bg-[#312D52] rounded-md w-[150px] flex justify-between items-center"
+            onClick={() => setDropdownOpened(true)}
+          >
+            <div>{selectedPlanInMobileScreen.title}</div>
             <div>
-              {selectedPlanInMobileScreen.title}
-            </div>
-            <div>
-              {dropdownOpened? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
+              {dropdownOpened ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
             </div>
           </div>
 
-          {dropdownOpened && (
-              <div className="mt-4">  
-                {getPlanNames()}
-              </div>
-            )
-          }
+          {dropdownOpened && <div className="mt-4">{getPlanNames()}</div>}
 
           <div className="mt-4 mb-4">
             <ShowPlanDetailsInMobileScreen
