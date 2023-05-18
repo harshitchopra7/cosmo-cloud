@@ -112,11 +112,11 @@ function Section2Details({ details, showDetails }) {
           showDetails={showDetails}
         />
         <Divider />
-        <InfoDetails
+        {/* <InfoDetails
           text={details.uptimeGuarantee}
           showDetails={showDetails}
         />
-        <Divider />
+        <Divider /> */}
       </div>
     </div>
   );

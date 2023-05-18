@@ -43,7 +43,14 @@ function Section2Cards({ details }) {
           } font-medium w-full rounded-md h-[45px] ${
             details.buttonType === "secondary" && "border-[#312D52] border-2"
           }`}
-          onClick={() => navigate(details.link)}
+          onClick={() => {
+            if (details.link.startsWith("https://"))
+            {
+              window.open(details.link, "_blank")
+            }
+            else {
+              navigate(details.link)
+            }}}
         >
           {details.buttonText}
         </button>
@@ -81,8 +88,8 @@ function Section2Cards({ details }) {
         <InfoDetails text={details.resources} />
         <Divider />
         <InfoDetails text={details.slaSupport} />
-        <Divider />
-        <InfoDetails text={details.uptimeGuarantee} />
+        {/* <Divider />
+        <InfoDetails text={details.uptimeGuarantee} /> */}
         <Divider />
       </div>
     </div>

@@ -13,7 +13,7 @@ import { MdOutlineClose, MdOutlineMenu } from "react-icons/md";
 
 import styled from "styled-components";
 
-const items = ["Home", "About", "Contact us"];
+const items = ["Home", "Pricing", "About", "Contact us"];
 
 const NavigationItem = styled.div`
   font-size: 16px;

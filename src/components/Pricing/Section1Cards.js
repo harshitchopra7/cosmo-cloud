@@ -65,7 +65,16 @@ function Section1Cards({
           } font-medium w-full rounded-md h-[45px] ${
             buttonType !== "primary" && "border-[#312D52] border-2"
           }`}
-          onClick={() => navigate(link)}
+          onClick={() => {
+            if (link.startsWith("https://"))
+            {
+              window.open(link, "_blank")
+            }
+            else {
+              navigate(link)
+            }
+            
+          }}
         >
           {buttonText}
         </button>

@@ -25,6 +25,7 @@ const pricingDetails = [
     slaSupport: <MdOutlineClose />,
     uptimeGuarantee: <MdOutlineClose />,
     type: "FREE",
+    link: "https://dashboard.cosmocloud.io"
   },
   {
     description: "starts at",
@@ -35,6 +36,7 @@ const pricingDetails = [
     slaSupport: <MdOutlineCheck />,
     uptimeGuarantee: <MdOutlineCheck />,
     type: "PERSONAL",
+    link: "https://dashboard.cosmocloud.io"
   },
   {
     description: "starts at",
@@ -45,6 +47,7 @@ const pricingDetails = [
     slaSupport: <MdOutlineCheck />,
     uptimeGuarantee: <MdOutlineCheck />,
     type: "STARTER",
+    link: "https://dashboard.cosmocloud.io"
   },
   {
     description: "starts at",
@@ -54,8 +57,8 @@ const pricingDetails = [
     resources: "Dedicated",
     slaSupport: <MdOutlineCheck />,
     uptimeGuarantee: <MdOutlineCheck />,
-    link: "/contact-us",
     type: "STANDARD",
+    link: "https://dashboard.cosmocloud.io"
   },
   {
     name: "Enterprise",
@@ -116,10 +119,9 @@ function Section2() {
     numberOfAPis: "Number of APIs",
     numberOfModels: "Number of models",
     dataBandwidth: "Data bandwidth",
-    loadBalancing: "Load balancing",
+    loadBalancing: "High Availability",
     resources: "Resources",
     slaSupport: "SLA support",
-    uptimeGuarantee: "Uptime guarantee",
     detailsColumn: true,
   };
 
@@ -268,10 +270,10 @@ function Section2() {
               description={pricingDetails[0].slaSupport}
               value={selectedPlanInMobileScreen.slaSupport}
             />
-            <ShowPlanDetailsInMobileScreen
+            {/* <ShowPlanDetailsInMobileScreen
               description={pricingDetails[0].uptimeGuarantee}
               value={selectedPlanInMobileScreen.uptimeGuarantee}
-            />
+            /> */}
           </div>
         </div>
       )}
