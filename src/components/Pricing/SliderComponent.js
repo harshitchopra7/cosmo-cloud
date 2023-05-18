@@ -4,7 +4,7 @@ import Slider from "@mui/material/Slider";
 const SliderComponent = ({
   defaultValue,
   value,
-  setterValue,
+  onChange,
   min,
   max,
   disabled = false,
@@ -17,7 +17,7 @@ const SliderComponent = ({
       <Slider
         defaultValue={defaultValue}
         value={value}
-        onChange={(e) => setterValue(e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
         valueLabelDisplay={disabled ? "auto" : "on"}
         aria-label="Small"
         color="primary"
